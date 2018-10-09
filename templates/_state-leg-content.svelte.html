@@ -1,0 +1,44 @@
+
+<div class="strib-styles ssa ssb ssc">
+  <Header />
+
+  <section class="container-lg">
+    <p>Content goes here.</p>
+
+    <p>
+      Example image:
+      <!-- Since this markup will live in CMS, the URL needs to be fully to static,
+        but for development we rewrite to local -->
+      <img src="{ production.url }assets/images/strib/strib-logo-transparent-307.png" alt="Test image">
+    </p>
+
+    <Body defaultTitle="State House"
+      id="mn-state-house"
+      supplement="{ supplement }"
+      likelyOffices="{ 134 }"
+      parties="{ ['dfl', 'dem', 'rep'] }" />
+  </section>
+</div>
+
+<script>
+  // Dependencies and components
+  import Header from "./_content-header.svelte.html";
+  import Body from "./_content-body.svelte.html";
+
+  // Svelte logic
+  export default {
+    components: {
+      Header,
+      Body
+    },
+
+    oncreate: function() {
+      if (this.get().attachShare) {
+        this.get().attachShare();
+      }
+    }
+  };
+</script>
+
+
+

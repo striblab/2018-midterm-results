@@ -1,0 +1,161 @@
+<!-- TODO: Standarize on "office" not "race" -->
+<div class="office cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id }">
+  <div class="office-details">
+    <h4 class="font-benton-sans">{ supplementedTitle }</h4>
+    <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
+    {#if description}
+      <p class="office-chat">{@html description }</p>
+    {/if}
+  </div>
+
+  {#if !loaded}
+    {#each (new Array(2)) as blank}
+      <Contest
+        embedded="{ true }"
+        loaded="{ false }"
+        supplement="{ supplement }"
+        countyMap="{ countyMap }" />
+    {/each}
+  {:else}
+    {#each contests as contest}
+      {#if !parties || (parties && contest.party && ~parties.indexOf(contest.party.id))}
+        <Contest id="{ contest.id }"
+          {...contest}
+          embedded="{ true }"
+          loaded="{ loaded }"
+          supplement="{ supplement }"
+          countyMap="{ countyMap }" />
+      {/if}
+    {/each}
+  {/if}
+</div>
+
+<script>
+  /* global moment */
+  // Dependencies and components
+  import Contest from "./_content-contest.svelte.html";
+  import { isArray } from "lodash";
+
+  // Svelte logic
+  export default {
+    components: {
+      Contest
+    },
+
+    oncreate() {
+      if (!this.get().embedded) {
+        this.fetchDataInterval = setInterval(() => {
+          this.fetchData();
+        }, this.adjustedInterval());
+        this.fetchData();
+      }
+    },
+
+    ondestroy() {
+      if (this.fetchDataInterval) {
+        clearInterval(this.fetchDataInterval);
+      }
+    },
+
+    helpers: {
+      makeDate: (date, format) => {
+        let m = moment(date);
+        let now = moment();
+        if (!m || !m.isValid()) {
+          return "";
+        }
+
+        return m.isSame(now, "date")
+          ? m.format("h:mm a")
+          : m.format("MMM D h:mm a");
+      }
+    },
+
+    computed: {
+      supplementedTitle: ({
+        id,
+        supplement,
+        title,
+        defaultTitle,
+        shortTitle,
+        embedded
+      }) => {
+        return supplement && id && supplement[id] && supplement[id].title
+          ? supplement[id].title
+          : defaultTitle
+            ? defaultTitle
+            : embedded && shortTitle
+              ? shortTitle
+              : title || "-";
+      },
+
+      description: ({ id, supplement }) => {
+        return supplement && id && supplement[id] && supplement[id].description
+          ? supplement[id].description
+          : undefined;
+      },
+
+      updatedDate: ({ contests }) => {
+        if (!contests) {
+          return;
+        }
+
+        // TODO: Get newest/oldest date
+        return (
+          contests[0].results[0].apUpdated || contests[0].results[0].last_updated
+        );
+      }
+    },
+
+    methods: {
+      // Add some randomness to the interval, so they all
+      // don't go at once
+      adjustedInterval() {
+        return (
+          (this.store.get().interval || 60 * 1000) + Math.random() * 5 * 1000
+        );
+      },
+
+      fetchData() {
+        // TODO: Handle no ID
+        if (!this.get().id) {
+          return;
+        }
+
+        // If embedded, data is managed some other way
+        if (this.get().embedded) {
+          return;
+        }
+
+        // Mark as loading
+        this.set({ loading: true });
+
+        // Fetch
+        window
+          .fetch(
+            `${this.store.get().civixEndpoint}/contests/by-office/${
+              this.get().id
+            }.json`
+          )
+          .then(response => {
+            return response.json();
+          })
+          .then(office => {
+            if (isArray(office)) {
+              office = {
+                contests: office
+              };
+            }
+
+            this.set(office);
+            this.set({ loaded: true, loading: false });
+          })
+          .catch(e => {
+            // TODO: Handle error
+            console.error(e);
+            this.set({ loading: false });
+          });
+      }
+    }
+  };
+</script>

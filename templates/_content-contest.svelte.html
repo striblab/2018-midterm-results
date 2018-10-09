@@ -1,0 +1,210 @@
+<!-- DOING: Standardizing to "contest" -->
+
+<div class="race-party
+  { !party || party.id === 'np' ? 'non-partisan' : '' }
+  party-{ party ? party.id : 'np' } contest-{ id }
+  { uncontested ? 'uncontested' : '' }
+  { countyMap ? 'has-county-map' : '' }
+  { reporting && reporting > 0 ? 'is-reporting' : '' }" id="{ id }">
+
+  {#if party || !embedded}
+    <h6>{ supplementedTitle }</h6>
+  {/if}
+
+  <div class="contest-table">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th class="cand">Candidate</th>
+          <th class="votes">Votes</th>
+          <th class="pct">Pct.</th>
+          <th class="bar"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {#if !loaded}
+          <tbody>
+            {#each (new Array(1)) as blank}
+              <tr>
+                <td class="winner"></td>
+                <td class="cand">Loading ...</td>
+                <td class="votes"></td>
+                <td class="pct">%</td>
+                <td class="bar"></td>
+              </tr>
+            {/each}
+          </tbody>
+        {:else}
+          {#each results as r, ri}
+            <tr class="{ r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
+              data-candidate-id="{ r.candidate_id }">
+              <td class="winner">{#if r.winner}&#10004;{/if}</td>
+
+              <td class="cand">
+                {#if countyMap}
+                  <span class="candidate-color-label candidate-{ r.candidate.id}"></span>
+                {/if}
+                { r.candidate.fullName }{#if r.incumbent}<span class="inc">(i)</span>{/if}
+              </td>
+
+              <td class="votes"><span>{ r.votes.toLocaleString() }</span></td>
+
+              <td class="pct">
+                {#if uncontested}
+                  <span class="uncontested">Uncontested</span>
+                {/if}
+                <span>{ round(r.percent * 100) }%</span>
+              </td>
+
+              <td class="bar">
+                {#if reporting}
+                  <span class="pctBar candidate-result-{ r.candidate_id }" style="width: { (r.percent / results[0].percent) * 100 }%;"></span>
+                {/if}
+              </td>
+            </tr>
+          {/each}
+        {/if}
+      </tbody>
+    </table>
+
+    <div class="reporting">
+      {#if loaded}
+        { round(percentReporting * 100, 0) }% of precincts reporting
+      {:else}
+        -
+      {/if}
+    </div>
+
+  </div>
+
+  {#if countyMap && subResults && subResults.county}
+    <CountyMap subResults="{ subResults.county }"
+      candidates="{ candidates }"
+      keyedResults="{ keyedResults }" />
+  {/if}
+</div>
+
+<script>
+  import CountyMap from "./_content-county-map.svelte.html";
+  import { keyBy } from "lodash";
+
+  export default {
+    components: {
+      CountyMap
+    },
+
+    oncreate() {
+      if (!this.get().embedded || this.get().countyMap) {
+        this.fetchDataInterval = setInterval(() => {
+          this.fetchData();
+        }, this.adjustedInterval());
+        this.fetchData();
+      }
+    },
+
+    ondestroy() {
+      if (this.fetchDataInterval) {
+        clearInterval(this.fetchDataInterval);
+      }
+    },
+
+    helpers: {
+      round(input, decimals = 1) {
+        if (parseFloat(input) !== NaN) {
+          return (
+            Math.round(parseFloat(input) * Math.pow(10, decimals)) /
+            Math.pow(10, decimals)
+          );
+        }
+      }
+    },
+
+    computed: {
+      supplementedTitle: ({
+        id,
+        supplement,
+        title,
+        party,
+        defaultTitle,
+        shortTitle,
+        embedded
+      }) => {
+        return supplement && id && supplement[id] && supplement[id].title
+          ? supplement[id].title
+          : defaultTitle
+            ? defaultTitle
+            : embedded && shortTitle
+              ? shortTitle
+              : party && party.id !== "np" && party.title
+                ? party.title
+                : title || "-";
+      },
+
+      percentReporting({ reporting, totalPrecincts }) {
+        if (totalPrecincts) {
+          return (reporting || 0) / totalPrecincts;
+        }
+
+        return 0;
+      },
+
+      // Keyed by candidate id
+      keyedResults: ({ results }) => {
+        if (!results || !results.length) {
+          return {};
+        }
+
+        return keyBy(
+          results.map((r, ri) => {
+            r.indexId = ri;
+            return r;
+          }),
+          "candidate_id"
+        );
+      }
+    },
+
+    methods: {
+      // Add some randomness to the interval, so they all
+      // don't go at once
+      adjustedInterval() {
+        return (
+          (this.store.get().interval || 60 * 1000) + Math.random() * 5 * 1000
+        );
+      },
+
+      fetchData() {
+        // Check for ID
+        if (!this.get().id) {
+          // TODO: Handle
+          return;
+        }
+
+        // If embedded, data is managed some other way
+        if (!this.get().countyMap && this.get().embedded) {
+          return;
+        }
+
+        window
+          .fetch(
+            `${this.store.get().civixEndpoint}/contests/contests/${
+              this.get().id
+            }.${this.get().countyMap ? "sub-results." : ""}json`
+          )
+          .then(response => {
+            return response.json();
+          })
+          .then(contest => {
+            this.set(contest);
+            this.set({ loaded: true });
+          })
+          .catch(e => {
+            // TODO: Handle error
+            console.error(e);
+          });
+      }
+    }
+  };
+</script>

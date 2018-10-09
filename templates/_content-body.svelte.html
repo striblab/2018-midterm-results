@@ -1,0 +1,131 @@
+<!-- TODO: Standardize on "body" term -->
+<div class="body" id="{ id }">
+    <h3 class="font-benton-sans">{ supplementedTitle }</h3>
+
+    {#if description}
+      <p class="body-chat">{ @html description }</p>
+    {/if}
+
+    {#if !loaded}
+      {#each (new Array(likelyOffices || 3)) as blank}
+        <Office
+          embedded="{ true }"
+          loaded="{ false }"
+          supplement="{ supplement }" />
+      {/each}
+    {:else}
+      {#each Object.entries(offices) as [officeId, office]}
+        <Office
+          id="{ officeId }"
+          {...office}
+          parties="{ parties }"
+          embedded="{ true }"
+          loaded="{ loaded }"
+          supplement="{ supplement }" />
+      {/each}
+    {/if}
+</div>
+
+<script>
+  // Dependencies and components
+  import Office from "./_content-office.svelte.html";
+  import { groupBy, isArray, mapValues } from "lodash";
+
+  // Svelte logic
+  export default {
+    components: {
+      Office
+    },
+
+    oncreate() {
+      if (!this.get().embedded) {
+        this.fetchDataInterval = setInterval(() => {
+          this.fetchData();
+        }, this.adjustedInterval());
+        this.fetchData();
+      }
+    },
+
+    ondestroy() {
+      if (this.fetchDataInterval) {
+        clearInterval(this.fetchDataInterval);
+      }
+    },
+
+    computed: {
+      supplementedTitle: ({ id, supplement, title, defaultTitle }) => {
+        return supplement && id && supplement[id] && supplement[id].title
+          ? supplement[id].title
+          : defaultTitle
+            ? defaultTitle
+            : title || "-";
+      },
+
+      description: ({ id, supplement }) => {
+        return supplement && id && supplement[id] && supplement[id].description
+          ? supplement[id].description
+          : undefined;
+      }
+    },
+
+    methods: {
+      // Add some randomness to the interval, so they all
+      // don't go at once
+      adjustedInterval() {
+        let uncontested = this.get().contestedFilter === "uncontested";
+        return (
+          (this.store.get().interval || 60 * 1000) * (uncontested ? 3 : 1) +
+          Math.random() * 5 * 1000
+        );
+      },
+
+      fetchData() {
+        // TODO: Handle no ID
+        if (!this.get().id) {
+          return;
+        }
+
+        // If embedded, data is managed some other way
+        if (this.get().embedded) {
+          return;
+        }
+
+        // Filter contested
+        let contestedFilter = this.get().contestedFilter
+          ? this.get().contestedFilter
+          : null;
+
+        // Mark as loading
+        this.set({ loading: true });
+
+        // Fetch
+        window
+          .fetch(
+            `${this.store.get().civixEndpoint}/contests/by-body/${
+              this.get().id
+            }.${contestedFilter ? contestedFilter + "." : ""}json`
+          )
+          .then(response => {
+            return response.json();
+          })
+          .then(body => {
+            if (isArray(body)) {
+              body = {
+                offices: mapValues(groupBy(body, "office_id"), g => {
+                  return { contests: g };
+                })
+              };
+            }
+
+            this.set(body);
+            this.set({ loaded: true, loading: false });
+          })
+          .catch(e => {
+            // TODO: Handle error
+            console.error(e);
+            this.set({ loading: false });
+          });
+      }
+    }
+  };
+</script>
