@@ -1,0 +1,457 @@
+/**
+ * Project specific styling.
+ */
+
+// UTILITY STYLES
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+// RESULTS mainframe
+.results {
+  max-width: 1000px;
+
+  @media (max-width: 768px) {
+    max-width: 95%;
+    margin: auto;
+  }
+
+  .util {
+    max-width: 350px;
+    text-align: center;
+    margin: auto;
+    font-family: "Benton Sans";
+    font-size: 0.75em;
+    padding: 10px 0 25px;
+  }
+
+  .lead-in {
+    max-width: 525px;
+    margin: auto;
+    font-family: "Benton Sans";
+    text-transform: none;
+    font-size: 0.9em;
+    padding: 0px 0 20px;
+  }
+
+  .lead-in span {
+    font-weight: bold;
+  }
+
+  .promo {
+    max-width: 525px;
+    margin: auto;
+    font-family: "Benton Sans";
+    text-transform: none;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 0px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  h3,
+  #mn-governor h4 {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+
+  h4 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 0.2em;
+  }
+
+  h6 {
+    font-size: 1em;
+    font-weight: normal;
+    color: black;
+  }
+
+  .office-details {
+    clear: both;
+  }
+
+  p.timestamp {
+    font-family: "Benton Sans";
+    font-size: 0.6em;
+    color: #808080;
+    text-transform: uppercase;
+  }
+
+  p.body-chat,
+  p.office-chat {
+    font-family: "Benton Sans";
+    font-size: 0.9em;
+    width: 75%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  .contest:nth-child(odd) {
+    margin-left: 8%;
+
+    @media (max-width: 768px) {
+      margin: auto;
+    }
+  }
+
+  .contest:nth-child(even) {
+    @media (max-width: 768px) {
+      margin-bottom: 25px;
+    }
+  }
+
+  .contest {
+    width: 46%;
+    float: left;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: auto;
+      margin-bottom: 15px;
+      float: none;
+    }
+  }
+
+  .body,
+  .office {
+    clear: both;
+  }
+
+  .office {
+    padding-top: 3em;
+  }
+
+  .body .office:first-of-type,
+  #mn-attorney-general {
+    padding-top: 0em;
+  }
+
+  .body,
+  #mn-governor {
+    padding-top: 4em;
+
+    @media (max-width: 545px) {
+      padding-top: 6em;
+    }
+  }
+
+  #state-offices,
+  #courts {
+    padding-top: 3em;
+
+    @media (max-width: 545px) {
+      padding-top: 5em;
+    }
+  }
+
+  #mn-district-court {
+    padding-top: 0px;
+  }
+
+  #mn-auditor,
+  #mn-secretaryof-state {
+    @media (max-width: 545px) {
+      padding-top: 6.5em;
+    }
+  }
+
+  .contest {
+    @media (max-width: 768px) {
+      margin-bottom: 0em;
+    }
+  }
+
+  .contest table {
+    margin-bottom: 0.5em;
+  }
+
+  .contest-table.left table {
+    @media (max-width: 768px) {
+      margin-bottom: 0px;
+    }
+  }
+
+  .contest-table.right thead {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .contest-table.right tbody tr td {
+    @media (max-width: 768px) {
+      border-top: none;
+    }
+  }
+
+  .contest-table thead tr th {
+    font-size: 0.6em;
+    text-transform: uppercase;
+    color: #080808;
+    font-weight: normal;
+    border-bottom: 3px solid #eeeeee;
+    padding-left: 0;
+    padding-bottom: 0.2em;
+  }
+
+  .contest-table tbody td {
+    font-size: 0.9em;
+    border-bottom: 1px solid #eeeeee;
+    vertical-align: middle;
+  }
+
+  tr.test-data {
+    border-right: 3px solid #ff6933;
+  }
+
+  .cand {
+    padding-left: 0;
+  }
+
+  .cand > span.inc {
+    font-size: 0.8em;
+    padding-left: 5px;
+  }
+
+  .votes,
+  .pct {
+    padding-right: 8px;
+    text-align: right;
+  }
+
+  .bar {
+    width: 25%;
+
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  .bar .pctBar {
+    display: block;
+    height: 5px;
+    border-radius: 2px;
+    min-width: 2px;
+  }
+
+  .party-dem .pctBar,
+  .party-dfl .pctBar {
+    background-color: #0258a0;
+  }
+
+  .party-rep .pctBar {
+    background-color: #c0272d;
+  }
+
+  .party-np .pctBar {
+    background-color: #808080;
+  }
+
+  .reporting {
+    font-size: 0.65em;
+    color: #808080;
+    font-style: italic;
+  }
+
+  .contest .mapcanvas span {
+    width: 100%;
+    height: 400px;
+    margin: auto;
+    background-color: #eeeeee;
+    display: block;
+  }
+
+  // MAP styles
+
+  .counties {
+    fill: #dcdcdc;
+    stroke: white;
+    stroke-width: 0.5px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  //RACE STYLE EXCEPTIONS
+
+  //Winners
+
+  tr.winner {
+    background-color: #f5f5f5;
+  }
+
+  tr.winner td.cand {
+    font-weight: bold;
+  }
+
+  tr.winner td.cand > span {
+    font-weight: normal;
+  }
+
+  td.winner {
+    width: 18px;
+    padding: 0.5em 0.2em 0.5em 0.5em;
+    font-size: 0.8em;
+    color: black;
+  }
+
+  //Uncontested
+
+  #mn-state-house-uncontested {
+    width: 100%;
+    display: inline-block;
+    float: none;
+    margin-left: 0px;
+    padding-top: 3em;
+  }
+
+  .uncontested {
+    th.votes,
+    th.pct,
+    td.votes > span,
+    td.pct > span {
+      visibility: hidden;
+    }
+
+    .reporting {
+      display: none;
+    }
+
+    td.pct > span.uncontested {
+      visibility: visible;
+      font-size: 0.75em;
+      vertical-align: middle;
+    }
+
+    .bar {
+      width: 5%;
+    }
+  }
+
+  //Condensed tables
+
+  .condensed {
+    width: 46%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: auto;
+    }
+
+    tbody td {
+      font-size: 0.77em;
+    }
+
+    .dist,
+    .seat {
+      width: 15%;
+      text-align: center;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .cand > span {
+      padding-left: 0px;
+    }
+
+    .winner > .dist,
+    .winner > .seat {
+      background-color: white;
+    }
+
+    table span.party {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 2px;
+    }
+
+    table span.party-dfl,
+    table span.party-dem {
+      background-color: #0258a0;
+    }
+
+    table span.party-rep {
+      background-color: #c0272d;
+    }
+  }
+
+  .uncontested-condensed .contest {
+    float: none;
+    margin-left: 0px;
+  }
+
+  // Weird exceptions for the uncontested condensed races
+
+  #mn-supreme-court- .dist,
+  #mn-appeals-court- .dist {
+    display: none;
+  }
+
+  #mn-supreme-court- {
+    float: left;
+
+    @media (max-width: 768px) {
+      float: none;
+    }
+  }
+
+  #mn-appeals-court- {
+    float: right;
+
+    @media (max-width: 768px) {
+      float: none;
+      padding-top: 3em;
+    }
+  }
+
+  #mn-district-court h3 {
+    display: none;
+  }
+
+  #mn-district-court .body {
+    width: 46%;
+    float: left;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      float: none;
+    }
+  }
+
+  #mn-district-court .office {
+    padding-top: 3em;
+  }
+
+  #mn-district-court .contest {
+    width: 100%;
+  }
+
+  .uncontested-condensed #mn-district-court-uncontested {
+    float: right;
+    padding-top: 3em;
+  }
+
+  // Credits and footers
+
+  .credits {
+    clear: both;
+    padding-top: 8em;
+
+    p {
+      font-family: "Benton Sans";
+      font-size: 0.8em;
+      color: #808080;
+    }
+  }
+}

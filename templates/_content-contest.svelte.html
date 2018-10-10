@@ -7,7 +7,7 @@
   { countyMap ? 'has-county-map' : '' }
   { reporting && reporting > 0 ? 'is-reporting' : '' }" id="{ id }">
 
-  {#if party || !embedded}
+  {#if type === 'primary' && (party || !embedded) }
     <h6>{ supplementedTitle }</h6>
   {/if}
 
@@ -24,48 +24,34 @@
       </thead>
 
       <tbody>
-        {#if !loaded}
-          <tbody>
-            {#each (new Array(1)) as blank}
-              <tr>
-                <td class="winner"></td>
-                <td class="cand">Loading ...</td>
-                <td class="votes"></td>
-                <td class="pct">%</td>
-                <td class="bar"></td>
-              </tr>
-            {/each}
-          </tbody>
-        {:else}
-          {#each results as r, ri}
-            <tr class="{ r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
-              data-candidate-id="{ r.candidate_id }">
-              <td class="winner">{#if r.winner}&#10004;{/if}</td>
+        {#each results as r, ri}
+          <tr class="{ r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
+            data-candidate-id="{ r.candidate_id }">
+            <td class="winner">{#if r.winner}&#10004;{/if}</td>
 
-              <td class="cand">
-                {#if countyMap}
-                  <span class="candidate-color-label candidate-{ r.candidate.id}"></span>
-                {/if}
-                { r.candidate.fullName }{#if r.incumbent}<span class="inc">(i)</span>{/if}
-              </td>
+            <td class="cand">
+              {#if countyMap}
+                <span class="candidate-color-label candidate-{ r.candidate.id}"></span>
+              {/if}
+              { r.candidate.fullName }{#if r.incumbent}<span class="inc">(i)</span>{/if}
+            </td>
 
-              <td class="votes"><span>{ r.votes.toLocaleString() }</span></td>
+            <td class="votes"><span>{ r.votes.toLocaleString() }</span></td>
 
-              <td class="pct">
-                {#if uncontested}
-                  <span class="uncontested">Uncontested</span>
-                {/if}
-                <span>{ round(r.percent * 100) }%</span>
-              </td>
+            <td class="pct">
+              {#if uncontested}
+                <span class="uncontested">Uncontested</span>
+              {/if}
+              <span>{ round(r.percent * 100) }%</span>
+            </td>
 
-              <td class="bar">
-                {#if reporting}
-                  <span class="pctBar candidate-result-{ r.candidate_id }" style="width: { (r.percent / results[0].percent) * 100 }%;"></span>
-                {/if}
-              </td>
-            </tr>
-          {/each}
-        {/if}
+            <td class="bar">
+              {#if reporting}
+                <span class="pctBar candidate-result-{ r.candidate_id }" style="width: { (r.percent / results[0].percent) * 100 }%;"></span>
+              {/if}
+            </td>
+          </tr>
+        {/each}
       </tbody>
     </table>
 
@@ -79,35 +65,35 @@
 
   </div>
 
-  {#if countyMap && subResults && subResults.county}
+  <!-- {#if countyMap && subResults && subResults.county}
     <CountyMap subResults="{ subResults.county }"
       candidates="{ candidates }"
       keyedResults="{ keyedResults }" />
-  {/if}
+  {/if} -->
 </div>
 
 <script>
-  import CountyMap from "./_content-county-map.svelte.html";
+  //import CountyMap from "./_content-county-map.svelte.html";
   import { keyBy } from "lodash";
 
   export default {
     components: {
-      CountyMap
+      //CountyMap
     },
 
     oncreate() {
-      if (!this.get().embedded || this.get().countyMap) {
-        this.fetchDataInterval = setInterval(() => {
-          this.fetchData();
-        }, this.adjustedInterval());
-        this.fetchData();
-      }
+      // if (!this.get().embedded || this.get().countyMap) {
+      //   this.fetchDataInterval = setInterval(() => {
+      //     this.fetchData();
+      //   }, this.adjustedInterval());
+      //   this.fetchData();
+      // }
     },
 
     ondestroy() {
-      if (this.fetchDataInterval) {
-        clearInterval(this.fetchDataInterval);
-      }
+      // if (this.fetchDataInterval) {
+      //   clearInterval(this.fetchDataInterval);
+      // }
     },
 
     helpers: {

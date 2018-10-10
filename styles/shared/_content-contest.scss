@@ -1,0 +1,141 @@
+/**
+ * Contest table specific styling.
+ */
+
+// CONTEST table defaults
+
+  .contest {
+    width: 46%;
+    float: left;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: auto;
+      margin-bottom: 15px;
+      float: none;
+    }
+
+    :nth-child(odd) {
+      margin-left: 8%;
+
+      @media (max-width: 768px) {
+        margin: auto;
+      }
+    }
+
+    :nth-child(even) {
+      @media (max-width: 768px) {
+        margin-bottom: 25px;
+      }
+    }
+
+    table{
+      margin-bottom: 0.5em;
+    }
+
+    .contest-table{
+      thead tr th {
+        font-size: 0.6em;
+        text-transform: uppercase;
+        color: #080808;
+        font-weight: normal;
+        border-bottom: 3px solid #eeeeee;
+        padding-left: 0;
+        padding-bottom: 0.2em;
+      }
+
+      tbody td {
+        font-size: 0.9em;
+        border-bottom: 1px solid #eeeeee;
+        vertical-align: middle;
+      }
+
+      tr.test-data {
+        border-right: 3px solid #ff6933;
+      }
+
+    }
+
+}
+
+
+
+  .cand {
+    padding-left: 0;
+  }
+
+  .cand > span.inc {
+    font-size: 0.8em;
+    padding-left: 5px;
+  }
+
+  .votes,
+  .pct {
+    padding-right: 8px;
+    text-align: right;
+  }
+
+  .bar {
+    width: 25%;
+
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  .bar .pctBar {
+    display: block;
+    height: 5px;
+    border-radius: 2px;
+    min-width: 2px;
+  }
+
+  .party-dem .pctBar,
+  .party-dfl .pctBar {
+    background-color: #0258a0;
+  }
+
+  .party-rep .pctBar {
+    background-color: #c0272d;
+  }
+
+  .party-np .pctBar {
+    background-color: #808080;
+  }
+
+  .reporting {
+    font-size: 0.65em;
+    color: #808080;
+    font-style: italic;
+  }
+
+  .contest .mapcanvas span {
+    width: 100%;
+    height: 400px;
+    margin: auto;
+    background-color: #eeeeee;
+    display: block;
+  }
+
+
+  // WINNER MARKER STYLES
+
+  tr.winner {
+    background-color: #f5f5f5;
+
+    td.cand {
+      font-weight: bold;
+
+      > span {
+        font-weight: normal;
+      }
+    }
+  }
+
+  td.winner {
+    width: 18px;
+    padding: 0.5em 0.2em 0.5em 0.5em;
+    font-size: 0.8em;
+    color: black;
+  }
+}
