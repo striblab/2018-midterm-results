@@ -39,3 +39,17 @@
     }
   }
 }
+
+.office:nth-of-type(even) {
+  margin-left: 8%;
+
+  @media (max-width: 768px) {
+    margin: auto;
+  }
+}
+
+.office:nth-of-type(odd) {
+  @media (max-width: 768px) {
+    margin-bottom: 25px;
+  }
+}

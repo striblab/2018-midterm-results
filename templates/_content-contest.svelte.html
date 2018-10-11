@@ -27,7 +27,7 @@
         {#each results as r, ri}
           <tr class="{ r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
             data-candidate-id="{ r.candidate_id }">
-            <td class="winner">{#if r.winner}&221A;{/if}</td>
+            <td class="winner">{#if r.winner}&#10003;{/if}</td>
 
             <td class="cand">
               {#if countyMap}
@@ -65,7 +65,7 @@
 
   </div>
 
-  <div class="map"><img src="http://placekitten.com/460/400" /></div>
+  <div class="map"><img src="http://placekitten.com/460/400" alt="map placeholder" /></div>
 
   <!-- {#if countyMap && subResults && subResults.county}
     <CountyMap subResults="{ subResults.county }"

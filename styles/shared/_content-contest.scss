@@ -5,11 +5,9 @@
 // CONTEST table defaults
 
 .contest {
-  table {
-    margin-bottom: 0.5em;
-  }
-
   .contest-table {
+    margin-bottom: 0.5em;
+
     thead tr th {
       font-size: 0.6em;
       text-transform: uppercase;
@@ -29,63 +27,69 @@
     tr.test-data {
       border-right: 3px solid #ff6933;
     }
-  }
 
-  .cand {
-    padding-left: 0;
-  }
+    .cand {
+      padding-left: 0;
+    }
 
-  .cand > span.inc {
-    font-size: 0.8em;
-    padding-left: 5px;
-  }
+    .cand > span.inc {
+      font-size: 0.8em;
+      padding-left: 5px;
+    }
 
-  .votes,
-  .pct {
-    padding-right: 8px;
-    text-align: right;
-  }
+    .votes,
+    .pct {
+      padding-right: 8px;
+      text-align: right;
+    }
 
-  .bar {
-    width: 25%;
+    .bar {
+      width: 25%;
 
-    @media (max-width: 900px) {
-      display: none;
+      @media (max-width: 900px) {
+        display: none;
+      }
+    }
+
+    .bar .pctBar {
+      display: block;
+      height: 5px;
+      border-radius: 2px;
+      min-width: 2px;
+    }
+
+    .party-dem .pctBar,
+    .party-dfl .pctBar {
+      background-color: #0258a0;
+    }
+
+    .party-rep .pctBar {
+      background-color: #c0272d;
+    }
+
+    .party-np .pctBar {
+      background-color: #808080;
+    }
+
+    .reporting {
+      font-size: 0.65em;
+      color: #808080;
+      font-style: italic;
     }
   }
 
-  .bar .pctBar {
-    display: block;
-    height: 5px;
-    border-radius: 2px;
-    min-width: 2px;
-  }
+  // .map
+  // // .mapcanvas span
+  // {
+  //   width: 100%;
+  //   height: 400px;
+  //   margin: auto;
+  //   background-color: #eeeeee;
+  //   display: block;
+  // }
 
-  .party-dem .pctBar,
-  .party-dfl .pctBar {
-    background-color: #0258a0;
-  }
-
-  .party-rep .pctBar {
-    background-color: #c0272d;
-  }
-
-  .party-np .pctBar {
-    background-color: #808080;
-  }
-
-  .reporting {
-    font-size: 0.65em;
-    color: #808080;
-    font-style: italic;
-  }
-
-  .mapcanvas span {
-    width: 100%;
-    height: 400px;
-    margin: auto;
-    background-color: #eeeeee;
-    display: block;
+  .map {
+    float: right;
   }
 
   // WINNER MARKER STYLES
@@ -103,11 +107,36 @@
   }
 
   td.winner {
-    font-family: Popular;
+    font-family: "Popular";
     font-weight: bold;
     width: 18px;
     padding: 0.5em 0.2em 0.5em 0.5em;
     font-size: 0.8em;
     color: black;
+  }
+}
+
+// UNCONTESTED styles
+
+.uncontested {
+  th.votes,
+  th.pct,
+  td.votes > span,
+  td.pct > span {
+    visibility: hidden;
+  }
+
+  .reporting {
+    display: none;
+  }
+
+  td.pct > span.uncontested {
+    visibility: visible;
+    font-size: 0.75em;
+    vertical-align: middle;
+  }
+
+  .bar {
+    width: 5%;
   }
 }
