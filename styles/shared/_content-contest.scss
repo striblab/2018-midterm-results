@@ -4,61 +4,32 @@
 
 // CONTEST table defaults
 
-  .contest {
-    width: 46%;
-    float: left;
+.contest {
+  table {
+    margin-bottom: 0.5em;
+  }
 
-    @media (max-width: 768px) {
-      width: 100%;
-      margin: auto;
-      margin-bottom: 15px;
-      float: none;
+  .contest-table {
+    thead tr th {
+      font-size: 0.6em;
+      text-transform: uppercase;
+      color: #080808;
+      font-weight: normal;
+      border-bottom: 3px solid #eeeeee;
+      padding-left: 0;
+      padding-bottom: 0.2em;
     }
 
-    :nth-child(odd) {
-      margin-left: 8%;
-
-      @media (max-width: 768px) {
-        margin: auto;
-      }
+    tbody td {
+      font-size: 0.9em;
+      border-bottom: 1px solid #eeeeee;
+      vertical-align: middle;
     }
 
-    :nth-child(even) {
-      @media (max-width: 768px) {
-        margin-bottom: 25px;
-      }
+    tr.test-data {
+      border-right: 3px solid #ff6933;
     }
-
-    table{
-      margin-bottom: 0.5em;
-    }
-
-    .contest-table{
-      thead tr th {
-        font-size: 0.6em;
-        text-transform: uppercase;
-        color: #080808;
-        font-weight: normal;
-        border-bottom: 3px solid #eeeeee;
-        padding-left: 0;
-        padding-bottom: 0.2em;
-      }
-
-      tbody td {
-        font-size: 0.9em;
-        border-bottom: 1px solid #eeeeee;
-        vertical-align: middle;
-      }
-
-      tr.test-data {
-        border-right: 3px solid #ff6933;
-      }
-
-    }
-
-}
-
-
+  }
 
   .cand {
     padding-left: 0;
@@ -109,14 +80,13 @@
     font-style: italic;
   }
 
-  .contest .mapcanvas span {
+  .mapcanvas span {
     width: 100%;
     height: 400px;
     margin: auto;
     background-color: #eeeeee;
     display: block;
   }
-
 
   // WINNER MARKER STYLES
 
@@ -133,6 +103,8 @@
   }
 
   td.winner {
+    font-family: Popular;
+    font-weight: bold;
     width: 18px;
     padding: 0.5em 0.2em 0.5em 0.5em;
     font-size: 0.8em;

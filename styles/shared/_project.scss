@@ -1,3 +1,56 @@
 /**
  * Project specific styling.
  */
+
+// Results mainframe
+
+.results {
+  max-width: 1000px;
+
+  @media (max-width: 768px) {
+    max-width: 95%;
+    margin: auto;
+  }
+}
+
+// Lead-in copy
+
+.lead-in {
+  max-width: 525px;
+  margin: auto;
+  font-family: "Benton Sans";
+  text-transform: none;
+  font-size: 0.9em;
+  padding: 0px 0 20px;
+
+  span {
+    font-weight: bold;
+  }
+
+  .promo {
+    max-width: 525px;
+    margin: auto;
+    font-family: "Benton Sans";
+    text-transform: none;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 0px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+// Credits and footers
+
+.credits {
+  clear: both;
+  padding-top: 8em;
+
+  p {
+    font-family: "Benton Sans";
+    font-size: 0.8em;
+    color: #808080;
+  }
+}

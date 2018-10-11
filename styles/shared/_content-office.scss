@@ -1,0 +1,41 @@
+/**
+ * Office specific styling.
+ */
+
+.office {
+  float: left;
+  padding-top: 2em;
+  width: 46%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 15px;
+    float: none;
+  }
+
+  .office-details {
+    h4 {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-bottom: 0.2em;
+    }
+
+    p.timestamp {
+      font-family: "Benton Sans";
+      font-size: 0.6em;
+      color: #808080;
+      text-transform: uppercase;
+    }
+
+    p.office-chat {
+      font-family: "Benton Sans";
+      font-size: 0.9em;
+      width: 75%;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,457 +1,200 @@
 /**
- * Project specific styling.
+ * Header + navigation specific styling.
  */
 
-// UTILITY STYLES
+.results-header {
+  max-width: 600px;
 
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-// RESULTS mainframe
-.results {
-  max-width: 1000px;
-
-  @media (max-width: 768px) {
-    max-width: 95%;
-    margin: auto;
-  }
-
-  .util {
-    max-width: 350px;
+  h1 {
     text-align: center;
-    margin: auto;
-    font-family: "Benton Sans";
+    padding-top: 0.3em;
+    line-height: 1.1em;
+    margin-bottom: 0;
+
+    @media (max-width: 768px) {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  .share-placeholder {
+    margin-bottom: 4em;
+  }
+
+  // NAV default styles
+
+  #navigation {
+    width: 100%;
+    background-color: white;
+    z-index: 150;
+  }
+
+  .sticky {
+    position: fixed;
+    left: 0;
+    top: 40px;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid #e8e8e8;
+
+    @media (max-width: 545px) {
+      padding-bottom: 0;
+    }
+  }
+
+  // Placeholder
+  .navigation-placeholder {
+    display: none;
+
+    &.sticky-on {
+      display: block;
+    }
+  }
+
+  nav ul {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin: 0 auto 20px;
+  }
+
+  .sticky nav ul {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  nav ul li.main-nav {
+    background-color: white;
+    text-transform: uppercase;
     font-size: 0.75em;
-    padding: 10px 0 25px;
-  }
-
-  .lead-in {
-    max-width: 525px;
-    margin: auto;
     font-family: "Benton Sans";
-    text-transform: none;
-    font-size: 0.9em;
-    padding: 0px 0 20px;
+    border: 1px solid #080808;
+    border-radius: 6px;
+    margin-right: 12px;
+    min-width: 15%;
+    position: relative;
   }
 
-  .lead-in span {
-    font-weight: bold;
+  nav ul li.nodrop {
+    padding: 6px 10px;
   }
 
-  .promo {
-    max-width: 525px;
-    margin: auto;
-    font-family: "Benton Sans";
-    text-transform: none;
-    font-size: 0.9em;
-    font-weight: 600;
-    padding: 0px;
-
-    a {
-      text-decoration: none;
-    }
+  nav ul li.drop {
+    padding: 6px 10px;
   }
 
-  h3,
-  #mn-governor h4 {
-    font-size: 1.4em;
-    font-weight: bold;
-  }
-
-  h4 {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-bottom: 0.2em;
-  }
-
-  h6 {
-    font-size: 1em;
-    font-weight: normal;
-    color: black;
-  }
-
-  .office-details {
-    clear: both;
-  }
-
-  p.timestamp {
-    font-family: "Benton Sans";
-    font-size: 0.6em;
-    color: #808080;
-    text-transform: uppercase;
-  }
-
-  p.body-chat,
-  p.office-chat {
-    font-family: "Benton Sans";
-    font-size: 0.9em;
-    width: 75%;
-
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-  }
-
-  .contest:nth-child(odd) {
-    margin-left: 8%;
-
-    @media (max-width: 768px) {
-      margin: auto;
-    }
-  }
-
-  .contest:nth-child(even) {
-    @media (max-width: 768px) {
-      margin-bottom: 25px;
-    }
-  }
-
-  .contest {
-    width: 46%;
-    float: left;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      margin: auto;
-      margin-bottom: 15px;
-      float: none;
-    }
-  }
-
-  .body,
-  .office {
-    clear: both;
-  }
-
-  .office {
-    padding-top: 3em;
-  }
-
-  .body .office:first-of-type,
-  #mn-attorney-general {
-    padding-top: 0em;
-  }
-
-  .body,
-  #mn-governor {
-    padding-top: 4em;
-
-    @media (max-width: 545px) {
-      padding-top: 6em;
-    }
-  }
-
-  #state-offices,
-  #courts {
-    padding-top: 3em;
-
-    @media (max-width: 545px) {
-      padding-top: 5em;
-    }
-  }
-
-  #mn-district-court {
-    padding-top: 0px;
-  }
-
-  #mn-auditor,
-  #mn-secretaryof-state {
-    @media (max-width: 545px) {
-      padding-top: 6.5em;
-    }
-  }
-
-  .contest {
-    @media (max-width: 768px) {
-      margin-bottom: 0em;
-    }
-  }
-
-  .contest table {
-    margin-bottom: 0.5em;
-  }
-
-  .contest-table.left table {
-    @media (max-width: 768px) {
-      margin-bottom: 0px;
-    }
-  }
-
-  .contest-table.right thead {
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
-
-  .contest-table.right tbody tr td {
-    @media (max-width: 768px) {
-      border-top: none;
-    }
-  }
-
-  .contest-table thead tr th {
-    font-size: 0.6em;
-    text-transform: uppercase;
-    color: #080808;
-    font-weight: normal;
-    border-bottom: 3px solid #eeeeee;
-    padding-left: 0;
-    padding-bottom: 0.2em;
-  }
-
-  .contest-table tbody td {
-    font-size: 0.9em;
-    border-bottom: 1px solid #eeeeee;
-    vertical-align: middle;
-  }
-
-  tr.test-data {
-    border-right: 3px solid #ff6933;
-  }
-
-  .cand {
-    padding-left: 0;
-  }
-
-  .cand > span.inc {
-    font-size: 0.8em;
+  nav ul li span {
     padding-left: 5px;
   }
 
-  .votes,
-  .pct {
-    padding-right: 8px;
-    text-align: right;
-  }
-
-  .bar {
-    width: 25%;
-
-    @media (max-width: 900px) {
-      display: none;
-    }
-  }
-
-  .bar .pctBar {
-    display: block;
-    height: 5px;
-    border-radius: 2px;
-    min-width: 2px;
-  }
-
-  .party-dem .pctBar,
-  .party-dfl .pctBar {
-    background-color: #0258a0;
-  }
-
-  .party-rep .pctBar {
-    background-color: #c0272d;
-  }
-
-  .party-np .pctBar {
-    background-color: #808080;
-  }
-
-  .reporting {
-    font-size: 0.65em;
-    color: #808080;
-    font-style: italic;
-  }
-
-  .contest .mapcanvas span {
-    width: 100%;
-    height: 400px;
-    margin: auto;
-    background-color: #eeeeee;
-    display: block;
-  }
-
-  // MAP styles
-
-  .counties {
-    fill: #dcdcdc;
-    stroke: white;
-    stroke-width: 0.5px;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-  }
-
-  //RACE STYLE EXCEPTIONS
-
-  //Winners
-
-  tr.winner {
-    background-color: #f5f5f5;
-  }
-
-  tr.winner td.cand {
-    font-weight: bold;
-  }
-
-  tr.winner td.cand > span {
-    font-weight: normal;
-  }
-
-  td.winner {
+  nav ul li img {
     width: 18px;
-    padding: 0.5em 0.2em 0.5em 0.5em;
-    font-size: 0.8em;
-    color: black;
-  }
+    -webkit-transform: rotateZ(90deg);
+    -moz-transform: rotateZ(90deg);
+    transform: rotateZ(90deg);
+    vertical-align: bottom;
 
-  //Uncontested
-
-  #mn-state-house-uncontested {
-    width: 100%;
-    display: inline-block;
-    float: none;
-    margin-left: 0px;
-    padding-top: 3em;
-  }
-
-  .uncontested {
-    th.votes,
-    th.pct,
-    td.votes > span,
-    td.pct > span {
-      visibility: hidden;
+    @media (max-width: 1000px) {
+      width: 15px;
     }
+  }
 
-    .reporting {
+  nav ul li:last-child {
+    margin-right: 0;
+  }
+
+  nav ul li a,
+  nav ul li a:link,
+  nav ul li a:visited {
+    color: #080808;
+  }
+
+  nav ul li.main-nav ul.nav-dropdown li {
+    border: none;
+    display: block;
+    text-align: left;
+    font-size: 0.95em;
+    letter-spacing: 0.05em;
+    padding: 8px 10px;
+    margin: 0;
+  }
+
+  nav ul li.main-nav ul.nav-dropdown {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    background-color: #f5f5f5;
+    border: 1px solid #666666;
+    border-radius: 0 0 6px 6px;
+    border-top: 0;
+    margin: 5px 0;
+    visibility: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: 300ms ease;
+    -moz-transition: 300ms ease;
+    -o-transition: 300ms ease;
+    transition: 300ms ease;
+  }
+
+  nav.visible-phone {
+    position: relative;
+    font-family: "Benton Sans";
+    max-width: 70%;
+    margin: auto;
+    cursor: pointer;
+  }
+
+  nav select option {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 5px 0;
+  }
+
+  nav select option.sub {
+    font-weight: normal;
+    text-transform: capitalize;
+  }
+
+  #drop-nav {
+    display: none;
+  }
+
+  @media (max-width: 545px) {
+    #button-nav {
       display: none;
     }
 
-    td.pct > span.uncontested {
-      visibility: visible;
-      font-size: 0.75em;
-      vertical-align: middle;
-    }
-
-    .bar {
-      width: 5%;
+    #drop-nav {
+      display: block;
     }
   }
 
-  //Condensed tables
+  // NAV hover states
 
-  .condensed {
-    width: 46%;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      margin: auto;
-    }
-
-    tbody td {
-      font-size: 0.77em;
-    }
-
-    .dist,
-    .seat {
-      width: 15%;
-      text-align: center;
-      padding-left: 0px;
-      padding-right: 0px;
-    }
-
-    .cand > span {
-      padding-left: 0px;
-    }
-
-    .winner > .dist,
-    .winner > .seat {
-      background-color: white;
-    }
-
-    table span.party {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 2px;
-    }
-
-    table span.party-dfl,
-    table span.party-dem {
-      background-color: #0258a0;
-    }
-
-    table span.party-rep {
-      background-color: #c0272d;
-    }
+  nav ul li:hover {
+    color: #666666;
+    border: 1px solid #666666;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #eeeeee;
   }
 
-  .uncontested-condensed .contest {
-    float: none;
-    margin-left: 0px;
+  nav ul a:hover li,
+  nav ul li:hover a,
+  nav ul li a:hover {
+    color: #666666;
   }
 
-  // Weird exceptions for the uncontested condensed races
-
-  #mn-supreme-court- .dist,
-  #mn-appeals-court- .dist {
-    display: none;
+  nav ul a:hover li {
+    background-color: #eeeeee;
+    border: 1px solid #666666;
+    border-radius: 6px;
   }
 
-  #mn-supreme-court- {
-    float: left;
-
-    @media (max-width: 768px) {
-      float: none;
-    }
-  }
-
-  #mn-appeals-court- {
-    float: right;
-
-    @media (max-width: 768px) {
-      float: none;
-      padding-top: 3em;
-    }
-  }
-
-  #mn-district-court h3 {
-    display: none;
-  }
-
-  #mn-district-court .body {
-    width: 46%;
-    float: left;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      float: none;
-    }
-  }
-
-  #mn-district-court .office {
-    padding-top: 3em;
-  }
-
-  #mn-district-court .contest {
-    width: 100%;
-  }
-
-  .uncontested-condensed #mn-district-court-uncontested {
-    float: right;
-    padding-top: 3em;
-  }
-
-  // Credits and footers
-
-  .credits {
-    clear: both;
-    padding-top: 8em;
-
-    p {
-      font-family: "Benton Sans";
-      font-size: 0.8em;
-      color: #808080;
-    }
+  nav ul li:hover ul.nav-dropdown {
+    visibility: visible;
+    opacity: 1;
+    filter: alpha(opacity=100);
   }
 }
