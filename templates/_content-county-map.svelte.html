@@ -1,0 +1,247 @@
+
+<div class="contest-county-map" ref:container>
+  <div class="county-map-tooltip { tooltipActive ? 'tooltip-active' : '' }">
+    <h4>{ toolTipResults ? toolTipResults.countyName : '' } County</h4>
+    <table>
+      <thead>
+        <tr>
+          <th class="map-cand">Candidate</th>
+          <th class="map-votes">Votes</th>
+          <th class="map-pct">Pct.</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {#if toolTipResults}
+          {#each toolTipResults as result}
+            <tr>
+              <td class="map-cand">{ keyedResults[result.candidate_id].candidate.last }</td>
+              <td class="map-votes">{ result.votes.toLocaleString() }</td>
+              <td class="map-pct">{ round(result.percent * 100, 1) }%</td>
+            </tr>
+          {/each}
+        {/if}
+      </tbody>
+    </table>
+
+    {#if toolTipResults && toolTipResults[0] && toolTipResults[0].resultDetails}
+      <div class="reporting">
+        { round(toolTipResults[0].resultDetails.totalPrecincts ? toolTipResults[0].resultDetails.reporting / toolTipResults[0].resultDetails.totalPrecincts * 100 : 0, 0) }% precincts reporting in county
+      </div>
+    {/if}
+  </div>
+
+  <svg viewBox="0 0 400 400" style="width: 100%; height: 100%;" ref:svgContainer>
+    <g class="state">
+      {#if $mnStateGeo}
+        {#each $mnStateGeo as feature}
+          <path
+            d="{ drawPath(feature) }"
+            class="state-path">
+          </path>
+        {/each}
+      {/if}
+    </g>
+
+    <g class="counties">
+      {#if $mnCountiesGeo}
+        {#each $mnCountiesGeo as feature}
+          <path
+            d="{ drawPath(feature) }"
+            class="county-path { pathClass(feature, subResults, keyedResults) }"
+            on:mouseover="buildTooltip(feature)"
+            on:mousemove="positionTooltip(event, feature)"
+            on:mouseout="hideTooltip(event)">
+          </path>
+        {/each}
+      {/if}
+    </g>
+
+    <g class="cities" pointer-events="none">
+      {#if $mnCitiesGeo}
+        {#each $mnCitiesGeo as feature}
+          {#if feature.properties.TIER <= 2 }
+            <circle
+              cx="{ feature.geometry.coordinates[0] }"
+              cy="{ feature.geometry.coordinates[1] }"
+              class="city-dot-{ getCityClass(feature) }"
+              r="{ getCityDot(feature) }">
+            </circle>
+            <text
+              x="{ feature.geometry.coordinates[0] }"
+              y="{ feature.geometry.coordinates[1] }"
+              text-anchor="{ feature.properties.ANCHOR }"
+              dx="{ feature.properties.DX }"
+              dy="{ feature.properties.DY - 2 }"
+              class="city-label-{ getCityClass(feature) }">
+            { feature.properties.NAME }
+            </text>
+          {/if}
+        {/each}
+      {/if}
+    </g>
+
+  </svg>
+
+  <div class="county-map-legend"></div>
+</div>
+
+<script>
+  import { geoPath } from "d3-geo";
+  import { select } from "d3-selection";
+
+  export default {
+    oncreate() {},
+
+    helpers: {
+      getCityDot(feature) {
+        if (feature.properties.TIER == 1) {
+          return "2px";
+        } else {
+          return "1px";
+        }
+      },
+
+      getCityClass(feature) {
+        if (feature.properties.TIER == 1) {
+          return "large";
+        } else {
+          return "small";
+        }
+      },
+
+      drawPath(feature) {
+        return feature ? geoPath()(feature) : "";
+      },
+
+      pathClass(feature, subResults, keyedResults) {
+        let countyResults =
+          subResults[`2013-mn-county-${feature.properties.COUNTYFP}`];
+        let topCountyResults = countyResults[0];
+
+        // Make sure there is data
+        if (!topCountyResults) {
+          return "no-county-leader";
+        }
+
+        // No votes
+        if (!countyResults[0].votes) {
+          return "no-county-leader";
+        }
+
+        // Look for tie
+        if (
+          countyResults[0].votes &&
+          countyResults[0].votes === countyResults[1].votes
+        ) {
+          console.info("county tie", countyResults);
+          return "no-county-leader";
+        }
+
+        // Determine level of reporting
+        let contestResult = keyedResults[topCountyResults.candidate_id];
+        let reporting =
+          topCountyResults.resultDetails &&
+          topCountyResults.resultDetails.totalPrecincts
+            ? topCountyResults.resultDetails.reporting /
+              topCountyResults.resultDetails.totalPrecincts
+            : 0;
+
+        return `county-leader-${topCountyResults.candidate_id} ${
+          reporting && reporting < 1
+            ? "county-reporting"
+            : reporting && reporting === 1
+              ? "county-fully-reported"
+              : "county-no-reporting"
+        }`;
+      },
+
+      round(input, decimals = 1) {
+        if (parseFloat(input) !== NaN) {
+          return (
+            Math.round(parseFloat(input) * Math.pow(10, decimals)) /
+            Math.pow(10, decimals)
+          );
+        }
+      }
+    },
+
+    computed: {
+      matchedCounties({ $mnCountiesGeo, subResults }) {
+        if ($mnCountiesGeo && subResults) {
+          return $mnCountiesGeo.map(f => {
+            f.properties.results =
+              subResults[`2013-mn-county-${f.properties.COUNTYFP}`];
+            return f;
+          });
+        }
+      }
+    },
+
+    methods: {
+      buildTooltip(feature) {
+        // Get sub results
+        let { subResults } = this.get();
+
+        // Build tooltip
+        if (feature && feature.properties) {
+          let countyResults =
+            subResults[`2013-mn-county-${feature.properties.COUNTYFP}`];
+          countyResults.countyName = feature.properties.NAME;
+
+          this.set({
+            tooltipActive: true,
+            toolTipResults: countyResults
+          });
+
+          // Awful hack: Measure tooltip after it is built. Inevitably a better way
+          // to do this, but don't want to do it on mousemove because it is inefficient.
+          let tooltip = select(this.refs.container).select(".county-map-tooltip");
+          let height = tooltip.node().clientHeight;
+          let width = tooltip.node().clientWidth;
+
+          this.set({
+            tooltipHeight: height,
+            tooltipWidth: width
+          });
+        }
+      },
+
+      positionTooltip(event, feature) {
+        // Position tooltip on mousemove. The logic flips the tooltip from bottom
+        // to top if it collides with the bottom of the screen. Not perfect, but
+        // it works pretty well (and the pixel math makes sense).
+        let tooltip = select(this.refs.container).select(".county-map-tooltip");
+
+        // Get offset position in a way that also works for Firefox (with layerX and layerY). This
+        // is probably not a great way to handle this problem, but it works ...
+        var x = event.layerX == event.offsetX ? event.offsetX : event.layerX;
+        var y = event.layerY == event.offsetY ? event.offsetY : event.layerY;
+
+        // Do pixel magic
+        let { tooltipHeight, tooltipWidth } = this.get();
+        let tooltipOffset = 25; // Position the tooltip a little under/over the cursor itself.
+        let cursorOffPage =
+          event.clientY + (tooltipHeight + tooltipOffset) >= window.innerHeight;
+
+        // Position the tooltip based on whether it flows over the page boundary
+        if (!cursorOffPage) {
+          tooltip
+            .style("left", x - tooltipWidth / 2 + "px")
+            .style("top", y + tooltipOffset + "px");
+        } else {
+          tooltip
+            .style("left", x - tooltipWidth / 2 + "px")
+            .style("top", y - (tooltipHeight + tooltipOffset) + "px");
+        }
+      },
+
+      hideTooltip(event) {
+        this.set({
+          tooltipActive: false,
+          toolTipResults: undefined
+        });
+      }
+    }
+  };
+</script>

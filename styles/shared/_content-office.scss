@@ -3,52 +3,59 @@
  */
 
 .office {
-  float: left;
   padding-top: 2em;
-  width: 46%;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    margin: auto;
-    margin-bottom: 15px;
-    float: none;
-  }
+  .office-table {
+    float: left;
+    width: 46%;
 
-  .office-details {
-    h4 {
-      font-size: 1.1em;
-      font-weight: bold;
-      margin-bottom: 0.2em;
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: auto;
+      margin-bottom: 15px;
+      float: none;
     }
 
-    p.timestamp {
-      font-family: "Benton Sans";
-      font-size: 0.6em;
-      color: #808080;
-      text-transform: uppercase;
-    }
+    .office-details {
+      h4 {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-bottom: 0.2em;
+        padding-top: 0;
+      }
 
-    p.office-chat {
-      font-family: "Benton Sans";
-      font-size: 0.9em;
-      width: 75%;
+      p.timestamp {
+        font-family: "Benton Sans";
+        font-size: 0.6em;
+        color: #808080;
+        text-transform: uppercase;
+      }
 
-      @media (max-width: 768px) {
-        width: 100%;
+      p.office-chat {
+        font-family: "Benton Sans";
+        font-size: 0.9em;
+        width: 75%;
+
+        @media (max-width: 768px) {
+          width: 100%;
+        }
       }
     }
   }
+
+  .office-map {
+    float: right;
+    width: 46%;
+  }
 }
 
-.office:nth-of-type(even) {
-  margin-left: 8%;
-
+.office:nth-child(even) {
   @media (max-width: 768px) {
     margin: auto;
   }
 }
 
-.office:nth-of-type(odd) {
+.office:nth-child(odd) {
   @media (max-width: 768px) {
     margin-bottom: 25px;
   }

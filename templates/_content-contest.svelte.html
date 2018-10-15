@@ -31,7 +31,7 @@
 
             <td class="cand">
               {#if countyMap}
-                <span class="candidate-color-label candidate-{ r.candidate.id}"></span>
+                <span class="candidate-color-label candidate-{ r.candidate.id }"></span>
               {/if}
               { r.candidate.fullName }{#if r.incumbent}<span class="inc">(i)</span>{/if}
             </td>
@@ -62,16 +62,7 @@
         -
       {/if}
     </div>
-
   </div>
-
-  <div class="map"><img src="http://placekitten.com/460/400" alt="map placeholder" /></div>
-
-  <!-- {#if countyMap && subResults && subResults.county}
-    <CountyMap subResults="{ subResults.county }"
-      candidates="{ candidates }"
-      keyedResults="{ keyedResults }" />
-  {/if} -->
 </div>
 
 <script>

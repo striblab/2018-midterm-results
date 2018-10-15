@@ -1,24 +1,37 @@
 <!-- TODO: Standarize on "office" -->
 <div class="office cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id }">
-  <div class="office-details">
-    <h4 class="font-benton-sans">{ supplementedTitle }</h4>
-    <!-- <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p> -->
-    {#if description}
-      <p class="office-chat">{@html description }</p>
-    {/if}
+  <div class="office-table">
+    <div class="office-details">
+      <h4 class="font-benton-sans">{ supplementedTitle }</h4>
+      <!-- <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p> -->
+      {#if description}
+        <p class="office-chat">{@html description }</p>
+      {/if}
+    </div>
+
+    {#each contests as contest}
+      {#if !parties || (parties && contest.party && ~parties.indexOf(contest.party.id))}
+        <Contest id="{ contest.id }"
+          {...contest}
+          embedded="{ true }"
+          loaded="{ loaded }"
+          supplement="{ supplement }"
+          countyMap="{ countyMap }" />
+      {/if}
+    {/each}
   </div>
 
-  {#each contests as contest}
-    {#if !parties || (parties && contest.party && ~parties.indexOf(contest.party.id))}
-      <Contest id="{ contest.id }"
-        {...contest}
-        embedded="{ true }"
-        loaded="{ loaded }"
-        supplement="{ supplement }"
-        countyMap="{ countyMap }" />
-    {/if}
-  {/each}
+  <div class="office-map">
+    <img src="http://placekitten.com/460/400" alt="map placeholder" />
+  </div>
+
+  <!-- {#if countyMap && subResults && subResults.county}
+    <CountyMap subResults="{ subResults.county }"
+      candidates="{ candidates }"
+      keyedResults="{ keyedResults }" />
+  {/if} -->
 </div>
+
 
 <script>
   /* global moment */
