@@ -1,9 +1,19 @@
 
 <div class="strib-styles ssa ssb ssc">
-  <Header />
+  <Header page={page} />
 
   <section class="container-lg results">
     <p class="lead-in">Possibly some lead-in copy about what you'll find on this page, with some context about the state of play, etc.</p>
+
+    <Office defaultTitle="Governor"
+      id="mn-governor"
+      supplement="{ supplement }"
+      countyMap="{ false }" />
+
+    <Office defaultTitle="Attorney General"
+      id="mn-attorney-general"
+      supplement="{ supplement }"
+      countyMap="{ false }" />
 
     <Body defaultTitle="State House"
       id="mn-state-house"
@@ -20,12 +30,14 @@
 <script>
   // Dependencies and components
   import Header from "./_content-header.svelte.html";
+  import Office from "./_content-office.svelte.html";
   import Body from "./_content-body.svelte.html";
 
   // Svelte logic
   export default {
     components: {
       Header,
+      Office,
       Body
     },
 
@@ -33,6 +45,10 @@
       if (this.get().attachShare) {
         this.get().attachShare();
       }
+    },
+
+    data: function() {
+      return { page: "legis" };
     }
   };
 </script>

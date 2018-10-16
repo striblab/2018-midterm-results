@@ -13,8 +13,6 @@ import utils from './shared/utils.js';
 // Mark page with note about development or staging
 utils.environmentNoting();
 
-
-
 // Adding dependencies
 // ---------------------------------
 // Import local ES6 or CommonJS modules like this:

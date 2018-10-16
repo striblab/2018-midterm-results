@@ -13,38 +13,66 @@
     <div class="cf" id="navigation">
       <nav>
         <div class="counter">
-          <div>
             <p class="caps">Update:</p>
             <p><span id="time"></span> s</p>
-          </div>
         </div>
 
         <ul>
-          <a id="navtop" href="#topraces"><li>Top<span class="navdt"> Races</span></li></a>
-          <a id="navstate" href="#state"><li>Minn<span class="navdt">esota</span></li></a>
-          <a id="navleg" href="#legislature"><li>Legis<span class="navdt">lature</span></li></a>
-          <a id="navlocal" href="#local"><li>Local</li></a>
+          <a class="{page == "top" ? "active" : " "}" href="#topraces"><li>Top<span class="navdt">&nbsp;Races</span></li></a>
+          <a class="" href="#state"><li>Minn<span class="navdt">esota</span></li></a>
+          <a class="{page == "legis" ? "active" : " "}" href="#legislature"><li>Legis<span class="navdt">lature</span></li></a>
+          <a class="" href="#local"><li>Local</li></a>
         </ul>
       </nav>
     </div>
+
   </section>
 </div>
 
 <script>
+  import { throttle } from "lodash";
+
   // Svelte logic
   export default {
-
     oncreate: function() {
-      let seconds = 10;
-      let display = document.querySelector('#time');
+      let seconds = 60;
+      let display = document.querySelector("#time");
       this.start_timer(seconds, display);
+
+      // Set place holder.
+      this.refs.navigationPlaceholder.style.height =
+        $(this.refs.navigation).height() + "px";
+
+      // Nav might move because of ads or something
+      this.updateNavTopInterval = window.setInterval(() => {
+        this.updateNavTop();
+      }, 1000);
+      this.updateNavTop();
+
+      // Make throttled updated
+      this.throttledUpdateStickyNav = throttle(() => {
+        this.updateStickyNav();
+      }, 50);
+
+      // Add to scroll event
+      window.addEventListener("scroll", this.throttledUpdateStickyNav);
+    },
+
+    ondestroy() {
+      if (this.throttledUpdateStickyNav) {
+        window.removeEventListener("scroll", this.throttledUpdateStickyNav);
+      }
+      if (this.updateNavTopInterval) {
+        window.clearInterval(this.updateNavTopInterval);
+      }
     },
 
     methods: {
-
       start_timer: function(duration, display) {
-        var timer = duration, minutes, seconds;
-        setInterval(function () {
+        var timer = duration,
+          minutes,
+          seconds;
+        setInterval(function() {
           seconds = parseInt(timer % 60, 10);
 
           seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -55,8 +83,26 @@
             timer = duration;
           }
         }, 1000);
-      }
+      },
 
+      updateStickyNav() {
+        // See if we are past
+        if (window.pageYOffset >= this.get().navigationTop) {
+          this.refs.navigationPlaceholder.classList.add("sticky-on");
+          this.refs.navigation.classList.add("sticky");
+        } else {
+          this.refs.navigationPlaceholder.classList.remove("sticky-on");
+          this.refs.navigation.classList.remove("sticky");
+        }
+      },
+
+      // Check where the nav container is
+      updateNavTop() {
+        // Mark navigation top.  This can change due to ads or reloads
+        this.set({
+          navigationTop: $(this.refs.navigationMarker).offset().top
+        });
+      }
     }
   };
 </script>

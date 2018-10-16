@@ -97,7 +97,7 @@ $candidateColors: (
       fill: $color;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       .candidate-color-label {
         width: 10px;
         height: 10px;

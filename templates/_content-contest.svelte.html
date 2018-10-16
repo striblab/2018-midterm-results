@@ -1,8 +1,7 @@
 <!-- DOING: Standardizing to "contest" -->
 
 <div class="contest
-  { !party || party.id === 'np' ? 'non-partisan' : '' }
-  party-{ party ? party.id : 'np' } contest-{ id }
+  contest-{ id }
   { uncontested ? 'uncontested' : '' }
   { countyMap ? 'has-county-map' : '' }
   { reporting && reporting > 0 ? 'is-reporting' : '' }" id="{ id }">
@@ -25,14 +24,12 @@
 
       <tbody>
         {#each results as r, ri}
-          <tr class="{ r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
+          <tr class="{ !party || party.id === 'np' ? 'non-partisan' : '' } party-{ party ? party.id : 'np' } { r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
             data-candidate-id="{ r.candidate_id }">
             <td class="winner">{#if r.winner}&#10003;{/if}</td>
 
             <td class="cand">
-              {#if countyMap}
-                <span class="candidate-color-label candidate-{ r.candidate.id }"></span>
-              {/if}
+              <span class="{ !party || party.id === 'np' ? 'non-partisan' : '' } party-{ party ? party.id : 'np' } candidate-color-label candidate-{ r.candidate.id }"></span>
               { r.candidate.fullName }{#if r.incumbent}<span class="inc">(i)</span>{/if}
             </td>
 

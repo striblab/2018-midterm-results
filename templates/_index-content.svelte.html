@@ -1,6 +1,6 @@
 
 <div class="strib-styles ssa ssb ssc">
-  <Header />
+  <Header page={page} />
 
   <section class="container-lg results">
     <p class="lead-in">Possibly some lead-in copy about what you'll find on this page, with some context about the state of play, etc.</p>
@@ -14,6 +14,16 @@
       id="mn-attorney-general"
       supplement="{ supplement }"
       countyMap="{ true }" />
+
+    <Office defaultTitle="Governor"
+      id="mn-governor"
+      supplement="{ supplement }"
+      countyMap="{ false }" />
+
+    <Office defaultTitle="Attorney General"
+      id="mn-attorney-general"
+      supplement="{ supplement }"
+      countyMap="{ false }" />
 
     <!-- <Body defaultTitle="U.S. Senate"
       id="mn-us-senate"
@@ -52,6 +62,10 @@
       if (this.get().attachShare) {
         this.get().attachShare();
       }
+    },
+
+    data: function() {
+      return { page: "top" };
     }
   };
 </script>
