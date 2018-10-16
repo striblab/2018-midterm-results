@@ -21,6 +21,7 @@
   }
 
   //NAV styles
+
   // NAV default styles
   .l-navigation-shortnav-container {
     box-shadow: none;
@@ -57,40 +58,30 @@
   }
 
   nav {
-    #updater {
-      color: red;
+    .counter {
+      color: rgb(207, 59, 59);
       font-family: "Benton Sans";
       font-size: 0.7em;
       float: left;
+      position: absolute;
 
-      .counter-dt {
-        @media (max-width: 768px) {
-          display: none;
-        }
-      }
-
-      .counter-mob {
-        display: none;
+      p {
+        font-family: "Benton Sans";
+        text-align: center;
+        margin-bottom: 0;
+        display: inline;
 
         @media (max-width: 768px) {
           display: block;
-          font-size: 0.8em;
-          padding-top: 1.2em;
-
-          p {
-            font-family: "Benton Sans";
-            text-align: center;
-            margin-bottom: 0;
-          }
-
-          p.caps {
-            text-transform: uppercase;
-          }
-
-          span {
-            font-weight: bold;
-          }
         }
+      }
+
+      p.caps {
+        text-transform: uppercase;
+      }
+
+      span {
+        font-weight: bold;
       }
     }
 
@@ -99,6 +90,7 @@
       display: block;
       text-align: center;
       margin: 0px auto;
+      position: relative;
 
       a,
       a:link,
