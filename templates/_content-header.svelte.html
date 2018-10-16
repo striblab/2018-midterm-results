@@ -13,10 +13,10 @@
     <div class="cf" id="navigation">
       <nav>
         <div id="updater">
-          <div class="counter-dt">Next update: XX seconds</div>
+          <div class="counter-dt">Next update: <span id="time"></span> seconds</div>
           <div class="counter-mob">
             <p class="caps">Update:</p>
-            <p><span>XX</span> s</p>
+            <p><span></span> s</p>
           </div>
         </div>
 
@@ -31,4 +31,33 @@
   </section>
 </div>
 
+<script>
+  // Svelte logic
+  export default {
 
+    oncreate: function() {
+      let seconds = 10;
+      let display = document.querySelector('#time');
+      this.start_timer(seconds, display);
+    },
+
+    methods: {
+
+      start_timer: function(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+          seconds = parseInt(timer % 60, 10);
+
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+
+          display.textContent = seconds;
+
+          if (--timer < 0) {
+            timer = duration;
+          }
+        }, 1000);
+      }
+
+    }
+  };
+</script>
