@@ -24,18 +24,4 @@
       width: 100%;
     }
   }
-
-  .office:nth-child(odd) {
-    margin-left: 8%;
-
-    @media (max-width: 768px) {
-      margin: auto;
-    }
-  }
-
-  .office:nth-child(even) {
-    @media (max-width: 768px) {
-      margin-bottom: 25px;
-    }
-  }
 }
