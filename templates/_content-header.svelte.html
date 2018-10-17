@@ -35,6 +35,8 @@
   // Svelte logic
   export default {
     oncreate: function() {
+      return;
+
       let seconds = 60;
       let display = document.querySelector("#time");
       this.start_timer(seconds, display);

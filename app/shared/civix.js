@@ -100,4 +100,4 @@ class Civix {
   }
 }
 
-export default Civix;
+module.exports = Civix;

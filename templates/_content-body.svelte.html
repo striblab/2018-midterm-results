@@ -30,6 +30,7 @@
   // Dependencies and components
   import Office from "./_content-office.svelte.html";
   import { groupBy, isArray, mapValues } from "lodash";
+  import Civix from "../app/shared/civix.js";
 
   // Svelte logic
   export default {
@@ -39,16 +40,34 @@
 
     oncreate() {
       if (!this.get().embedded) {
-        this.fetchDataInterval = setInterval(() => {
-          this.fetchData();
-        }, this.adjustedInterval());
-        this.fetchData();
+        let contestedFilter = this.get().contestedFilter
+          ? this.get().contestedFilter
+          : null;
+
+        this.civix = new Civix(
+          `contests/by-body/${this.get().id}${
+            contestedFilter ? "." + contestedFilter : ""
+          }`
+        );
+        this.civix.on("update", body => {
+          if (isArray(body)) {
+            body = {
+              offices: mapValues(groupBy(body, "office_id"), g => {
+                return { contests: g };
+              })
+            };
+          }
+
+          this.set(body);
+          this.set({ loaded: true });
+        });
+        this.civix.poll();
       }
     },
 
     ondestroy() {
-      if (this.fetchDataInterval) {
-        clearInterval(this.fetchDataInterval);
+      if (this.civix) {
+        this.civix.cancel();
       }
     },
 
@@ -68,64 +87,6 @@
       }
     },
 
-    methods: {
-      // Add some randomness to the interval, so they all
-      // don't go at once
-      adjustedInterval() {
-        let uncontested = this.get().contestedFilter === "uncontested";
-        return (
-          (this.store.get().interval || 60 * 1000) * (uncontested ? 3 : 1) +
-          Math.random() * 5 * 1000
-        );
-      },
-
-      fetchData() {
-        // TODO: Handle no ID
-        if (!this.get().id) {
-          return;
-        }
-
-        // If embedded, data is managed some other way
-        if (this.get().embedded) {
-          return;
-        }
-
-        // Filter contested
-        let contestedFilter = this.get().contestedFilter
-          ? this.get().contestedFilter
-          : null;
-
-        // Mark as loading
-        this.set({ loading: true });
-
-        // Fetch
-        window
-          .fetch(
-            `${this.store.get().civixEndpoint}/contests/by-body/${
-              this.get().id
-            }.${contestedFilter ? contestedFilter + "." : ""}json`
-          )
-          .then(response => {
-            return response.json();
-          })
-          .then(body => {
-            if (isArray(body)) {
-              body = {
-                offices: mapValues(groupBy(body, "office_id"), g => {
-                  return { contests: g };
-                })
-              };
-            }
-
-            this.set(body);
-            this.set({ loaded: true, loading: false });
-          })
-          .catch(e => {
-            // TODO: Handle error
-            console.error(e);
-            this.set({ loading: false });
-          });
-      }
-    }
+    methods: {}
   };
 </script>
