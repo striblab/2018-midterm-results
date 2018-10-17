@@ -1,5 +1,5 @@
 <!-- TODO: Standardize on "body" term -->
-<div class="body" id="{ id }">
+<div class="body { condensed ? 'condensed' : ''}" id="{ id }">
     <h3 class="font-benton-sans">{ supplementedTitle }</h3>
 
     {#if description}
@@ -21,7 +21,8 @@
           parties="{ parties }"
           embedded="{ true }"
           loaded="{ loaded }"
-          supplement="{ supplement }" />
+          supplement="{ supplement }"
+          condensed="{ condensed }" />
       {/each}
     {/if}
 </div>

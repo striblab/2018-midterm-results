@@ -1,0 +1,82 @@
+/**
+ * CONDENSED OFFICE specific styling.
+ */
+
+.condensed {
+  .office .contest {
+    .contest-table {
+      thead tr th {
+        font-size: 0.6em;
+        text-transform: uppercase;
+        color: #080808;
+        font-weight: normal;
+        border-bottom: 3px solid #eeeeee;
+        padding-left: 0;
+        padding-bottom: 0.2em;
+      }
+
+      tbody td {
+        font-size: 0.75em;
+        border-bottom: 1px solid #eeeeee;
+        vertical-align: middle;
+      }
+
+      tr.test-data {
+        border-right: 3px solid #ff6933;
+      }
+
+      .cand {
+        padding-left: 0;
+      }
+
+      .cand > span.inc {
+        font-size: 0.8em;
+        padding-left: 5px;
+      }
+
+      .votes,
+      .pct {
+        padding-right: 8px;
+        text-align: right;
+      }
+
+      .bar {
+        display: none;
+      }
+    }
+  }
+
+  .condensed {
+    float: left;
+    width: 21%;
+    margin-left: 3%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: auto;
+      margin-bottom: 15px;
+      float: none;
+    }
+  }
+
+  .condensed:nth-of-type(1),
+  .condensed:nth-of-type(2),
+  .condensed:nth-of-type(3),
+  .condensed:nth-of-type(4) {
+    padding-top: 2em;
+  }
+
+  .no-map:nth-of-type(1) {
+    margin-left: 0%;
+
+    @media (max-width: 768px) {
+      margin: auto;
+    }
+  }
+
+  .no-map:nth-of-type(odd) {
+    @media (max-width: 768px) {
+      margin-bottom: 25px;
+    }
+  }
+}

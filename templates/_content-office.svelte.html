@@ -1,5 +1,5 @@
 <!-- DOING: Standarizing on "office" -->
-<div class="office { countyMap ? 'row' : 'no-map'} cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id }">
+<div class="office { countyMap ? 'row' : 'no-map'} { condensed ? 'condensed' : ''} cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id }">
   <div class="office-table { countyMap ? 'col col-100 col-md-50' : ''}">
     <div class="office-details">
       <h4 class="font-benton-sans">{ supplementedTitle }</h4>
@@ -9,16 +9,18 @@
       {/if}
     </div>
 
-    {#each contests as contest}
-      {#if !parties || (parties && contest.party && ~parties.indexOf(contest.party.id))}
-        <Contest id="{ contest.id }"
-          {...contest}
-          embedded="{ true }"
-          loaded="{ loaded }"
-          supplement="{ supplement }"
-          countyMap="{ countyMap }" />
-      {/if}
-    {/each}
+    {#if contests}
+      {#each contests as contest}
+        {#if !parties || (parties && contest.party && ~parties.indexOf(contest.party.id))}
+          <Contest id="{ contest.id }"
+            {...contest}
+            embedded="{ true }"
+            loaded="{ loaded }"
+            supplement="{ supplement }"
+            countyMap="{ countyMap }" />
+        {/if}
+      {/each}
+    {/if}
   </div>
 
 
@@ -115,268 +117,7 @@
     methods: {},
 
     data: () => {
-      return {
-        loaded: true,
-        id: "mn-governor",
-        name: "mn-governor",
-        title: "Governor",
-        sort: "governor",
-        created_at: "2018-08-14T15:11:10.608Z",
-        updated_at: "2018-08-14T15:11:10.608Z",
-        boundary_id: "state-mn",
-        contests: [
-          {
-            id: "mn-20180814-governor-dfl",
-            name: "mn-20180814-governor-dfl",
-            title: "Governor Democratic-Farmer-Labor",
-            shortTitle: "DFL Primary",
-            sort: "governor democraticfarmerlabor",
-            apId: "24702",
-            type: "general",
-            special: false,
-            elect: 1,
-            uncontested: false,
-            partisan: true,
-            question: false,
-            voteType: "majority",
-            reporting: 4112,
-            totalPrecincts: 4112,
-            created_at: "2018-08-14T15:11:10.613Z",
-            updated_at: "2018-08-16T15:30:09.159Z",
-            election_id: "mn-20180814",
-            office_id: "mn-governor",
-            party_id: "dfl",
-            results: [
-              {
-                id: "mn-20180814-governor-dfl-33509-walz",
-                apId: "24702-polid-51531-state-MN-1",
-                apUpdated: "2018-08-15T20:16:24.740Z",
-                units: "votes",
-                votes: 242549,
-                percent: 0.416171,
-                incumbent: false,
-                winner: true,
-                subResult: false,
-                test: false,
-                created_at: "2018-08-14T15:11:32.689Z",
-                updated_at: "2018-08-16T15:30:09.102Z",
-                contest_id: "mn-20180814-governor-dfl",
-                candidate_id: "mn-20180814-33509-walz",
-                candidate: {
-                  id: "mn-20180814-33509-walz",
-                  name: "mn-20180814-33509-walz",
-                  apId: "33509",
-                  apIdHistory: { "mn-20180814": "33509" },
-                  first: "Tim",
-                  last: "Walz",
-                  fullName: "Tim Walz",
-                  sort: "walz, tim",
-                  created_at: "2018-08-14T15:11:22.551Z",
-                  updated_at: "2018-08-14T15:11:22.551Z",
-                  party_id: "dfl",
-                  party: {
-                    id: "dfl",
-                    name: "dfl",
-                    title: "Democratic-Farmer-Labor",
-                    shortTitle: "DFL",
-                    sort: "aaaad democratic farmer labor",
-                    abbreviation: "DFL",
-                    created_at: "2018-08-14T15:10:53.068Z",
-                    updated_at: "2018-08-14T15:10:53.068Z"
-                  }
-                }
-              },
-              {
-                id: "mn-20180814-governor-dfl-33506-murphy",
-                apId: "24702-polid-67363-state-MN-1",
-                apUpdated: "2018-08-15T20:16:24.740Z",
-                units: "votes",
-                votes: 186699,
-                percent: 0.320342,
-                incumbent: false,
-                winner: false,
-                subResult: false,
-                test: false,
-                created_at: "2018-08-14T15:11:32.676Z",
-                updated_at: "2018-08-16T15:30:09.115Z",
-                contest_id: "mn-20180814-governor-dfl",
-                candidate_id: "mn-20180814-33506-murphy",
-                candidate: {
-                  id: "mn-20180814-33506-murphy",
-                  name: "mn-20180814-33506-murphy",
-                  apId: "33506",
-                  apIdHistory: { "mn-20180814": "33506" },
-                  first: "Erin",
-                  last: "Murphy",
-                  fullName: "Erin Murphy",
-                  sort: "murphy, erin",
-                  created_at: "2018-08-14T15:11:22.544Z",
-                  updated_at: "2018-08-14T15:11:22.544Z",
-                  party_id: "dfl",
-                  party: {
-                    id: "dfl",
-                    name: "dfl",
-                    title: "Democratic-Farmer-Labor",
-                    shortTitle: "DFL",
-                    sort: "aaaad democratic farmer labor",
-                    abbreviation: "DFL",
-                    created_at: "2018-08-14T15:10:53.068Z",
-                    updated_at: "2018-08-14T15:10:53.068Z"
-                  }
-                }
-              },
-              {
-                id: "mn-20180814-governor-dfl-33508-swanson",
-                apId: "24702-polid-67364-state-MN-1",
-                apUpdated: "2018-08-15T20:16:24.740Z",
-                units: "votes",
-                votes: 143156,
-                percent: 0.24563,
-                incumbent: false,
-                winner: false,
-                subResult: false,
-                test: false,
-                created_at: "2018-08-14T15:11:32.638Z",
-                updated_at: "2018-08-16T15:30:09.128Z",
-                contest_id: "mn-20180814-governor-dfl",
-                candidate_id: "mn-20180814-33508-swanson",
-                candidate: {
-                  id: "mn-20180814-33508-swanson",
-                  name: "mn-20180814-33508-swanson",
-                  apId: "33508",
-                  apIdHistory: { "mn-20180814": "33508" },
-                  first: "Lori",
-                  last: "Swanson",
-                  fullName: "Lori Swanson",
-                  sort: "swanson, lori",
-                  created_at: "2018-08-14T15:11:22.520Z",
-                  updated_at: "2018-08-14T15:11:22.520Z",
-                  party_id: "dfl",
-                  party: {
-                    id: "dfl",
-                    name: "dfl",
-                    title: "Democratic-Farmer-Labor",
-                    shortTitle: "DFL",
-                    sort: "aaaad democratic farmer labor",
-                    abbreviation: "DFL",
-                    created_at: "2018-08-14T15:10:53.068Z",
-                    updated_at: "2018-08-14T15:10:53.068Z"
-                  }
-                }
-              },
-              {
-                id: "mn-20180814-governor-dfl-33505-holden",
-                apId: "24702-polid-67388-state-MN-1",
-                apUpdated: "2018-08-15T20:16:24.740Z",
-                units: "votes",
-                votes: 6386,
-                percent: 0.010957,
-                incumbent: false,
-                winner: false,
-                subResult: false,
-                test: false,
-                created_at: "2018-08-14T15:11:32.663Z",
-                updated_at: "2018-08-16T15:30:09.142Z",
-                contest_id: "mn-20180814-governor-dfl",
-                candidate_id: "mn-20180814-33505-holden",
-                candidate: {
-                  id: "mn-20180814-33505-holden",
-                  name: "mn-20180814-33505-holden",
-                  apId: "33505",
-                  apIdHistory: { "mn-20180814": "33505" },
-                  first: "Tim",
-                  last: "Holden",
-                  fullName: "Tim Holden",
-                  sort: "holden, tim",
-                  created_at: "2018-08-14T15:11:22.537Z",
-                  updated_at: "2018-08-14T15:11:22.537Z",
-                  party_id: "dfl",
-                  party: {
-                    id: "dfl",
-                    name: "dfl",
-                    title: "Democratic-Farmer-Labor",
-                    shortTitle: "DFL",
-                    sort: "aaaad democratic farmer labor",
-                    abbreviation: "DFL",
-                    created_at: "2018-08-14T15:10:53.068Z",
-                    updated_at: "2018-08-14T15:10:53.068Z"
-                  }
-                }
-              },
-              {
-                id: "mn-20180814-governor-dfl-33507-savior",
-                apId: "24702-polid-26773-state-MN-1",
-                apUpdated: "2018-08-15T20:16:24.740Z",
-                units: "votes",
-                votes: 4021,
-                percent: 0.006899,
-                incumbent: false,
-                winner: false,
-                subResult: false,
-                test: false,
-                created_at: "2018-08-14T15:11:32.651Z",
-                updated_at: "2018-08-16T15:30:09.156Z",
-                contest_id: "mn-20180814-governor-dfl",
-                candidate_id: "mn-20180814-33507-savior",
-                candidate: {
-                  id: "mn-20180814-33507-savior",
-                  name: "mn-20180814-33507-savior",
-                  apId: "33507",
-                  apIdHistory: { "mn-20180814": "33507" },
-                  first: "Ole",
-                  last: "Savior",
-                  fullName: "Ole Savior",
-                  sort: "savior, ole",
-                  created_at: "2018-08-14T15:11:22.528Z",
-                  updated_at: "2018-08-14T15:11:22.528Z",
-                  party_id: "dfl",
-                  party: {
-                    id: "dfl",
-                    name: "dfl",
-                    title: "Democratic-Farmer-Labor",
-                    shortTitle: "DFL",
-                    sort: "aaaad democratic farmer labor",
-                    abbreviation: "DFL",
-                    created_at: "2018-08-14T15:10:53.068Z",
-                    updated_at: "2018-08-14T15:10:53.068Z"
-                  }
-                }
-              }
-            ],
-            office: {
-              id: "mn-governor",
-              name: "mn-governor",
-              title: "Governor",
-              sort: "governor",
-              created_at: "2018-08-14T15:11:10.608Z",
-              updated_at: "2018-08-14T15:11:10.608Z",
-              boundary_id: "state-mn"
-            },
-            election: {
-              id: "mn-20180814",
-              name: "mn-20180814",
-              title: "Minnesota Primary 2018-08-14",
-              shortTitle: "MN Primary",
-              sort: "20180814 minnesota primary",
-              date: "2018-08-14",
-              type: "primary",
-              created_at: "2018-08-14T15:11:08.359Z",
-              updated_at: "2018-08-14T15:11:08.359Z",
-              boundary_id: "state-mn"
-            },
-            party: {
-              id: "dfl",
-              name: "dfl",
-              title: "Democratic-Farmer-Labor",
-              shortTitle: "DFL",
-              sort: "aaaad democratic farmer labor",
-              abbreviation: "DFL",
-              created_at: "2018-08-14T15:10:53.068Z",
-              updated_at: "2018-08-14T15:10:53.068Z"
-            }
-          }
-        ]
-      };
+      return {};
     }
   };
 </script>
