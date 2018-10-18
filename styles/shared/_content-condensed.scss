@@ -3,26 +3,54 @@
  */
 
 .condensed {
-  .office .contest {
-    .contest-table {
-      thead tr th {
-        font-size: 0.6em;
-        text-transform: uppercase;
-        color: #080808;
-        font-weight: normal;
-        border-bottom: 3px solid #eeeeee;
-        padding-left: 0;
-        padding-bottom: 0.2em;
-      }
+  .office {
+    float: left;
+    width: 22%;
+    margin-left: 4%;
 
+    @media (max-width: 768px) {
+      width: 48%;
+      margin-bottom: 15px;
+      padding-top: 2em;
+    }
+
+    @media (max-width: 576px) {
+      width: 100%;
+      margin: auto;
+    }
+  }
+
+  .office:nth-of-type(1),
+  .office:nth-of-type(2),
+  .office:nth-of-type(3),
+  .office:nth-of-type(4) {
+    padding-top: 1em;
+  }
+
+  .office:nth-of-type(2n + 1) {
+    @media (max-width: 768px) {
+      margin-left: 0%;
+      clear: both;
+    }
+  }
+
+  .office:nth-of-type(4n + 1) {
+    margin-left: 0%;
+    clear: both;
+  }
+
+  .contest {
+    .contest-table {
       tbody td {
         font-size: 0.75em;
-        border-bottom: 1px solid #eeeeee;
-        vertical-align: middle;
+        padding: 0.3em 0.5em;
       }
 
-      tr.test-data {
-        border-right: 3px solid #ff6933;
+      td.winner > .candidate-color-label {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        display: inline-block;
       }
 
       .cand {
@@ -44,39 +72,31 @@
         display: none;
       }
     }
-  }
 
-  .condensed {
-    float: left;
-    width: 21%;
-    margin-left: 3%;
+    tr.winner {
+      background-color: #f5f5f5;
 
-    @media (max-width: 768px) {
-      width: 100%;
-      margin: auto;
-      margin-bottom: 15px;
-      float: none;
+      td.winner span.check {
+        font-family: "Popular";
+        font-weight: bold;
+      }
+
+      td.winner > span.candidate-color-label {
+        display: none;
+      }
     }
-  }
 
-  .condensed:nth-of-type(1),
-  .condensed:nth-of-type(2),
-  .condensed:nth-of-type(3),
-  .condensed:nth-of-type(4) {
-    padding-top: 2em;
-  }
-
-  .no-map:nth-of-type(1) {
-    margin-left: 0%;
-
-    @media (max-width: 768px) {
-      margin: auto;
+    tr.party-dem .winner span.check,
+    tr.party-dfl .winner span.check {
+      color: #0258a0;
     }
-  }
 
-  .no-map:nth-of-type(odd) {
-    @media (max-width: 768px) {
-      margin-bottom: 25px;
+    tr.party-rep .winner span.check {
+      color: #c0272d;
+    }
+
+    tr.party-np .winner span.check {
+      color: #808080;
     }
   }
 }

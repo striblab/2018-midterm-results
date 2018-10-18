@@ -26,10 +26,9 @@
         {#each results as r, ri}
           <tr class="{ !party || party.id === 'np' ? 'non-partisan' : '' } party-{ party ? party.id : 'np' } { r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
             data-candidate-id="{ r.candidate_id }">
-            <td class="winner">{#if r.winner}&#10003;{/if}</td>
+            <td class="winner"><span class="{ !party || party.id === 'np' ? 'non-partisan' : '' } party-{ party ? party.id : 'np' } candidate-color-label"></span><span class="check">{#if r.winner}&#10003;{/if}</span></td>
 
-            <td class="cand">
-              <span class="{ !party || party.id === 'np' ? 'non-partisan' : '' } party-{ party ? party.id : 'np' } candidate-color-label candidate-{ r.candidate.id }"></span>
+            <td class="cand candidate-{ r.candidate.id }">
               { r.candidate.fullName }{#if r.incumbent}<span class="inc">(i)</span>{/if}
             </td>
 
