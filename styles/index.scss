@@ -26,6 +26,7 @@ $selector-wrapper: ".strib-styles.ssa.ssb.ssc";
 #{$selector-wrapper} {
   // Split your styles into multiple files so its easier to understand and change
   @import "shared/_content-header";
+  @import "shared/_content-search";
   @import "shared/_content-body";
   @import "shared/_content-office";
   @import "shared/_content-contest";
