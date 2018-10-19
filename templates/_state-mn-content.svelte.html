@@ -1,0 +1,70 @@
+
+<div class="strib-styles ssa ssb ssc">
+  <Header page={page} />
+
+  <section class="container-lg results">
+    <p class="lead-in">Possibly some lead-in copy about what you'll find on this page, with some context about the state of play, etc.</p>
+
+    <h3 class="font-benton-sans">Executive offices</h3>
+    <Office defaultTitle="Governor"
+      id="usa-mn-governor"
+      supplement="{ supplement }"
+      countyMap="{ true }" />
+
+    <Office defaultTitle="Attorney General"
+      id="usa-mn-attorney-general"
+      supplement="{ supplement }"
+      countyMap="{ true }" />
+
+    <Office defaultTitle="Auditor"
+      id="usa-mn-auditor"
+      supplement="{ supplement }"
+      countyMap="{ false }" />
+
+    <Office defaultTitle="Secretary of State"
+      id="usa-mn-secretary-state"
+      supplement="{ supplement }"
+      countyMap="{ false }" />
+
+
+    <Body defaultTitle="Courts"
+      id="usa-mn-supreme-court"
+      condensed="{ true }"
+      supplement="{ supplement }"
+      likelyOffices="{  }" />
+
+    <div class="credits">
+      <p>Source: Associated Press, Minnesota Secretary of State, Star Tribune analysis. Election results and winner calls provided by the Associated Press.</p>
+      <p>Credits: Alan Palazzolo, C.J. Sinner, Chase Davis</p>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Dependencies and components
+  import Header from "./_content-header.svelte.html";
+  import Office from "./_content-office.svelte.html";
+  import Body from "./_content-body.svelte.html";
+
+  // Svelte logic
+  export default {
+    components: {
+      Header,
+      Office,
+      Body
+    },
+
+    oncreate: function() {
+      if (this.get().attachShare) {
+        this.get().attachShare();
+      }
+    },
+
+    data: function() {
+      return { page: "state" };
+    }
+  };
+</script>
+
+
+
