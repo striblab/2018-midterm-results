@@ -19,7 +19,21 @@
       },
 
       {
+        "id": "state-mn",
+        "articleId": "NEEDS-ARTICLE-ID",
+        "lcd": "NEEDS-LCD-ID",
+        "styles": "index"
+      },
+
+      {
         "id": "state-leg",
+        "articleId": "NEEDS-ARTICLE-ID",
+        "lcd": "NEEDS-LCD-ID",
+        "styles": "index"
+      },
+
+      {
+        "id": "local",
         "articleId": "NEEDS-ARTICLE-ID",
         "lcd": "NEEDS-LCD-ID",
         "styles": "index"
