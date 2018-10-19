@@ -1,27 +1,53 @@
 /**
  * SEARCH specific styling.
  */
-
 .search {
-  border: 1px solid #666;
-  padding: 0.5em 2em;
+  padding-top: 6em;
+  clear: both;
 
-  h5 {
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    font-size: 1.3em;
-  }
-
-  .input {
-    max-width: 80%;
+  .search-box {
+    border: 1px solid #666;
+    border-radius: 6px;
+    width: 80%;
     margin: auto;
-    padding: 0.3em 0.7em;
-    background-color: #f5f5f5;
-    border: 1px solid #eee;
-  }
+    padding: 0.8em 2em;
 
-  .examples {
-    max-width: 70%;
-    margin: auto;
+    h5 {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 1.2em;
+      text-align: center;
+    }
+
+    .input {
+      max-width: 80%;
+      margin: auto;
+      padding: 0.3em 0.7em;
+      background-color: #f5f5f5;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      color: rgb(145, 145, 145);
+      font-size: 0.9em;
+    }
+
+    .examples {
+      max-width: 70%;
+      margin: auto;
+      padding-top: 1em;
+      font-size: 0.77em;
+
+      p {
+        font-family: "Benton Sans";
+        text-align: center;
+
+        span {
+          padding: 0 8px;
+
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+    }
   }
 }
