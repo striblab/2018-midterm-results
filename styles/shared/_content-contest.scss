@@ -46,19 +46,6 @@
           display: inline-block;
         }
       }
-
-      > span.party-dem,
-      > span.party-dfl {
-        background-color: #0258a0;
-      }
-
-      > span.party-rep {
-        background-color: #c0272d;
-      }
-
-      > span.party-np {
-        background-color: #808080;
-      }
     }
 
     .cand {
@@ -91,23 +78,95 @@
       min-width: 2px;
     }
 
-    .party-dem .pctBar,
-    .party-dfl .pctBar {
-      background-color: #0258a0;
-    }
-
-    .party-rep .pctBar {
-      background-color: #c0272d;
-    }
-
-    .party-np .pctBar {
-      background-color: #808080;
-    }
-
     .reporting {
       font-size: 0.65em;
       color: #808080;
       font-style: italic;
+    }
+
+    // PARTY STYLES
+
+    tr.party-dem,
+    tr.party-dfl {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #0258a0;
+        background-color: #0258a0;
+      }
+    }
+
+    tr.party-rep {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #c0272d;
+        background-color: #c0272d;
+      }
+    }
+
+    tr.party-lib {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #fef38a;
+        background-color: #fef38a;
+      }
+    }
+
+    tr.party-ind,
+    tr.party-idp {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #ffa953;
+        background-color: #ffa953;
+      }
+    }
+
+    tr.party-grt {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #55b774;
+        background-color: #55b774;
+      }
+    }
+
+    tr.party-gre {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #99ef60;
+        background-color: #99ef60;
+      }
+    }
+
+    tr.party-lmn {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #5ce4e1;
+        background-color: #5ce4e1;
+      }
+    }
+
+    tr.party-una {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #eea3ec;
+        background-color: #eea3ec;
+      }
+    }
+
+    tr.party-np {
+      td.winner span,
+      td.winner span.check,
+      td.bar span.pctBar {
+        color: #808080;
+        background-color: #808080;
+      }
     }
   }
 
@@ -132,19 +191,6 @@
         font-weight: normal;
       }
     }
-  }
-
-  tr.party-dem .winner span.check,
-  tr.party-dfl .winner span.check {
-    color: #0258a0;
-  }
-
-  tr.party-rep .winner span.check {
-    color: #c0272d;
-  }
-
-  tr.party-np .winner span.check {
-    color: #808080;
   }
 }
 

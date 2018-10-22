@@ -24,9 +24,9 @@
 
       <tbody>
         {#each results as r, ri}
-          <tr class="{ !party || party.id === 'np' ? 'non-partisan' : '' } party-{ party ? party.id : 'np' } { r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
+          <tr class="{ !r.candidate.party || r.candidate.party.id === 'np' ? 'non-partisan' : '' } party-{ r.candidate.party ? r.candidate.party.id : 'np' } { r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
             data-candidate-id="{ r.candidate_id }">
-            <td class="winner"><span class="{ !party || party.id === 'np' ? 'non-partisan' : '' } party-{ party ? party.id : 'np' } candidate-color-label"></span><span class="check">{#if r.winner}&#10003;{/if}</span></td>
+            <td class="winner" title="{r.candidate.party.title}"><span class="candidate-color-label" title="{r.candidate.party.title}"></span><span class="check">{#if r.winner}&#10003;{/if}</span></td>
 
             <td class="cand candidate-{ r.candidate.id }">
               { r.candidate.fullName }{#if r.incumbent}<span class="inc">(i)</span>{/if}
@@ -41,7 +41,7 @@
               <span>{ round(r.percent * 100) }%</span>
             </td>
 
-            <td class="bar">
+            <td class="bar" title="{r.candidate.party.title}">
               {#if reporting}
                 <span class="pctBar candidate-result-{ r.candidate_id }" style="width: { (r.percent / results[0].percent) * 100 }%;"></span>
               {/if}
