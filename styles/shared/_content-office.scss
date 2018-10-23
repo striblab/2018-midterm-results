@@ -6,7 +6,7 @@
   padding-top: 4em;
 
   @media (max-width: 768px) {
-    padding-top: 1em;
+    padding-top: 3em;
   }
 
   .office-table {
@@ -37,6 +37,10 @@
         font-size: 0.9em;
       }
     }
+  }
+
+  .office-map {
+    padding-left: 2em;
   }
 }
 

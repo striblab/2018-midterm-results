@@ -48,6 +48,21 @@
   }
 }
 
+// Weird race design exceptions
+
+#usa-mn-governor h5,
+#usa-mn-attorney-general h5 {
+  font-size: 1.3em;
+}
+
+h3#judiciary {
+  padding-top: 5em;
+}
+
+#usa-mn-supreme-court {
+  padding-top: 0;
+}
+
 // Credits and footers
 
 .credits {
