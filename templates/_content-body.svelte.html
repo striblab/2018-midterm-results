@@ -2,8 +2,8 @@
 <div class="body { condensed ? 'condensed' : ''}" id="{ id }">
     <h4 class="font-benton-sans">{ supplementedTitle }</h4>
 
-    {#if description}
-      <p class="body-chat">{ @html description }</p>
+    {#if chatter}
+      <p class="body-chat">{ chatter }</p>
     {/if}
 
     {#if !loaded}
