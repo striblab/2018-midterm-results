@@ -3,7 +3,7 @@
   <div class="office-table { countyMap ? 'col col-100 col-md-50' : ''}">
     <div class="office-details">
       <h5 class="font-benton-sans">{ supplementedTitle }</h5>
-      <!-- <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p> -->
+      <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
       {#if chatter}
         <p class="office-chat">{ chatter }</p>
       {/if}
