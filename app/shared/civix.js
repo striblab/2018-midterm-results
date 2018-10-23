@@ -8,7 +8,7 @@ class Civix {
   constructor(resource, options = {}) {
     options.endpoint =
       options.endpoint || '//static.startribune.com/elections/civix-test/v2/';
-    options.election = options.election || '2018-11-05';
+    options.election = options.election || '2018-11-06';
     options.jitter =
       options.jitter === false || options.jitter === true
         ? options.jitter
