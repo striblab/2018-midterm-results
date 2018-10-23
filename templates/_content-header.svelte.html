@@ -8,9 +8,9 @@
     </div>
 
     <!-- navigation -->
-    <div class="navigation-marker"></div>
-    <div class="navigation-placeholder"></div>
-    <div class="cf" id="navigation">
+    <div class="navigation-marker" ref:navigationMarker></div>
+    <div class="navigation-placeholder" ref:navigationPlaceholder></div>
+    <div class="cf" id="navigation" ref:navigation>
       <nav>
         <div class="counter">
             <p class="caps">Update:</p>
@@ -24,6 +24,8 @@
           <a class="{page == "local" ? "active" : " "}" href="#local"><li>Local</li></a>
         </ul>
       </nav>
+
+      <div class="counter"></div>
     </div>
 
   </section>
@@ -34,9 +36,7 @@
 
   // Svelte logic
   export default {
-    oncreate: function() {
-      return;
-
+    oncreate() {
       let seconds = 60;
       let display = document.querySelector("#time");
       this.start_timer(seconds, display);

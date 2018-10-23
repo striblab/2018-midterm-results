@@ -56,21 +56,26 @@
   }
 
   nav {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: baseline;
+
     .counter {
       color: rgb(207, 59, 59);
       font-family: "Benton Sans";
       font-size: 0.7em;
-      float: left;
-      position: absolute;
+      width: 100px;
+      padding-right: 15px;
 
       p {
         font-family: "Benton Sans";
         text-align: center;
-        margin-bottom: 0;
         display: inline;
 
         @media (max-width: 768px) {
           display: block;
+          margin-bottom: 0;
         }
       }
 
@@ -84,12 +89,6 @@
     }
 
     ul {
-      width: 100%;
-      display: block;
-      text-align: center;
-      margin: 0px auto;
-      position: relative;
-
       a,
       a:link,
       a:visited {

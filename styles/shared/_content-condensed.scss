@@ -42,7 +42,7 @@
   .contest {
     .contest-table {
       tbody td {
-        font-size: 0.72em;
+        font-size: 0.7em;
         padding: 0.3em 0.5em;
       }
 
@@ -51,6 +51,11 @@
         height: 9px;
         border-radius: 50%;
         display: inline-block;
+
+        @media (max-width: 768px) {
+          width: 8px;
+          height: 8px;
+        }
       }
 
       .cand {
