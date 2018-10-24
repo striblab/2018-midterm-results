@@ -16,6 +16,7 @@
     font-weight: bold;
     font-size: 1.5em;
     clear: both;
+    padding-top: 2.5em;
   }
 }
 
@@ -24,26 +25,29 @@
 .lead-in {
   max-width: 525px;
   margin: auto;
-  font-family: "Benton Sans";
   text-transform: none;
   font-size: 0.9em;
   padding: 50px 0 20px;
 
-  span {
-    font-weight: bold;
-  }
-
-  .promo {
-    max-width: 525px;
-    margin: auto;
+  p {
     font-family: "Benton Sans";
-    text-transform: none;
-    font-size: 0.9em;
-    font-weight: 600;
-    padding: 0px;
 
-    a {
-      text-decoration: none;
+    span {
+      font-weight: bold;
+    }
+
+    .promo {
+      max-width: 525px;
+      margin: auto;
+      font-family: "Benton Sans";
+      text-transform: none;
+      font-size: 0.9em;
+      font-weight: 600;
+      padding: 0px;
+
+      a {
+        text-decoration: none;
+      }
     }
   }
 }

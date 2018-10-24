@@ -4,8 +4,9 @@
 
 .results-header {
   h1 {
+    font-size: 3.4em;
     text-align: center;
-    padding-top: 0.3em;
+    padding-top: 1.1em;
     line-height: 1.1em;
     margin-bottom: 0;
 
@@ -40,7 +41,7 @@
     padding-bottom: 17px;
     border-bottom: 1px solid #e8e8e8;
 
-    @media (max-width: 600px) {
+    @media (max-width: 596px) {
       padding-top: 8px;
       padding-bottom: 10px;
     }
@@ -59,14 +60,17 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
 
     .counter {
       color: rgb(207, 59, 59);
       font-family: "Benton Sans";
       font-size: 0.7em;
       width: 100px;
-      padding-right: 15px;
+
+      @media (max-width: 596px) {
+        max-width: 20%;
+      }
 
       p {
         font-family: "Benton Sans";
@@ -89,6 +93,10 @@
     }
 
     ul {
+      @media (max-width: 596px) {
+        flex-grow: 2;
+      }
+
       a,
       a:link,
       a:visited {
@@ -96,7 +104,7 @@
       }
 
       li {
-        min-width: 18%;
+        min-width: 20%;
         background-color: white;
         text-transform: uppercase;
         font-size: 0.75em;
@@ -104,17 +112,23 @@
         border: 1px solid #d3d3d3;
         border-radius: 6px;
         padding: 5px 12px 4px;
+        text-align: center;
         display: inline;
+        margin-right: 1em;
         -webkit-transition: border 0.3s ease, color 0.3s ease;
         -moz-transition: border 0.3s ease, color 0.3s ease;
         -o-transition: border 0.3s ease, color 0.3s ease;
         transition: border 0.3s ease, color 0.3s ease;
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+          margin-right: 0.4em;
+        }
+
+        @media (max-width: 596px) {
           display: inline-block;
-          margin-top: 10px;
           padding: 5px 0px 4px;
           margin-right: 0.3em;
+          text-align: center;
 
           .navdt {
             display: none;
@@ -131,6 +145,14 @@
         cursor: pointer;
         color: #202020;
         border: 1px solid #202020;
+      }
+    }
+
+    .placeholder {
+      width: 100px;
+
+      @media (max-width: 596px) {
+        display: none;
       }
     }
   }
