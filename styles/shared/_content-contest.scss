@@ -50,6 +50,7 @@
 
     .cand {
       padding-left: 0;
+      width: 45%;
     }
 
     .cand > span.inc {
@@ -89,83 +90,110 @@
     tr.party-dem,
     tr.party-dfl {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #0258a0;
         background-color: #0258a0;
+      }
+
+      td.winner span.check {
+        color: #0258a0;
+        background-color: #f5f5f5;
       }
     }
 
     tr.party-rep {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #c0272d;
         background-color: #c0272d;
+      }
+
+      td.winner span.check {
+        color: #c0272d;
+        background-color: #f5f5f5;
       }
     }
 
     tr.party-lib {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #fef38a;
         background-color: #fef38a;
+      }
+
+      td.winner span.check {
+        color: #fef38a;
+        background-color: #f5f5f5;
       }
     }
 
     tr.party-ind,
     tr.party-idp {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #ffa953;
         background-color: #ffa953;
+      }
+
+      td.winner span.check {
+        color: #ffa953;
+        background-color: #f5f5f5;
       }
     }
 
     tr.party-grt {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #55b774;
         background-color: #55b774;
+      }
+
+      td.winner span.check {
+        color: #55b774;
+        background-color: #f5f5f5;
       }
     }
 
     tr.party-gre {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #99ef60;
         background-color: #99ef60;
+      }
+
+      td.winner span.check {
+        color: #99ef60;
+        background-color: #f5f5f5;
       }
     }
 
     tr.party-lmn {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #5ce4e1;
         background-color: #5ce4e1;
+      }
+
+      td.winner span.check {
+        color: #5ce4e1;
+        background-color: #f5f5f5;
       }
     }
 
     tr.party-una {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #eea3ec;
         background-color: #eea3ec;
+      }
+
+      td.winner span.check {
+        color: #eea3ec;
+        background-color: #f5f5f5;
       }
     }
 
     tr.party-np {
       td.winner span,
-      td.winner span.check,
       td.bar span.pctBar {
-        color: #808080;
         background-color: #808080;
+      }
+
+      td.winner span.check {
+        color: #000000;
+        background-color: #f5f5f5;
       }
     }
   }

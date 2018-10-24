@@ -25,7 +25,7 @@
       <tbody>
         {#each results as r, ri}
           <tr class="{ !r.candidate.party || r.candidate.party.id === 'np' ? 'non-partisan' : '' } party-{ r.candidate.party ? r.candidate.party.id : 'np' } { r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''}"
-            data-candidate-id="{ r.candidate_id }">
+            data-candidate-id="{ r.candidate_id }" title="{r.candidate.party.title}">
             <td class="winner" title="{r.candidate.party.title}"><span class="candidate-color-label" title="{r.candidate.party.title}"></span><span class="check">{#if r.winner}&#10003;{/if}</span></td>
 
             <td class="cand candidate-{ r.candidate.id }">
