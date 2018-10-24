@@ -1,0 +1,45 @@
+
+<div class="bop" id="">
+  <div class="header">{ title }</div>
+  <div class="d-big-num">{ parties[0].seats }</div>
+  <div class="r-big-num">{ parties[1].seats } </div>
+  <br clear=all>
+  <div class="stacked-bar-graph">
+    <span style="width:{ (parties[0].seats / total) * 100}%" class="bar-d"></span>
+    <span style="width:{ ((total - (parties[0].seats + parties[1].seats))) * 100 / total  }%" class="bar-x"></span>
+    <span style="width:{ (parties[1].seats / total) * 100 }%" class="bar-r"></span>
+  </div>
+  <div class="d-little">D</div>
+  <div class="r-little">R</div>
+  <br clear=all>
+  <div class="center">{ majority }
+    <br>
+    <span>|</span>
+  </div>
+  <div class="reporting"> { reporting }% REPORTING </div>
+</div>
+
+
+<script>
+  /* global moment */
+  // Dependencies and components
+  import Civix from "../app/shared/civix.js";
+
+  // Svelte logic
+  export default {
+    data: function() {
+      return {
+        title: "U.S. Senate",
+        total: 100,
+        majority: 51,
+        reporting: 60,
+        parties: [
+          { winner: true, party: "D", seats: 40 },
+          { winner: false, party: "R", seats: 40 }
+        ]
+      };
+    },
+
+    components: {}
+  };
+</script>

@@ -47,6 +47,11 @@
       supplement="{ supplement }"
       countyMap="{ false }" />
 
+    <BOP defaultTitle=""
+      id=""
+      chatter=""
+      supplement=""/>
+
     <Body defaultTitle="Minnesota House of Representatives (all)"
       id="usa-mn-state-lower"
       condensed="{ true }"
@@ -64,6 +69,7 @@
   // Dependencies and components
   import Header from "./_content-header.svelte.html";
   import Office from "./_content-office.svelte.html";
+  import BOP from "./_content-bop.svelte.html";
   import Body from "./_content-body.svelte.html";
 
   // Svelte logic
@@ -71,6 +77,7 @@
     components: {
       Header,
       Office,
+      BOP,
       Body
     },
 
