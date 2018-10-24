@@ -3,9 +3,8 @@
  */
 
 .bop {
-  width: 50%;
-  float: left;
-  margin: 0 10px;
+  padding-top: 7em;
+  width: 100%;
   position: relative;
 
   &:last-child {
@@ -14,29 +13,28 @@
   }
 
   .header {
-    color: #231f20;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 1.1em;
     padding-bottom: 4px;
   }
 
   .d-big-num {
-    font-size: 14px;
+    font-size: 1.1em;
     font-weight: bold;
-    color: #2964ab;
+    color: #0258ac;
     float: left;
   }
 
   .r-big-num {
-    font-size: 14px;
+    font-size: 1.1em;
     font-weight: bold;
-    color: #bc1f34;
+    color: #c0272d;
     float: right;
   }
 
   .stacked-bar-graph {
     width: 100%;
-    height: 10px;
+    height: 40px;
     color: #cccccc;
     span {
       display: inline-block;
@@ -46,7 +44,7 @@
       padding: 0;
     }
     .bar-d {
-      background: #22409a;
+      background: #0258ac;
     }
 
     .bar-x {
@@ -54,23 +52,21 @@
     }
 
     .bar-r {
-      background: #da2228;
+      background: #c0272d;
     }
   }
 
   .d-little {
-    font-size: 7.5px;
+    font-size: 0.9em;
     margin-top: 2px;
     font-weight: bold;
-    color: #222222;
     float: left;
   }
 
   .r-little {
-    font-size: 7.5px;
+    font-size: 0.9em;
     margin-top: 2px;
     font-weight: bold;
-    color: #222222;
     float: right;
   }
 
@@ -81,13 +77,12 @@
     position: absolute;
     text-align: center;
     width: 100%;
-    margin-top: -37px;
+    margin-top: -86px;
     z-index: 55;
-    padding-bottom: 37px;
+    padding-bottom: 86px;
     span {
       color: #fff;
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 44px;
     }
   }
 
