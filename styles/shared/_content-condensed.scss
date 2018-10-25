@@ -18,6 +18,14 @@
       width: 100%;
       margin: auto;
     }
+
+    .office-details h5 {
+      font-size: 1em;
+    }
+
+    .office-details p.timestamp {
+      font-size: 0.55em;
+    }
   }
 
   .office:nth-of-type(1),
@@ -41,30 +49,38 @@
 
   .contest {
     .contest-table {
+      table thead tr th {
+        font-size: 0.55em;
+      }
+
       tbody td {
         font-size: 0.7em;
         padding: 0.3em 0.5em;
       }
 
       td.winner > .candidate-color-label {
-        width: 9px;
-        height: 9px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
         display: inline-block;
 
         @media (max-width: 768px) {
-          width: 8px;
-          height: 8px;
+          width: 7px;
+          height: 7px;
         }
       }
 
       .cand {
         padding-left: 0;
-      }
 
-      .cand > span.inc {
-        font-size: 0.8em;
-        padding-left: 5px;
+        > span.first {
+          display: none;
+        }
+
+        > span.inc {
+          font-size: 0.8em;
+          // padding-left: 5px;
+        }
       }
 
       .votes,
@@ -89,19 +105,6 @@
       td.winner > span.candidate-color-label {
         display: none;
       }
-    }
-
-    tr.party-dem .winner span.check,
-    tr.party-dfl .winner span.check {
-      color: #0258a0;
-    }
-
-    tr.party-rep .winner span.check {
-      color: #c0272d;
-    }
-
-    tr.party-np .winner span.check {
-      color: #808080;
     }
   }
 }
