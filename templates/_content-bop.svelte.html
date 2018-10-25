@@ -1,45 +1,133 @@
 
-<div class="bop" id="">
-  <div class="body-bop">{ title }</div>
-  <div class="d-big-num">{ parties[0].seats }</div>
-  <div class="r-big-num">{ parties[1].seats } </div>
-  <br clear=all>
-  <div class="stacked-bar-graph">
-    <span style="width:{ (parties[0].seats / total) * 100}%" class="bar-d"></span>
-    <span style="width:{ ((total - (parties[0].seats + parties[1].seats))) * 100 / total  }%" class="bar-x"></span>
-    <span style="width:{ (parties[1].seats / total) * 100 }%" class="bar-r"></span>
-  </div>
-  <div class="d-little">D</div>
-  <div class="r-little">R</div>
-  <br clear=all>
-  <div class="center">{ majority }
-    <br>
-    <span>|</span>
-  </div>
-  <div class="reporting"> { reporting }% REPORTING </div>
+<div class="bop" id="bop-{ id  }">
+  <div class="body-bop">{ defaultTitle || title }</div>
+
+  {#if loaded}
+    <div class="cf">
+      <div class="d-big-num">{ demTotal }</div>
+      <div class="r-big-num">{ repTotal } </div>
+      <div class="majority">{ majority }</div>
+    </div>
+
+    <div class="stacked-bar-graph">
+      <span style="width:{ (demTotal / total * 100) }%" class="bar-d"></span>
+      <span style="width:{ ((total - (demTotal + repTotal))) * 100 / total  }%" class="bar-x"></span>
+      <span style="width:{ (repTotal / total) * 100 }%" class="bar-r"></span>
+      <div class="center"></div>
+    </div>
+
+    <div class="cf">
+      <div class="d-little">D</div>
+      <div class="r-little">R</div>
+
+      <div class="reporting">Updated { updatedDate ? makeDate(updatedDate) : '-' } </div>
+    </div>
+  {/if}
 </div>
 
 
 <script>
   /* global moment */
-  // Dependencies and components
   import Civix from "../app/shared/civix.js";
+  import { find, each } from "lodash";
 
   // Svelte logic
   export default {
-    data: function() {
-      return {
-        title: "U.S. Senate",
-        total: 100,
-        majority: 51,
-        reporting: 60,
-        parties: [
-          { winner: true, party: "D", seats: 40 },
-          { winner: false, party: "R", seats: 40 }
-        ]
-      };
+    components: {},
+
+    oncreate() {
+      if (!this.get().embedded) {
+        this.civix = new Civix(`trends/by-body/${this.get().id}`);
+        this.civix.on("update", body => {
+          this.set(body);
+          this.set({ loaded: true });
+        });
+        this.civix.poll();
+      }
     },
 
-    components: {}
+    ondestroy() {
+      if (this.civix) {
+        this.civix.cancel();
+      }
+    },
+
+    helpers: {
+      makeDate: (date, format) => {
+        let m = moment(date);
+        let now = moment();
+        if (!m || !m.isValid()) {
+          return "";
+        }
+
+        return m.isSame(now, "date")
+          ? m.format("h:mm a")
+          : m.format("MMM D h:mm a");
+      }
+    },
+
+    computed: {
+      dem: ({ trends, loaded, id }) => {
+        if (!loaded) {
+          return;
+        }
+
+        let dem = find(trends, { party_id: "dem" });
+
+        // For dems, we add the others, as the senate has some
+        // independent.
+        // TODO: Ask around
+        if (id === "usa-congress-senate") {
+          let others = find(trends, { party_id: "oth" });
+          dem.current += others.current;
+          dem.holdovers += others.holdovers;
+          dem.insufficientVote += others.insufficientVote;
+          dem.leading += others.leading;
+          dem.netLeaders += others.netLeaders;
+          dem.netWinners += others.netWinners;
+          dem.winningTrend += others.winningTrend;
+          dem.won += others.won;
+        }
+
+        return dem;
+      },
+
+      rep: ({ trends, loaded }) => {
+        if (!loaded) {
+          return;
+        }
+        return find(trends, { party_id: "rep" });
+      },
+
+      demTotal: ({ dem, loaded }) => {
+        if (!loaded) {
+          return;
+        }
+
+        return dem.holdovers + dem.won;
+      },
+
+      repTotal: ({ rep, loaded }) => {
+        if (!loaded) {
+          return;
+        }
+
+        return rep.holdovers + rep.won;
+      },
+
+      updatedDate: ({ trends }) => {
+        if (!trends) {
+          return;
+        }
+
+        return trends[0].apUpdated || trends[0].updated_at;
+      }
+    },
+
+    data: function() {
+      return {
+        loaded: false
+      };
+    }
   };
 </script>
