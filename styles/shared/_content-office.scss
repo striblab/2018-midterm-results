@@ -3,10 +3,10 @@
  */
 
 .office {
-  padding-top: 4em;
+  padding-top: 2.8em;
 
   @media (max-width: 768px) {
-    padding-top: 3em;
+    padding-top: 2.5em;
   }
 
   .office-table {
@@ -19,7 +19,7 @@
 
     .office-details {
       h5 {
-        font-size: 1.1em;
+        font-size: 1em;
         font-weight: bold;
         margin-bottom: 0.2em;
         padding-top: 0;
