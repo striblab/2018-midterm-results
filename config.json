@@ -13,29 +13,29 @@
     "pages": [
       {
         "id": "index",
-        "articleId": "NEEDS-ARTICLE-ID",
-        "lcd": "NEEDS-LCD-ID",
+        "articleId": "497951121",
+        "lcd": "497951261",
         "default": true
       },
 
       {
         "id": "state-mn",
-        "articleId": "NEEDS-ARTICLE-ID",
-        "lcd": "NEEDS-LCD-ID",
+        "articleId": "497951431",
+        "lcd": "497951481",
         "styles": "index"
       },
 
       {
         "id": "state-leg",
-        "articleId": "NEEDS-ARTICLE-ID",
-        "lcd": "NEEDS-LCD-ID",
+        "articleId": "497951711",
+        "lcd": "497951781",
         "styles": "index"
       },
 
       {
         "id": "local",
-        "articleId": "NEEDS-ARTICLE-ID",
-        "lcd": "NEEDS-LCD-ID",
+        "articleId": "497951861",
+        "lcd": "497951901",
         "styles": "index"
       }
     ]
@@ -66,9 +66,9 @@
     },
     "production": {
       "bucket": "static.startribune.com",
-      "path": "news/projects/all/2018-midterm-results",
-      "url": "http://static.startribune.com/news/projects/all/2018-midterm-results/",
-      "cacheSeconds": 600
+      "path": "elections/projects/2018-midterm-results",
+      "url": "http://static.startribune.com/elections/projects/2018-midterm-results/",
+      "cacheSeconds": 60
     }
   }
 }
