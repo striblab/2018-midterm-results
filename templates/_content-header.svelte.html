@@ -13,8 +13,10 @@
     <div class="cf results-navigation" ref:navigation>
       <nav>
         <div class="counter">
-            <p class="caps">Update:</p>
-            <p><span id="time"></span> s</p>
+          <p class="caps">Update:</p>
+          <p>
+            <span id="time" ref:timer></span> s
+          </p>
         </div>
 
         <ul>
@@ -33,14 +35,14 @@
 </div>
 
 <script>
+  /* global $ */
   import { throttle } from "lodash";
 
   // Svelte logic
   export default {
     oncreate() {
-      let seconds = 60;
-      let display = document.querySelector("#time");
-      this.start_timer(seconds, display);
+      // Start timer
+      this.startTimer();
 
       // Set place holder.
       this.refs.navigationPlaceholder.style.height =
@@ -68,24 +70,29 @@
       if (this.updateNavTopInterval) {
         window.clearInterval(this.updateNavTopInterval);
       }
+      if (this.timerIntervalId) {
+        window.clearInterval(this.timerIntervalId);
+      }
     },
 
     methods: {
-      start_timer: function(duration, display) {
-        var timer = duration,
-          minutes,
-          seconds;
-        setInterval(function() {
-          seconds = parseInt(timer % 60, 10);
+      startTimer(duration = 60) {
+        if (this.timerIntervalId) {
+          return;
+        }
 
-          seconds = seconds < 10 ? "0" + seconds : seconds;
+        // Things to keep track of
+        let time = duration;
 
-          display.textContent = seconds;
+        // Update function
+        let update = () => {
+          this.refs.timer.textContent = time.toString().padStart(2, "0");
+          time = time <= 0 ? duration : time - 1;
+        };
 
-          if (--timer < 0) {
-            timer = duration;
-          }
-        }, 1000);
+        // Set internval and start
+        this.timerIntervalId = setInterval(update, 1000);
+        update();
       },
 
       updateStickyNav() {
