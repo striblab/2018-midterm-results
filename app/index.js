@@ -10,6 +10,7 @@
 // Dependencies
 import utils from './shared/utils.js';
 import Content from '../templates/_index-content.svelte.html';
+import store from './shared/store.js';
 
 // Mark page with note about development or staging
 utils.environmentNoting();
@@ -31,6 +32,7 @@ const app = new Content({
   target: document.querySelector('.article-lcd-body-content'),
   data: {
     attachShare
-  }
+  },
+  store
 });
 window.__app = app;

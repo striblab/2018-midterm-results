@@ -13,7 +13,8 @@ class Civix {
       options.jitter === false || options.jitter === true
         ? options.jitter
         : true;
-    options.polling = 30 + (options.jitter ? Math.random() * 5 : 0);
+    options.polling =
+      options.polling || 30 + (options.jitter ? Math.random() * 5 : 0);
     options.autostart =
       options.autostart === false || options.autostart === true
         ? options.autostart

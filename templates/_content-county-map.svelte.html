@@ -1,36 +1,36 @@
 
 <div class="contest-county-map" ref:container>
   <div class="county-map-tooltip { tooltipActive ? 'tooltip-active' : '' }">
-    <h4>{ toolTipResults ? toolTipResults.countyName : '' } County</h4>
-    <table>
-      <thead>
-        <tr>
-          <th class="map-cand">Candidate</th>
-          <th class="map-votes">Votes</th>
-          <th class="map-pct">Pct.</th>
-        </tr>
-      </thead>
+    {#if toolTipContest}
+      <h4>{ toolTipContest ? toolTipContest.shortTitle : '' } County</h4>
+      <table>
+        <thead>
+          <tr>
+            <th class="map-cand">Candidate</th>
+            <th class="map-votes">Votes</th>
+            <th class="map-pct">Pct.</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {#if toolTipResults}
-          {#each toolTipResults as result}
-            <tr>
-              <td class="map-cand">{ keyedResults[result.candidate_id].candidate.last }</td>
-              <td class="map-votes">{ result.votes.toLocaleString() }</td>
-              <td class="map-pct">{ round(result.percent * 100, 1) }%</td>
-            </tr>
-          {/each}
-        {/if}
-      </tbody>
-    </table>
+        <tbody>
+          {#if toolTipContest.results}
+            {#each toolTipContest.results as result}
+              <tr>
+                <td class="map-cand">{ result.candidate.last }</td>
+                <td class="map-votes">{ (result.votes || 0).toLocaleString() }</td>
+                <td class="map-pct">{ round((result.percent || 0) * 100, 1) }%</td>
+              </tr>
+            {/each}
+          {/if}
+        </tbody>
+      </table>
 
-    {#if toolTipResults && toolTipResults[0] && toolTipResults[0].resultDetails}
       <div class="reporting">
-        { round(toolTipResults[0].resultDetails.totalPrecincts ? toolTipResults[0].resultDetails.reporting / toolTipResults[0].resultDetails.totalPrecincts * 100 : 0, 0) }% precincts reporting in county
+        { round(toolTipContest.totalPrecincts ? (toolTipContest.reporting || 0) / toolTipContest.totalPrecincts * 100 : 0, 0) }% precincts reporting in county
       </div>
-    {/if}
 
-    <!-- <div>Contextual historical data goes here in the tooltip</div> -->
+      <!-- <div>Contextual historical data goes here in the tooltip</div> -->
+    {/if}
   </div>
 
   <svg viewBox="0 0 400 400" style="width: 100%; height: 100%;" ref:svgContainer>
@@ -50,7 +50,7 @@
         {#each $mnCountiesGeo as feature}
           <path
             d="{ drawPath(feature) }"
-            class="county-path { pathClass(feature, subResults, keyedResults) }"
+            class="county-path { pathClass(feature, subContests) }"
             on:mouseover="buildTooltip(feature)"
             on:mousemove="positionTooltip(event, feature)"
             on:mouseout="hideTooltip(event)">
@@ -89,11 +89,31 @@
 </div>
 
 <script>
+  import Civix from "../app/shared/civix.js";
   import { geoPath } from "d3-geo";
   import { select } from "d3-selection";
+  import { find, orderBy } from "lodash";
 
   export default {
-    oncreate() {},
+    oncreate() {
+      this.civix = new Civix(
+        `contests/sub-contests/${this.get().contestId}.county`,
+        { polling: 59 }
+      );
+      this.civix.on("update", subContests => {
+        this.set({
+          subContests,
+          loaded: true
+        });
+      });
+      this.civix.poll();
+    },
+
+    ondestroy() {
+      if (this.civix) {
+        this.civix.cancel();
+      }
+    },
 
     helpers: {
       getCityDot(feature) {
@@ -116,40 +136,45 @@
         return feature ? geoPath()(feature) : "";
       },
 
-      pathClass(feature, subResults, keyedResults) {
-        let countyResults =
-          subResults[`2013-mn-county-${feature.properties.COUNTYFP}`];
-        let topCountyResults = countyResults[0];
-
-        // Make sure there is data
-        if (!topCountyResults) {
-          return "no-county-leader";
+      pathClass(feature, subContests) {
+        if (!subContests) {
+          return "no-results";
         }
 
-        // No votes
-        if (!countyResults[0].votes) {
+        // Find corresponding contest
+        let featureFips = `${feature.properties.STATEFP}${
+          feature.properties.COUNTYFP
+        }`;
+        let contest = find(subContests, c => {
+          return c.boundary_version.geoid === featureFips;
+        });
+
+        // Get top results.  It comes in as winner of entire race, so
+        // we need to sort
+        contest.results = orderBy(
+          contest.results,
+          ["votes", "sort"],
+          ["desc", "asc"]
+        );
+        let topResults = contest.results[0];
+
+        // Make sure there is data
+        if (!contest || !topResults || !topResults.votes) {
           return "no-county-leader";
         }
 
         // Look for tie
-        if (
-          countyResults[0].votes &&
-          countyResults[0].votes === countyResults[1].votes
-        ) {
-          console.info("county tie", countyResults);
+        if (topResults.votes && topResults.votes === contest.results[1].votes) {
+          console.info("county tie", contest);
           return "no-county-leader";
         }
 
         // Determine level of reporting
-        let contestResult = keyedResults[topCountyResults.candidate_id];
-        let reporting =
-          topCountyResults.resultDetails &&
-          topCountyResults.resultDetails.totalPrecincts
-            ? topCountyResults.resultDetails.reporting /
-              topCountyResults.resultDetails.totalPrecincts
-            : 0;
+        let reporting = (contest.reporting || 0) / contest.totalPrecincts;
 
-        return `county-leader-${topCountyResults.candidate_id} ${
+        return `county-leader-${
+          topResults.candidate_id
+        } county-leader-${topResults.candidate.party_id.toLowerCase()} ${
           reporting && reporting < 1
             ? "county-reporting"
             : reporting && reporting === 1
@@ -168,45 +193,48 @@
       }
     },
 
-    computed: {
-      matchedCounties({ $mnCountiesGeo, subResults }) {
-        if ($mnCountiesGeo && subResults) {
-          return $mnCountiesGeo.map(f => {
-            f.properties.results =
-              subResults[`2013-mn-county-${f.properties.COUNTYFP}`];
-            return f;
-          });
-        }
-      }
-    },
+    computed: {},
 
     methods: {
       buildTooltip(feature) {
         // Get sub results
-        let { subResults } = this.get();
-
-        // Build tooltip
-        if (feature && feature.properties) {
-          let countyResults =
-            subResults[`2013-mn-county-${feature.properties.COUNTYFP}`];
-          countyResults.countyName = feature.properties.NAME;
-
-          this.set({
-            tooltipActive: true,
-            toolTipResults: countyResults
-          });
-
-          // Awful hack: Measure tooltip after it is built. Inevitably a better way
-          // to do this, but don't want to do it on mousemove because it is inefficient.
-          let tooltip = select(this.refs.container).select(".county-map-tooltip");
-          let height = tooltip.node().clientHeight;
-          let width = tooltip.node().clientWidth;
-
-          this.set({
-            tooltipHeight: height,
-            tooltipWidth: width
-          });
+        let { subContests } = this.get();
+        if (!subContests || !feature || !feature.properties) {
+          return;
         }
+
+        // Find corresponding contest
+        let featureFips = `${feature.properties.STATEFP}${
+          feature.properties.COUNTYFP
+        }`;
+        let contest = find(subContests, c => {
+          return c.boundary_version.geoid === featureFips;
+        });
+
+        // It comes in as winner of entire race, so
+        // we need to sort
+        contest.results = orderBy(
+          contest.results,
+          ["votes", "sort"],
+          ["desc", "asc"]
+        );
+
+        // Set
+        this.set({
+          tooltipActive: true,
+          toolTipContest: contest
+        });
+
+        // Awful hack: Measure tooltip after it is built. Inevitably a better way
+        // to do this, but don't want to do it on mousemove because it is inefficient.
+        let tooltip = select(this.refs.container).select(".county-map-tooltip");
+        let height = tooltip.node().clientHeight;
+        let width = tooltip.node().clientWidth;
+
+        this.set({
+          tooltipHeight: height,
+          tooltipWidth: width
+        });
       },
 
       positionTooltip(event, feature) {
@@ -241,7 +269,7 @@
       hideTooltip(event) {
         this.set({
           tooltipActive: false,
-          toolTipResults: undefined
+          toolTipContest: undefined
         });
       }
     }

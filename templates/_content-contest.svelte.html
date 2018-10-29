@@ -1,76 +1,82 @@
-<!-- DOING: Standardizing to "contest" -->
-
 <div
-  class="contest contest-{ id } { uncontested ? 'uncontested' : '' } { countyMap ? 'has-county-map' : '' } { reporting && reporting > 0 ? 'is-reporting' : '' }" id="{ id }">
-  {#if type === 'primary' && (party || !embedded) }
-    <h6>{ supplementedTitle }</h6>
-  {/if}
+  class="contest contest-{ id } { uncontested ? 'uncontested' : '' } { countyMap ? 'has-county-map row' : '' } { reporting && reporting > 0 ? 'is-reporting' : '' }" id="{ id }">
+  <div class="{ countyMap ? 'col col-100 col-md-50' : ''}">
+    {#if type === 'primary' && (party || !embedded) }
+      <h6>{ supplementedTitle }</h6>
+    {/if}
 
-  {#if !embedded}
-    <h5>{ supplementedTitle }</h5>
-  {/if}
+    {#if !embedded}
+      <h5>{ supplementedTitle }</h5>
+    {/if}
 
-  <div class="contest-table">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th class="cand">Candidate</th>
-          <th class="votes">Votes</th>
-          <th class="pct">Pct.</th>
-          <th class="bar"></th>
-        </tr>
-      </thead>
+    <div class="contest-table">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="cand">Candidate</th>
+            <th class="votes">Votes</th>
+            <th class="pct">Pct.</th>
+            <th class="bar"></th>
+          </tr>
+        </thead>
 
-      <tbody>
+        <tbody>
+          {#if loaded}
+            {#each results as r, ri}
+              <tr class="{ !r.candidate.party || r.candidate.party.id === 'np' ? 'non-partisan' : '' } party-{ r.candidate.party ? r.candidate.party.id : 'np' } { r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''} { reporting ? '' : 'pre-reporting'}"
+                data-candidate-id="{ r.candidate_id }" title="{r.candidate.party.title}">
+                <td class="winner" title="{r.candidate.party.title}"><span class="candidate-color-label" title="{r.candidate.party.title}"></span><span class="check">{#if r.winner}&#10003;{/if}</span></td>
+
+                <td class="cand candidate-{ r.candidate.id }">
+                  <span class="first">{ r.candidate.first }&nbsp;</span>{ r.candidate.last }{#if r.incumbent}<span class="inc">*</span>{/if} <span class="{r.candidate.party.id === 'np' ? 'np' : 'party-label'}">{r.candidate.party.id}</span>
+                </td>
+
+                <td class="votes"><span>{ r.votes.toLocaleString() }</span></td>
+
+                <td class="pct">
+                  {#if uncontested}
+                    <span class="uncontested">Uncontested</span>
+                  {/if}
+                  <span class="num">{ Math.round(r.percent * 100) }%</span>
+                </td>
+
+                <td class="bar" title="{r.candidate.party.title}">
+                  {#if reporting}
+                    <span class="pctBar candidate-result-{ r.candidate_id }" style="width: { (r.percent / results[0].percent) * 100 }%;"></span>
+                  {/if}
+                </td>
+              </tr>
+            {/each}
+          {/if}
+        </tbody>
+      </table>
+
+      <div class="reporting">
         {#if loaded}
-          {#each results as r, ri}
-            <tr class="{ !r.candidate.party || r.candidate.party.id === 'np' ? 'non-partisan' : '' } party-{ r.candidate.party ? r.candidate.party.id : 'np' } { r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''} { reporting ? '' : 'pre-reporting'}"
-              data-candidate-id="{ r.candidate_id }" title="{r.candidate.party.title}">
-              <td class="winner" title="{r.candidate.party.title}"><span class="candidate-color-label" title="{r.candidate.party.title}"></span><span class="check">{#if r.winner}&#10003;{/if}</span></td>
-
-              <td class="cand candidate-{ r.candidate.id }">
-                <span class="first">{ r.candidate.first }&nbsp;</span>{ r.candidate.last }{#if r.incumbent}<span class="inc">*</span>{/if} <span class="{r.candidate.party.id === 'np' ? 'np' : 'party-label'}">{r.candidate.party.id}</span>
-              </td>
-
-              <td class="votes"><span>{ r.votes.toLocaleString() }</span></td>
-
-              <td class="pct">
-                {#if uncontested}
-                  <span class="uncontested">Uncontested</span>
-                {/if}
-                <span class="num">{ Math.round(r.percent * 100) }%</span>
-              </td>
-
-              <td class="bar" title="{r.candidate.party.title}">
-                {#if reporting}
-                  <span class="pctBar candidate-result-{ r.candidate_id }" style="width: { (r.percent / results[0].percent) * 100 }%;"></span>
-                {/if}
-              </td>
-            </tr>
-          {/each}
+          { round(percentReporting * 100, 0) }% of precincts reporting
+        {:else}
+          -
         {/if}
-      </tbody>
-    </table>
-
-    <div class="reporting">
-      {#if loaded}
-        { round(percentReporting * 100, 0) }% of precincts reporting
-      {:else}
-        -
-      {/if}
+      </div>
     </div>
   </div>
+
+  {#if countyMap}
+    <div class="contest-map col col-100 col-md-50">
+      <CountyMap contestId="{ id }" />
+    </div>
+  {/if}
 </div>
 
 <script>
-  //import CountyMap from "./_content-county-map.svelte.html";
+  import CountyMap from "./_content-county-map.svelte.html";
   import { keyBy } from "lodash";
   import Civix from "../app/shared/civix.js";
 
   export default {
     components: {
-      //CountyMap
+      CountyMap
     },
 
     oncreate() {

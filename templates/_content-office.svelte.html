@@ -1,6 +1,6 @@
 <!-- DOING: Standarizing on "office" -->
-<div class="office { countyMap ? 'row' : 'no-map'} { condensed ? 'condensed' : ''} cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id }">
-  <div class="office-table { countyMap ? 'col col-100 col-md-50' : ''}">
+<div class="office { condensed ? 'condensed' : ''} cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id }">
+  <div class="office-table">
     <div class="office-details">
       <h5 class="font-benton-sans">{ supplementedTitle }</h5>
       <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
@@ -22,18 +22,6 @@
       {/each}
     {/if}
   </div>
-
-
-  {#if countyMap}
-  <!-- {#if countyMap && subResults && subResults.county} -->
-    <div class="office-map { countyMap ? 'col col-100 col-md-50' : ''}">
-      <img src="http://stmedia.startribune.com/images/map_mock.png" alt="map placeholder" />
-    </div>
-
-    <!-- <CountyMap subResults="{ subResults.county }"
-      candidates="{ candidates }"
-      keyedResults="{ keyedResults }" /> -->
-  {/if}
 </div>
 
 

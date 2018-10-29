@@ -228,6 +228,15 @@
       // }
     }
   }
+
+  // Map styles
+  .contest-map {
+    margin-top: 0;
+
+    @include media-breakpoint-up("md") {
+      margin-top: -4em;
+    }
+  }
 }
 
 // UNCONTESTED styles

@@ -19,15 +19,21 @@
       supplement="{ supplement }"
       countyMap="{ true }" />
 
-    <Office defaultTitle="Auditor"
-      id="usa-mn-auditor"
-      supplement="{ supplement }"
-      countyMap="{ false }" />
+    <div class="row">
+      <div class="col col-100 col-md-50">
+        <Office defaultTitle="Auditor"
+          id="usa-mn-auditor"
+          supplement="{ supplement }"
+          countyMap="{ false }" />
+      </div>
 
-    <Office defaultTitle="Secretary of State"
-      id="usa-mn-secretary-state"
-      supplement="{ supplement }"
-      countyMap="{ false }" />
+      <div class="col col-100 col-md-50">
+        <Office defaultTitle="Secretary of State"
+          id="usa-mn-secretary-state"
+          supplement="{ supplement }"
+          countyMap="{ false }" />
+      </div>
+    </div>
 
     <h3 class="font-benton-sans" id="judiciary">Judiciary</h3>
     <Body defaultTitle=""
@@ -46,10 +52,7 @@
       condensed="{ true }"
       supplement="{ supplement }" />
 
-    <div class="credits">
-      <p>Source: Associated Press, Minnesota Secretary of State, Star Tribune analysis. Election results and winner calls provided by the Associated Press.</p>
-      <p>Credits: Alan Palazzolo, C.J. Sinner, Chase Davis</p>
-    </div>
+    <Footer />
   </section>
 </div>
 
@@ -58,13 +61,15 @@
   import Header from "./_content-header.svelte.html";
   import Office from "./_content-office.svelte.html";
   import Body from "./_content-body.svelte.html";
+  import Footer from "./_content-footer.svelte.html";
 
   // Svelte logic
   export default {
     components: {
       Header,
       Office,
-      Body
+      Body,
+      Footer
     },
 
     oncreate: function() {

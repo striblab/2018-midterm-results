@@ -7,15 +7,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-$candidateColors: (
-  mn-20180814-33506-murphy: #82bae0,
-  mn-20180814-33509-walz: #b9ee7d,
-  mn-20180814-33508-swanson: #ce91e9,
-  mn-20180814-33505-holden: #65c0b0,
-  mn-20180814-33507-savior: #9084c3,
-  mn-20180814-33512-johnson: #eb6868,
-  mn-20180814-33511-pawlenty: #f9f37c,
-  mn-20180814-33510-kruse: #fba363
+$partyColors: (
+  dfl: #0258a0,
+  dem: #0258a0,
+  rep: #c0272d,
+  gop: #c0272d
 );
 
 .results .has-county-map {
@@ -30,7 +26,7 @@ $candidateColors: (
     stroke-width: 2px;
     stroke: #dcdcdc;
     stroke-linecap: round;
-    stroke-linejoin: round;
+    stoke-linejoin: round;
   }
 
   .county-path {
@@ -39,7 +35,7 @@ $candidateColors: (
     stroke-width: 0.5px;
     transition: fill 1s;
     stroke-linecap: round;
-    stroke-linejoin: round;
+    stoke-linejoin: round;
   }
 
   .road-path {
@@ -87,7 +83,7 @@ $candidateColors: (
   }
 
   // Candidate colors colors
-  @each $cand, $color in $candidateColors {
+  @each $cand, $color in $partyColors {
     .candidate-result-#{$cand} {
       background-color: $color;
     }
@@ -97,7 +93,7 @@ $candidateColors: (
       fill: $color;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .candidate-color-label {
         width: 10px;
         height: 10px;
