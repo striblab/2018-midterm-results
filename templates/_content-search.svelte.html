@@ -1,14 +1,120 @@
 <div class="search local" id="">
   <div class="search-box">
     <h5>Find your races</h5>
-    <div class="input"><span><span>Search for a Minnesota county, city or race name</div>
+
+    <form on:submit="handleSearch(event)" class="contest-search-form">
+      <input bind:value="searchTerms" class="contest-search-input" type="search" placeholder="Search for a Minnesota county, city or race name" />
+      <button name="submit" type="submit">Search</button>
+    </form>
+
     <div class="examples">
-      <p>Examples: <span><a href="x">Hennepin County</a></span> | <span><a href="x">St. Paul</a></span> | <span><a href="x">St. Cloud City Council</a></span></p>
+      <p>Examples:
+        <span><a href="x">Hennepin County</a></span> |
+        <span><a href="x">St. Paul</a></span> |
+        <span><a href="x">St. Cloud City Council</a></span>
+      </p>
     </div>
+  </div>
+
+  <div class="search-results">
+    {#if noResults}
+      <div class="no-results">
+        Unable to find any results, try refining your search.
+      </div>
+    {/if}
+
+    {#if searchResults}
+      <div class="row">
+        {#each searchResults as r, ri}
+          {#if ri + 1 <= searchLimit}
+            <div class="col col-100 col-md-50">
+              <Contest id="{ r }" />
+            </div>
+          {/if}
+        {/each}
+      </div>
+    {/if}
+
+    {#if manyResults}
+      <div class="many-results">
+        More results found, try refining your search to get more specific results.
+      </div>
+    {/if}
   </div>
 </div>
 
 <script>
   // Dependencies and components
+  import Contest from "./_content-contest.svelte.html";
   import Civix from "../app/shared/civix.js";
+  import lunr from "lunr";
+
+  export default {
+    components: {
+      Contest
+    },
+
+    oncreate() {
+      // Get search index
+      this.civix = new Civix(`contests/search/search`);
+      this.civix.on("update", index => {
+        this.searchIndex = lunr(function() {
+          this.ref("id");
+          this.field("t");
+          this.field("ot");
+          this.field("oa");
+          this.field("osa");
+
+          index.forEach(c => {
+            this.add(c);
+          });
+        });
+
+        this.set({ loaded: true });
+      });
+      this.civix.fetch();
+    },
+
+    methods: {
+      handleSearch(e) {
+        if (e && e.preventDefault) {
+          e.preventDefault();
+        }
+
+        // Reset
+        this.set({ noResults: false, manyResults: false, searchResults: null });
+
+        // Check terms
+        let { searchTerms, searchLimit } = this.get();
+        if (!searchTerms) {
+          return;
+        }
+
+        // Do searc
+        let results = this.searchIndex.search(searchTerms);
+
+        // Check for results
+        if (!results || !results.length) {
+          return this.set({ noResults: true });
+        }
+
+        // Handle results
+        results = results.map(r => {
+          return r.ref;
+        });
+        if (results.length > searchLimit) {
+          this.set({ manyResults: true });
+        }
+        this.set({ searchResults: results });
+      }
+    },
+
+    data: () => {
+      return {
+        searchTerms: "",
+        noResults: false,
+        searchLimit: 10
+      };
+    }
+  };
 </script>
