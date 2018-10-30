@@ -4,27 +4,21 @@
 
 .condensed {
   .office {
-    float: left;
-    width: 22%;
-    margin-left: 4%;
+    .office-details {
+      h5 {
+        font-size: 1em;
+      }
 
-    @media (max-width: 768px) {
-      width: 48%;
-      margin-bottom: 15px;
-      padding-top: 2em;
-    }
+      p.timestamp {
+        font-size: 0.55em;
+        margin-bottom: 0.5em;
+      }
 
-    @media (max-width: 576px) {
-      width: 100%;
-      margin: auto;
-    }
-
-    .office-details h5 {
-      font-size: 1em;
-    }
-
-    .office-details p.timestamp {
-      font-size: 0.55em;
+      p.office-chat {
+        font-family: "Benton Sans";
+        font-size: 0.7em;
+        margin-bottom: 0.5em;
+      }
     }
   }
 
@@ -37,13 +31,11 @@
 
   .office:nth-of-type(2n + 1) {
     @media (max-width: 768px) {
-      margin-left: 0%;
       clear: both;
     }
   }
 
   .office:nth-of-type(4n + 1) {
-    margin-left: 0%;
     clear: both;
   }
 

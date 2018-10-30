@@ -5,8 +5,14 @@
 
       <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
 
-      {#if supplementedDescription}
-        <p class="office-chat">{@html supplementedDescription }</p>
+      {#if !condensed}
+        {#if supplementedDescription}
+          <p class="office-chat">{@html supplementedDescription }</p>
+        {/if}
+      {:else}
+        {#if supplementedShortDescription}
+          <p class="office-chat">{@html supplementedShortDescription }</p>
+        {/if}
       {/if}
     </div>
 
@@ -93,9 +99,16 @@
           $supplement[id] &&
           $supplement[id].descrip_long
           ? $supplement[id].descrip_long
-          : description
-            ? description
-            : undefined;
+          : undefined;
+      },
+
+      supplementedShortDescription: ({ id, $supplement, description }) => {
+        return $supplement &&
+          id &&
+          $supplement[id] &&
+          $supplement[id].descrip_short
+          ? $supplement[id].descrip_short
+          : undefined;
       },
 
       updatedDate: ({ contests }) => {

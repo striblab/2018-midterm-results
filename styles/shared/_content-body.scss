@@ -24,4 +24,8 @@
       width: 100%;
     }
   }
+
+  .body-row > .col-md-50:nth-child(odd) {
+    clear: both;
+  }
 }

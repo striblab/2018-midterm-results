@@ -59,14 +59,12 @@
 
       > span.inc {
         font-size: 0.8em;
-      }
-
-      > span.np {
-        display: none;
+        font-weight: normal;
       }
 
       > span.party-label {
         font-size: 0.7em;
+        font-weight: normal;
         text-transform: uppercase;
       }
     }
@@ -186,21 +184,16 @@
       }
     }
 
-    tr.party-np {
-      td.winner span.candidate-color-label {
-        display: none;
-      }
-    }
-
     tr.party-una,
-    tr.party-wi {
+    tr.party-wi,
+    tr.party-np {
       td.winner span,
       td.bar span.pctBar {
-        background-color: #808080;
+        background-color: #999999;
       }
 
       td.winner span.check {
-        color: #000000;
+        color: #303030;
         background-color: #f5f5f5;
       }
     }

@@ -42,7 +42,7 @@
 
                 <td class="cand candidate-{ r.candidate.id }">
                   <span class="first">{ r.candidate.first ? r.candidate.first : '' }&nbsp;</span>{ r.candidate.last }{#if r.incumbent}<span class="inc">*</span>{/if}
-                  <span class="{r.candidate.party.id === 'np' || r.candidate.party.id === 'wi' ? 'np' : 'party-label'}">{r.candidate.party.id}</span>
+                  <span class="party-label">{r.candidate.party.id}</span>
                 </td>
 
                 <td class="votes"><span>{ r.votes.toLocaleString() }</span></td>
