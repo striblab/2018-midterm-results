@@ -2,8 +2,8 @@
 <div class="body { condensed ? 'condensed' : ''}" id="{ id }">
     <h4 class="font-benton-sans">{ supplementedTitle }</h4>
 
-    {#if chatter}
-      <p class="body-chat">{ chatter }</p>
+    {#if supplementedDescription}
+      <p class="body-chat">{@html supplementedDescription }</p>
     {/if}
 
     {#if !loaded}
@@ -73,12 +73,23 @@
     },
 
     computed: {
-      supplementedTitle: ({ id, supplement, title, defaultTitle }) => {
-        return supplement && id && supplement[id] && supplement[id].title
-          ? supplement[id].title
+      supplementedTitle: ({ id, $supplement, title, defaultTitle }) => {
+        return $supplement && id && $supplement[id] && $supplement[id].title
+          ? $supplement[id].title
           : defaultTitle
             ? defaultTitle
             : title || "-";
+      },
+
+      supplementedDescription: ({ id, $supplement, description }) => {
+        return $supplement &&
+          id &&
+          $supplement[id] &&
+          $supplement[id].descrip_long
+          ? $supplement[id].descrip_long
+          : description
+            ? description
+            : undefined;
       },
 
       description: ({ id, supplement }) => {

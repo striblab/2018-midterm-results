@@ -9,6 +9,10 @@
       <h5>{ supplementedTitle }</h5>
     {/if}
 
+    {#if supplementedDescription}
+      <p class="contest-chat">{@html supplementedDescription }</p>
+    {/if}
+
     <div class="contest-table">
       <table>
         <thead>
@@ -110,15 +114,15 @@
     computed: {
       supplementedTitle: ({
         id,
-        supplement,
+        $supplement,
         title,
         party,
         defaultTitle,
         shortTitle,
         embedded
       }) => {
-        return supplement && id && supplement[id] && supplement[id].title
-          ? supplement[id].title
+        return $supplement && id && $supplement[id] && $supplement[id].title
+          ? $supplement[id].title
           : defaultTitle
             ? defaultTitle
             : embedded && shortTitle
@@ -126,6 +130,17 @@
               : party && party.id !== "np" && party.title
                 ? party.title
                 : title || "-";
+      },
+
+      supplementedDescription: ({ id, $supplement, description }) => {
+        return $supplement &&
+          id &&
+          $supplement[id] &&
+          $supplement[id].descrip_long
+          ? $supplement[id].descrip_long
+          : description
+            ? description
+            : undefined;
       },
 
       percentReporting({ reporting, totalPrecincts }) {

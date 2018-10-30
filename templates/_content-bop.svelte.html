@@ -1,6 +1,10 @@
 
 <div class="bop" id="bop-{ id  }">
-  <div class="body-bop">{ defaultTitle || title }</div>
+  <div class="body-bop">{ supplementedTitle }</div>
+
+  {#if supplementedDescription}
+    <p class="bop-chat">{@html supplementedDescription}</p>
+  {/if}
 
   {#if loaded}
     <div class="cf">
@@ -67,6 +71,34 @@
     },
 
     computed: {
+      supplementedTitle: ({
+        id,
+        $supplement,
+        title,
+        defaultTitle,
+        shortTitle,
+        embedded
+      }) => {
+        return $supplement && id && $supplement[id] && $supplement[id].title
+          ? $supplement[id].title
+          : defaultTitle
+            ? defaultTitle
+            : embedded && shortTitle
+              ? shortTitle
+              : title || "-";
+      },
+
+      supplementedDescription: ({ id, $supplement, description }) => {
+        return $supplement &&
+          id &&
+          $supplement[id] &&
+          $supplement[id].descrip_long
+          ? $supplement[id].descrip_long
+          : description
+            ? description
+            : undefined;
+      },
+
       dem: ({ trends, loaded, id }) => {
         if (!loaded) {
           return;

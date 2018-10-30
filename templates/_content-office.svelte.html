@@ -1,11 +1,12 @@
-<!-- DOING: Standarizing on "office" -->
 <div class="office { condensed ? 'condensed' : ''} cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id }">
   <div class="office-table">
     <div class="office-details">
       <h5 class="font-benton-sans">{ supplementedTitle }</h5>
+
       <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
-      {#if supplement}
-        <p class="office-chat">{ supplement }</p>
+
+      {#if supplementedDescription}
+        <p class="office-chat">{@html supplementedDescription }</p>
       {/if}
     </div>
 
@@ -16,7 +17,6 @@
             {...contest}
             embedded="{ true }"
             loaded="{ loaded }"
-            supplement="{ supplement }"
             countyMap="{ countyMap }" />
         {/if}
       {/each}
@@ -72,25 +72,32 @@
     computed: {
       supplementedTitle: ({
         id,
-        supplement,
+        $supplement,
         title,
         defaultTitle,
         shortTitle,
         embedded
       }) => {
-        return supplement && id && supplement[id] && supplement[id].title
-          ? supplement[id].title
+        return $supplement && id && $supplement[id] && $supplement[id].title
+          ? $supplement[id].title
           : defaultTitle
             ? defaultTitle
             : embedded && shortTitle
               ? shortTitle
               : title || "-";
       },
-      description: ({ id, supplement }) => {
-        return supplement && id && supplement[id] && supplement[id].description
-          ? supplement[id].description
-          : undefined;
+
+      supplementedDescription: ({ id, $supplement, description }) => {
+        return $supplement &&
+          id &&
+          $supplement[id] &&
+          $supplement[id].descrip_long
+          ? $supplement[id].descrip_long
+          : description
+            ? description
+            : undefined;
       },
+
       updatedDate: ({ contests }) => {
         if (!contests) {
           return;

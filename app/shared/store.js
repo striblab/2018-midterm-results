@@ -1,13 +1,20 @@
 /**
- * Global store
+ * Global store.  This should have at least the same
+ * data as the SSR store.  See buildStoreOptions in
+ * /data.js
  */
 
 // Dependencies
 import { Store } from 'svelte/store.js';
 import { feature as topojsonFeature } from 'topojson';
 
+// Data
+import supplement from '../../assets/data/supplement.json';
+
 // Define store
-const store = new Store({});
+const store = new Store({
+  supplement
+});
 
 // Get some data
 window
