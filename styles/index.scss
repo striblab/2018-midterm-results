@@ -25,10 +25,12 @@ $strib-fonts-location: "//static.startribune.com/assets/libs/strib-icons/0.0.10/
 $selector-wrapper: ".strib-styles.ssa.ssb.ssc";
 @import "@striblab/strib-styles/source/styles/default-wrapper.scss";
 
+
 // Project specific styles.  Split styles into files per component
 #{$selector-wrapper} {
   // Split your styles into multiple files so its easier to understand and change
   @import "shared/_content-header";
+  @import "shared/_content-banner";
   @import "shared/_content-search";
   @import "shared/_content-bop";
   @import "shared/_content-body";
