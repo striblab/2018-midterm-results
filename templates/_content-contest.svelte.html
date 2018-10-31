@@ -50,7 +50,7 @@
                   {#if uncontested}
                     <span class="uncontested">Uncontested</span>
                   {/if}
-                  <span class="num">{ Math.round(r.percent * 100) }%</span>
+                  <span class="num">{ Math.round((r.percent || 0) * 100) }%</span>
                 </td>
 
                 <td class="bar" title="{r.candidate.party.title}">
