@@ -1,40 +1,24 @@
 div.banner {
-	width: 81%;
+	width: 100%;
 	position: relative;
 	/*height: 500px;*/
 	padding: 50px;
 	background: transparent;
-	margin: 0 auto;
-	margin-bottom: 75px;
-	margin-top: 25px;
-	text-align: left;
-	div.gif {
-		width: 400px;
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		z-index: -1;
-		background: url("http://stmedia.startribune.com/images/needlegif_new.gif");
-		background-position: 50% 0%;
-		background-size: cover;
-		height: 400px;
-		display: none;
-	}
+	margin-bottom: 30px;
+	text-align: center;
 	img.gif2 {
-		width: 300px;
-		margin: 0 auto;
-		float: left;
-		margin-right: -40px;
+		width: 350px;
 	}
 	h3 {
 		z-index: 100;
+		text-align: center;
 		margin: 0 auto;
-		margin-top: 10px;
+		margin-top: 20px;
 		width: 100%;
 		font-family: "Benton Sans";
 		letter-spacing: -0.5px;
-		font-size: 1.75em;
-		margin-bottom: 15px;
+		font-size: 1.35em;
+		margin-bottom: 5px;
 		font-weight: bold;
 		span {
 			font-weight: bold;
@@ -43,27 +27,24 @@ div.banner {
 	h4 {
 		font-weight: normal;
 		font-size: 1.1em;
-		width: 100%;
+		width: 65%;
 		margin: 0 auto;
 	}
 	h5 {
 		font-weight: normal;
 		font-size: 0.9em;
-		width: 100%;
+		width: 65%;
 		margin: 0 auto;
 		margin-top: 10px;
 	}
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 600px) {
 	div.banner {
 		padding: 0;
-		margin-bottom: 75px;
-		text-align: center;
+		margin-bottom: 50px;
 		img.gif2 {
-			float: none;
-			clear: both;
-			margin: 0 auto;
+			width: 100%;
 		}
 		h3 {
 			margin-top: 20px;
