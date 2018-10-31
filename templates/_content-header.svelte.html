@@ -3,9 +3,7 @@
   <section class="container-lg results-header">
     <h1>2018 Minnesota midterm election results</h1>
 
-    <div class="share-placeholder">
-    <!-- share -->
-    </div>
+    <Banner />
 
     <!-- navigation -->
     <div class="navigation-marker" ref:navigationMarker></div>
@@ -31,15 +29,24 @@
 
     </div>
 
+    <div class="share-placeholder">
+    <!-- share -->
+    </div>
+
   </section>
 </div>
 
 <script>
   /* global $ */
+  import Banner from "./_content-banner.svelte.html";
   import { throttle } from "lodash";
 
   // Svelte logic
   export default {
+    components: {
+      Banner
+    },
+
     oncreate() {
       // Start timer
       this.startTimer();

@@ -15,7 +15,7 @@
         <tbody>
           {#if toolTipContest.results}
             {#each toolTipContest.results as result}
-              <tr>
+              <tr class="{ result.test ? 'test-data' : '' }">
                 <td class="map-cand">{ result.candidate.last }</td>
                 <td class="map-votes">{ (result.votes || 0).toLocaleString() }</td>
                 <td class="map-pct">{ Math.round((result.percent || 0) * 100, 1) }%</td>

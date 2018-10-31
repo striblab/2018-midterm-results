@@ -1,0 +1,76 @@
+div.banner {
+	width: 81%;
+	position: relative;
+	/*height: 500px;*/
+	padding: 50px;
+	background: transparent;
+	margin: 0 auto;
+	margin-bottom: 75px;
+	margin-top: 25px;
+	text-align: left;
+	div.gif {
+		width: 400px;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: -1;
+		background: url("http://stmedia.startribune.com/images/needlegif_new.gif");
+		background-position: 50% 0%;
+		background-size: cover;
+		height: 400px;
+		display: none;
+	}
+	img.gif2 {
+		width: 300px;
+		margin: 0 auto;
+		float: left;
+		margin-right: -40px;
+	}
+	h3 {
+		z-index: 100;
+		margin: 0 auto;
+		margin-top: 10px;
+		width: 100%;
+		font-family: "Benton Sans";
+		letter-spacing: -0.5px;
+		font-size: 1.75em;
+		margin-bottom: 15px;
+		font-weight: bold;
+		span {
+			font-weight: bold;
+		}
+	}
+	h4 {
+		font-weight: normal;
+		font-size: 1.1em;
+		width: 100%;
+		margin: 0 auto;
+	}
+	h5 {
+		font-weight: normal;
+		font-size: 0.9em;
+		width: 100%;
+		margin: 0 auto;
+		margin-top: 10px;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	div.banner {
+		padding: 0;
+		margin-bottom: 75px;
+		text-align: center;
+		img.gif2 {
+			float: none;
+			clear: both;
+			margin: 0 auto;
+		}
+		h3 {
+			margin-top: 20px;
+			font-size: 1.45em;
+		}
+		h4, h5 {
+			width: 100%;
+		}
+	}
+}

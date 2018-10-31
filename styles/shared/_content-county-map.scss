@@ -126,6 +126,10 @@ $partyColors: (
       padding-bottom: 0.3em;
     }
 
+    tr.test-data {
+      border-right: 1px solid #ff6933;
+    }
+
     td {
       border-bottom: 1px solid #eeeeee;
       font-size: 0.9em;

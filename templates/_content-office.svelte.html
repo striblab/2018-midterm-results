@@ -112,7 +112,12 @@
       },
 
       updatedDate: ({ contests }) => {
-        if (!contests) {
+        if (
+          !contests ||
+          !contests.length ||
+          !contests[0] ||
+          !contests[0].results
+        ) {
           return;
         }
         // TODO: Get newest/oldest date
