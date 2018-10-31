@@ -6,6 +6,9 @@
   > .condensed-row > .col-lg-25:nth-child(4n + 1) {
     clear: both;
   }
+  > .body-row > .col-md-50:nth-child(odd) {
+    //float: none;
+  }
 
   .office {
     .office-details {

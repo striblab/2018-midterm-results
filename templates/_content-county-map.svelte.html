@@ -18,7 +18,7 @@
               <tr>
                 <td class="map-cand">{ result.candidate.last }</td>
                 <td class="map-votes">{ (result.votes || 0).toLocaleString() }</td>
-                <td class="map-pct">{ round((result.percent || 0) * 100, 1) }%</td>
+                <td class="map-pct">{ Math.round((result.percent || 0) * 100, 1) }%</td>
               </tr>
             {/each}
           {/if}
