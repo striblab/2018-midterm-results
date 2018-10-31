@@ -1,5 +1,5 @@
 <div
-  class="contest contest-{ id } { uncontested ? 'uncontested' : '' } { countyMap ? 'has-county-map row' : '' } { reporting && reporting > 0 ? 'is-reporting' : '' }" id="{ id }">
+  class="contest contest-{ id } { uncontested ? 'uncontested' : '' } { countyMap ? 'has-county-map row' : '' } { reporting && reporting > 0 ? 'is-reporting' : '' } { partisan ? 'partisan' : 'non-partisan' } { winner ? 'has-winner' : '' }" id="{ id }">
   <div class="{ countyMap ? 'col col-100 col-md-50' : ''}">
     {#if type === 'primary' && (party || !embedded) }
       <h6>{ supplementedTitle }</h6>
@@ -84,7 +84,7 @@
 
 <script>
   import CountyMap from "./_content-county-map.svelte.html";
-  import { keyBy } from "lodash";
+  import { keyBy, find } from "lodash";
   import Civix from "../app/shared/civix.js";
 
   export default {
@@ -150,6 +150,10 @@
           : description
             ? description
             : undefined;
+      },
+
+      winner({ results }) {
+        return !!find(results, { winner: true });
       },
 
       percentReporting({ reporting, totalPrecincts }) {

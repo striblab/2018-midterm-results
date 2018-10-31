@@ -3,11 +3,8 @@
  */
 
 .condensed {
-  > .condensed-row > .col-lg-25:nth-child(4n + 1) {
+  .body-row .condensed-offices:nth-child(4n + 1) {
     clear: both;
-  }
-  > .body-row > .col-md-50:nth-child(odd) {
-    //float: none;
   }
 
   .office {
@@ -74,6 +71,10 @@
 
         > span.first {
           display: none;
+
+          @media (max-width: 991px) {
+            display: inline;
+          }
         }
 
         > span.inc {

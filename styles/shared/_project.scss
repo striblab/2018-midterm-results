@@ -8,7 +8,12 @@
   // max-width: 1100px;
 
   @media (max-width: 768px) {
-    max-width: 95%;
+    max-width: 90%;
+    margin: auto;
+  }
+
+  @media (max-width: 576px) {
+    max-width: 100%;
     margin: auto;
   }
 
@@ -66,6 +71,10 @@
 #usa-congress-senate-mn-class-ii {
   p {
     width: 48%;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
 }
 
@@ -74,13 +83,22 @@
 
   .contest-map {
     margin-top: -9em;
+
+    @media (max-width: 767px) {
+      margin-top: 0.5em;
+    }
   }
 }
 
 #usa-mn-attorney-general {
   margin-bottom: 3em;
+
   .contest-map {
     margin-top: -10.5em;
+
+    @media (max-width: 767px) {
+      margin-top: 0.5em;
+    }
   }
 }
 
@@ -89,12 +107,20 @@
 
   .contest-map {
     margin-top: -9.5em;
+
+    @media (max-width: 767px) {
+      margin-top: 0.5em;
+    }
   }
 }
 
 #usa-congress-senate-mn-class-ii {
   .contest-map {
     margin-top: -12.2em;
+
+    @media (max-width: 767px) {
+      margin-top: 0.5em;
+    }
   }
 }
 

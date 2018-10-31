@@ -55,7 +55,11 @@
 
     .cand {
       padding-left: 0;
-      width: 45%;
+      width: 50%;
+
+      @media (max-width: 576px) {
+        width: 55%;
+      }
 
       > span.inc {
         font-size: 0.8em;
@@ -78,7 +82,7 @@
     .bar {
       width: 25%;
 
-      @media (max-width: 576px) {
+      @media (max-width: 420px) {
         display: none;
       }
     }
@@ -199,25 +203,6 @@
     }
   }
 
-  // WINNER MARKER STYLES
-
-  tr.winner {
-    background-color: #f5f5f5;
-
-    td.winner span.check {
-      font-family: "Popular";
-      font-weight: bold;
-    }
-
-    td.winner > span.candidate-color-label {
-      display: none;
-    }
-
-    td.cand {
-      font-weight: bold;
-    }
-  }
-
   // Map styles
   .contest-map {
     margin-top: 0;
@@ -266,5 +251,44 @@
 
   .bar {
     width: 5%;
+  }
+}
+
+// NONPARTISAN race styles
+
+.office .non-partisan {
+  .contest-table tbody tr td.winner > span.candidate-color-label {
+    display: none;
+  }
+
+  .cand > span.party-label {
+    display: none;
+  }
+}
+
+// WINNER contest styles
+
+.office .has-winner {
+  .contest-table tbody td.winner > span.candidate-color-label {
+    display: none;
+  }
+
+  // WINNER MARKER STYLES
+
+  tr.winner {
+    background-color: #f5f5f5;
+
+    td.winner > .candidate-color-label {
+      display: none;
+    }
+
+    td.winner span.check {
+      font-family: "Popular";
+      font-weight: bold;
+    }
+
+    td.cand {
+      font-weight: bold;
+    }
   }
 }
