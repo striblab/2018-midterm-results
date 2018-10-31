@@ -227,30 +227,33 @@
 
     font-size: 0.8em;
   }
-}
 
-// UNCONTESTED styles
+  // &.is-question th.cand {
+  //   visibility: hidden;
+  // }
 
-.uncontested {
-  th.votes,
-  th.pct,
-  td.votes > span {
-    visibility: hidden;
-  }
+  // UNCONTESTED styles
+  &.uncontested {
+    th.votes,
+    th.pct,
+    td.votes > span {
+      visibility: hidden;
+    }
 
-  .reporting,
-  td.pct > span.num {
-    display: none;
-  }
+    .reporting,
+    td.pct > span.num {
+      display: none;
+    }
 
-  td.pct > span.uncontested {
-    visibility: visible;
-    font-size: 0.7em;
-    vertical-align: middle;
-  }
+    td.pct > span.uncontested {
+      visibility: visible;
+      font-size: 0.7em;
+      vertical-align: middle;
+    }
 
-  .bar {
-    width: 5%;
+    .bar {
+      width: 5%;
+    }
   }
 }
 
