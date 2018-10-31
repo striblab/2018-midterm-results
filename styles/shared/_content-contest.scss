@@ -215,10 +215,6 @@
 
     td.cand {
       font-weight: bold;
-
-      // > span {
-      //   font-weight: normal;
-      // }
     }
   }
 
@@ -235,14 +231,16 @@
   .question-title {
     @include font-styles("benton-sans");
 
-    font-size: 1em;
+    font-size: 0.9em;
     line-height: 1.15em;
     margin: 0 0 0.5em;
     padding: 0;
   }
 
   .question-text {
-    font-size: 0.85em;
+    @include font-styles("benton-sans");
+
+    font-size: 0.8em;
   }
 }
 

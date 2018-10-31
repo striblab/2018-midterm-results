@@ -8,10 +8,10 @@
 }
 
 $partyColors: (
-  dfl: #0258a0,
-  dem: #0258a0,
-  rep: #c0272d,
-  gop: #c0272d
+  dfl: #5597e4,
+  dem: #5597e4,
+  rep: #ff746a,
+  gop: #ff746a
 );
 
 .results .has-county-map {
@@ -73,15 +73,6 @@ $partyColors: (
     stroke-width: 1.5px;
   }
 
-  // A bit hacky, and probaly needs some adjustment
-  .race-party-table {
-    min-height: 250px;
-
-    @media (max-width: 768px) {
-      min-height: 0;
-    }
-  }
-
   // Candidate colors colors
   @each $cand, $color in $partyColors {
     .candidate-result-#{$cand} {
@@ -93,18 +84,16 @@ $partyColors: (
       fill: $color;
     }
 
-    @media (max-width: 900px) {
-      .candidate-color-label {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-left: 2px;
-        margin-right: 5px;
+    .candidate-color-label {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 2px;
+      margin-right: 5px;
 
-        &.candidate-#{$cand} {
-          background-color: $color;
-        }
+      &.candidate-#{$cand} {
+        background-color: $color;
       }
     }
   }
@@ -129,7 +118,16 @@ $partyColors: (
       font-size: 1em !important;
     }
 
+    th {
+      border-bottom: 2px solid #eeeeee;
+      font-size: 0.6em;
+      font-weight: normal;
+      text-transform: uppercase;
+      padding-bottom: 0.3em;
+    }
+
     td {
+      border-bottom: 1px solid #eeeeee;
       font-size: 0.9em;
       padding-top: 0.4em;
       padding-bottom: 0.4em;
@@ -143,6 +141,12 @@ $partyColors: (
     .map-pct {
       padding-right: 0.5px;
       text-align: right;
+    }
+
+    .reporting {
+      font-size: 0.7em;
+      color: #808080;
+      font-style: italic;
     }
 
     &.tooltip-hover-region-top {

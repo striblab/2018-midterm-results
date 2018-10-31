@@ -6,7 +6,7 @@
       <p class="body-chat">{@html supplementedDescription }</p>
     {/if}
 
-  <div class="{ countyMap ? '' : 'row body-row'}">
+  <div class="{ countyMap ? '' : 'row body-row'} { condensed ? 'condensed-row' : ''}">
     {#if !loaded}
       {#each (new Array(likelyOffices || 3)) as blank}
         <Office
@@ -16,7 +16,7 @@
       {/each}
     {:else}
       {#each Object.entries(offices) as [officeId, office]}
-      <div class="{ countyMap ? '' : 'col col-100 col-md-50'} { condensed ? 'col col-100 col-sm-50 col-md-25' : ''}">
+      <div class="{ countyMap ? '' : 'col col-100 col-md-50'} { condensed ? 'col col-100 col-md-50 col-lg-25' : ''}">
         <Office
           id="{ officeId }"
           {...office}

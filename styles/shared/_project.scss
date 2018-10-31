@@ -60,6 +60,43 @@
   font-size: 1.3em;
 }
 
+#usa-mn-governor,
+#usa-mn-attorney-general,
+#usa-congress-senate-mn-class-i,
+#usa-congress-senate-mn-class-ii {
+  p {
+    width: 48%;
+  }
+}
+
+#usa-mn-governor {
+  margin-bottom: 4em;
+
+  .contest-map {
+    margin-top: -8.5em;
+  }
+}
+
+#usa-mn-attorney-general {
+  .contest-map {
+    margin-top: -10.5em;
+  }
+}
+
+#usa-congress-senate-mn-class-i {
+  margin-bottom: 4em;
+
+  .contest-map {
+    margin-top: -9.5em;
+  }
+}
+
+#usa-congress-senate-mn-class-ii {
+  .contest-map {
+    margin-top: -12em;
+  }
+}
+
 h3#judiciary,
 h4#congress-bop {
   padding-top: 5em;
