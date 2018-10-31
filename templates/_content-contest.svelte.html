@@ -1,5 +1,4 @@
-<div
-  class="contest contest-{ id } { uncontested ? 'uncontested' : '' } { countyMap ? 'has-county-map row' : '' } { reporting && reporting > 0 ? 'is-reporting' : '' } { partisan ? 'partisan' : 'non-partisan' } { winner ? 'has-winner' : '' }" id="{ id }">
+<div class="contest contest-{ id } { uncontested ? 'uncontested' : '' } { countyMap ? 'has-county-map row' : '' } { reporting && reporting > 0 ? 'is-reporting' : '' } { partisan ? 'partisan' : 'non-partisan' } { winner ? 'has-winner' : '' } {question ? 'is-question' : ''}" id="{ id }">
   <div class="{ countyMap ? 'col col-100 col-md-50' : ''}">
     {#if type === 'primary' && (party || !embedded) }
       <h6>{ supplementedTitle }</h6>
@@ -9,9 +8,9 @@
       <h5>{ supplementedTitle }</h5>
     {/if}
 
-    {#if supplementedDescription}
+    <!-- {#if supplementedDescription}
       <p class="contest-chat">{@html supplementedDescription }</p>
-    {/if}
+    {/if} -->
 
     {#if question && questionText}
       {#if questionTitle}

@@ -6,8 +6,32 @@
 // Main civix class
 class Civix {
   constructor(resource, options = {}) {
+    // The default is helpful to change as a state
+    options.environment = options.environment || 'test';
+    // If on startribune.com, always use prod
+    if (
+      window &&
+      window.location &&
+      window.location.hostname &&
+      window.location.hostname.match(/startribune.com/i)
+    ) {
+      options.environment = 'prod';
+    }
+    // Allow to manuall switch with query
+    if (
+      window &&
+      window.location &&
+      window.location.search &&
+      window.location.search.match(/civix=prod/i)
+    ) {
+      options.environment = 'prod';
+    }
+
     options.endpoint =
-      options.endpoint || '//static.startribune.com/elections/civix-test/v2/';
+      options.endpoint ||
+      `//static.startribune.com/elections/${
+        options.environment === 'test' ? 'civix-test' : 'civix'
+      }/v2/`;
     options.election = options.election || '2018-11-06';
     options.jitter =
       options.jitter === false || options.jitter === true
