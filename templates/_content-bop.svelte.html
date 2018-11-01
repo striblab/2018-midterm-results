@@ -43,6 +43,7 @@
       if (!this.get().embedded) {
         this.civix = new Civix(`trends/by-body/${this.get().id}`);
         this.civix.on("update", body => {
+          console.log(body);
           this.set(body);
           this.set({ loaded: true });
         });
@@ -105,6 +106,14 @@
         }
 
         let dem = find(trends, { party_id: "dem" });
+        if (!dem) {
+          dem = find(trends, { party_id: "dfl" });
+        }
+
+        if (!dem) {
+          console.error("Unable to find dem in trend data.");
+          return 0;
+        }
 
         // For dems, we add the others, as the senate has some
         // independent.
