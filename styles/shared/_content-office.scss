@@ -27,17 +27,19 @@
         margin-bottom: 0;
       }
 
+      p.office-loc {
+        font-family: "Benton Sans";
+        font-size: 0.8em;
+        font-style: italic;
+        margin-bottom: 0.3em;
+      }
+
       p.timestamp {
         font-family: "Benton Sans";
         font-size: 0.6em;
         color: #808080;
         text-transform: uppercase;
-      }
-
-      p.office-loc {
-        font-family: "Benton Sans";
-        font-size: 0.8em;
-        font-style: italic;
+        margin-bottom: 1em;
       }
 
       p.office-chat {
