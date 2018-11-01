@@ -121,6 +121,7 @@ class Civix {
       })
       .then(parsed => {
         this.trigger('update', parsed);
+        return parsed;
       })
       .catch(e => {
         console.error(e);

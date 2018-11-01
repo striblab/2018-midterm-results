@@ -6,7 +6,7 @@
     <p class="bop-chat">{@html supplementedDescription}</p>
   {/if} -->
 
-  {#if loaded}
+  {#if trends}
     <div class="cf">
       <div class="d-big-num">{ demTotal }</div>
       <div class="r-big-num">{ repTotal } </div>
@@ -24,7 +24,7 @@
       <div class="d-little">D</div>
       <div class="r-little">R</div>
 
-      <div class="reporting">Updated { updatedDate ? makeDate(updatedDate) : '-' } </div>
+      <div class="reporting">Updated { !$server && updatedDate ? makeDate(updatedDate) : '-' } </div>
     </div>
   {/if}
 </div>
@@ -43,7 +43,6 @@
       if (!this.get().embedded) {
         this.civix = new Civix(`trends/by-body/${this.get().id}`);
         this.civix.on("update", body => {
-          console.log(body);
           this.set(body);
           this.set({ loaded: true });
         });
@@ -100,8 +99,8 @@
             : undefined;
       },
 
-      dem: ({ trends, loaded, id }) => {
-        if (!loaded) {
+      dem: ({ trends, id }) => {
+        if (!trends) {
           return;
         }
 
@@ -133,23 +132,23 @@
         return dem;
       },
 
-      rep: ({ trends, loaded }) => {
-        if (!loaded) {
+      rep: ({ trends }) => {
+        if (!trends) {
           return;
         }
         return find(trends, { party_id: "rep" });
       },
 
-      demTotal: ({ dem, loaded }) => {
-        if (!loaded) {
+      demTotal: ({ dem }) => {
+        if (!dem) {
           return;
         }
 
         return dem.holdovers + dem.won;
       },
 
-      repTotal: ({ rep, loaded }) => {
-        if (!loaded) {
+      repTotal: ({ rep }) => {
+        if (!rep) {
           return;
         }
 

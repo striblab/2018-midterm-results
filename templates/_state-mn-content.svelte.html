@@ -3,51 +3,66 @@
   <Header page={page} />
 
   <section class="container-lg results">
-      <p class="lead-in first-lead">Possibly some lead-in copy about what you'll find on this page, with some context about the state of play, etc. Gannett Does my "yes, but" look big in this corner office? recontextualize Dayton for under $900 a day Rupert Murdoch The Daily circulation afternoon paper put the paper to bed, The Work of Art in the Age of Mechanical Reproduction The Daily Nook Flipboard rubber cement David Foster Wallace dying, startups Fuego community WaPo engagement media bias got drudged.</p>
-      <p class="lead-in">WSJ tweet Pictures of Goats section bot got drudged Dan Fleckner Fuego gamification Snarkmarket, Nick Denton Nook community commons-based peer production gutter Django Storify, Walter Lippmann Foursquare Instagram Fuego NPR content is king we will make them pay.</p>
+    <p class="lead-in first-lead">Possibly some lead-in copy about what you'll find on this page, with some context about the state of play, etc. Gannett Does my "yes, but" look big in this corner office? recontextualize Dayton for under $900 a day Rupert Murdoch The Daily circulation afternoon paper put the paper to bed, The Work of Art in the Age of Mechanical Reproduction The Daily Nook Flipboard rubber cement David Foster Wallace dying, startups Fuego community WaPo engagement media bias got drudged.</p>
+
+    <p class="lead-in">WSJ tweet Pictures of Goats section bot got drudged Dan Fleckner Fuego gamification Snarkmarket, Nick Denton Nook community commons-based peer production gutter Django Storify, Walter Lippmann Foursquare Instagram Fuego NPR content is king we will make them pay.</p>
 
 
     <Office defaultTitle="Governor"
       id="usa-mn-governor"
-      supplement="{ supplement }"
-      countyMap="{ true }" />
+      countyMap="{ true }"
+      {...($civixContestsByOfficeUsaMnGovernor ? $civixContestsByOfficeUsaMnGovernor : {})}
+      loaded="{ !!$civixContestsByOfficeUsaMnGovernor }"
+    />
 
     <Office defaultTitle="Attorney General"
       id="usa-mn-attorney-general"
       supplement="{ supplement }"
-      countyMap="{ true }" />
+      countyMap="{ true }"
+      {...($civixContestsByOfficeUsaMnAttorneyGeneral ? $civixContestsByOfficeUsaMnAttorneyGeneral : {})}
+      loaded="{ !!$civixContestsByOfficeUsaMnAttorneyGeneral }"
+    />
 
     <div class="row">
       <div class="col col-100 col-md-50">
         <Office defaultTitle="Auditor"
           id="usa-mn-auditor"
-          supplement="{ supplement }"
-          countyMap="{ false }" />
+          countyMap="{ false }"
+          {...($civixContestsByOfficeUsaMnAuditor ? $civixContestsByOfficeUsaMnAuditor : {})}
+          loaded="{ !!$civixContestsByOfficeUsaMnAuditor }"
+        />
       </div>
 
       <div class="col col-100 col-md-50">
         <Office defaultTitle="Secretary of State"
           id="usa-mn-secretary-state"
-          supplement="{ supplement }"
-          countyMap="{ false }" />
+          countyMap="{ false }"
+          {...($civixContestsByOfficeUsaMnSecretaryState ? $civixContestsByOfficeUsaMnSecretaryState : {})}
+          loaded="{ !!$civixContestsByOfficeUsaMnSecretaryState }"
+        />
       </div>
     </div>
 
     <Body defaultTitle=""
       id="usa-mn-supreme-court"
       condensed="{ true }"
-      supplement="{ supplement }"
-      likelyOffices="{ 4 }" />
+      {...($civixContestsByBodyUsaMnSupremeCourt ? $civixContestsByBodyUsaMnSupremeCourt : {})}
+      loaded="{ !!$civixContestsByBodyUsaMnSupremeCourt }"
+    />
 
     <Body defaultTitle=""
       id="usa-mn-appeals-court"
       condensed="{ true }"
-      supplement="{ supplement }" />
+      {...($civixContestsByBodyUsaMnAppealsCourt ? $civixContestsByBodyUsaMnAppealsCourt : {})}
+      loaded="{ !!$civixContestsByBodyUsaMnAppealsCourt }"
+    />
 
     <Body defaultTitle="Minnesota District Courts"
       id="usa-mn-district-court"
       condensed="{ true }"
-      supplement="{ supplement }" />
+      {...($civixContestsByBodyUsaMnDistrictCourt ? $civixContestsByBodyUsaMnDistrictCourt : {})}
+      loaded="{ !!$civixContestsByBodyUsaMnDistrictCourt }"
+    />
 
     <Footer />
   </section>

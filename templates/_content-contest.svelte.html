@@ -33,28 +33,42 @@
         </thead>
 
         <tbody>
-          {#if loaded}
+          {#if results}
             {#each results as r, ri}
               <tr class="{ !r.candidate.party || r.candidate.party.id === 'np' ? 'non-partisan' : '' } party-{ r.candidate.party ? r.candidate.party.id : 'np' } { r.winner ? 'winner' : '' } { r.test ? 'test-data' : ''} { reporting ? '' : 'pre-reporting'}"
                 data-candidate-id="{ r.candidate_id }" title="{r.candidate.party.title}">
-                <td class="winner" title="{r.candidate.party.title}"><span class="candidate-color-label" title="{r.candidate.party.title}"></span><span class="check">{#if r.winner}&#10003;{/if}</span></td>
+
+                <td class="winner" title="{r.candidate.party.title}">
+                  <span class="candidate-color-label" title="{r.candidate.party.title}"></span>
+                  {#if !$server}
+                    <span class="check">{#if r.winner}&#10003;{/if}</span>
+                  {/if}
+                </td>
 
                 <td class="cand candidate-{ r.candidate.id }">
                   <span class="first">{ r.candidate.first ? r.candidate.first : '' }&nbsp;</span>{ r.candidate.last }{#if r.incumbent}<span class="inc">*</span>{/if}
+
                   <span class="party-label">{r.candidate.party.id}</span>
                 </td>
 
-                <td class="votes"><span>{ r.votes.toLocaleString() }</span></td>
+                <td class="votes">
+                  {#if !$server}
+                    <span>{ r.votes.toLocaleString() }</span>
+                  {/if}
+                </td>
 
                 <td class="pct">
                   {#if uncontested}
                     <span class="uncontested">Uncontested</span>
+                  {:elseif !$server}
+                    <span class="num">{ Math.round((r.percent || 0) * 100) }%</span>
+                  {:else}
+                    -
                   {/if}
-                  <span class="num">{ Math.round((r.percent || 0) * 100) }%</span>
                 </td>
 
                 <td class="bar" title="{r.candidate.party.title}">
-                  {#if reporting}
+                  {#if reporting && !$server}
                     <span class="pctBar candidate-result-{ r.candidate_id }" style="width: { (r.percent / results[0].percent) * 100 }%;"></span>
                   {/if}
                 </td>
@@ -65,7 +79,7 @@
       </table>
 
       <div class="reporting">
-        {#if loaded}
+        {#if !$server && percentReporting}
           { round(percentReporting * 100, 0) }% of precincts reporting
         {:else}
           -

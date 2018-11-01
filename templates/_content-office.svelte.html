@@ -1,25 +1,13 @@
-<div class="office { condensed ? 'condensed' : ''} cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id }">
+<div class="office { condensed ? 'condensed' : ''} cf type-{ voteType } { partisan ? 'partisan' : 'nonpartisan' }" id="{ id ? id : '' }">
   <div class="office-table">
     <div class="office-details">
       <h5 class="font-benton-sans">{ supplementedTitle }</h5>
-
-
-
-      <!-- {#if !condensed}
-        {#if supplementedDescription}
-          <p class="office-chat">{@html supplementedDescription }</p>
-        {/if}
-      {:else}
-        {#if supplementedShortDescription}
-          <p class="office-chat">{@html supplementedShortDescription }</p>
-        {/if}
-      {/if} -->
 
       {#if supplementedShortDescription}
         <p class="office-loc">{@html supplementedShortDescription }</p>
       {/if}
 
-      <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
+      <p class="timestamp">Last updated: { !$server && updatedDate ? makeDate(updatedDate) : '-' }</p>
 
 
       {#if !condensed}
@@ -27,8 +15,6 @@
           <p class="office-chat">{@html supplementedDescription }</p>
         {/if}
       {/if}
-
-
     </div>
 
     {#if contests}

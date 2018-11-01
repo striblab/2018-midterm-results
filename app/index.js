@@ -11,28 +11,41 @@
 import utils from './shared/utils.js';
 import Content from '../templates/_index-content.svelte.html';
 import store from './shared/store.js';
+import initializeData from './shared/initialize.js';
 
 // Mark page with note about development or staging
 utils.environmentNoting();
 
-// Hacky way to get the share parts to show up
-let $share = $('.share-placeholder').size()
-  ? $('.share-placeholder')
-    .children()
-    .detach()
-  : undefined;
-let attachShare = !$share
-  ? undefined
-  : () => {
-    $('.share-placeholder').append($share);
-  };
+// Initialize data
+initializeData([
+  'contests/by-office/usa-mn-governor',
+  'contests/by-office/usa-mn-attorney-general',
+  'trends/by-body/usa-congress-senate',
+  'trends/by-body/usa-congress-house',
+  'contests/by-body/usa-congress-senate',
+  'contests/by-body/usa-congress-house'
+]).then(initData => {
+  store.set(initData);
 
-// Svelte template hook-up
-const app = new Content({
-  target: document.querySelector('.article-lcd-body-content'),
-  data: {
-    attachShare
-  },
-  store
+  // Hacky way to get the share parts to show up
+  let $share = $('.share-placeholder').size()
+    ? $('.share-placeholder')
+      .children()
+      .detach()
+    : undefined;
+  let attachShare = !$share
+    ? undefined
+    : () => {
+      $('.share-placeholder').append($share);
+    };
+
+  // Svelte template hook-up
+  const app = new Content({
+    target: document.querySelector('.article-lcd-body-content'),
+    data: {
+      attachShare
+    },
+    store
+  });
+  window.__app = app;
 });
-window.__app = app;
