@@ -10,12 +10,12 @@
     <div class="navigation-placeholder" ref:navigationPlaceholder></div>
     <div class="cf results-navigation" ref:navigation>
       <nav>
-        <div class="counter">
+        <!-- <div class="counter">
           <p class="caps">Update:</p>
           <p>
             <span id="time" ref:timer></span> s
           </p>
-        </div>
+        </div> -->
 
         <ul>
           <a class="{page == "top" ? "active" : " "}" href="/x/497951121?preview=1"><li>Key Races</li></a>
@@ -33,18 +33,22 @@
     <!-- share -->
     </div>
 
+    <Utility />
+
   </section>
 </div>
 
 <script>
   /* global $ */
   import Banner from "./_content-banner.svelte.html";
+  import Utility from "./_content-utility.svelte.html";
   import { throttle } from "lodash";
 
   // Svelte logic
   export default {
     components: {
-      Banner
+      Banner,
+      Utility
     },
 
     oncreate() {

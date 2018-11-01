@@ -62,39 +62,39 @@
     justify-content: center;
     align-items: center;
 
-    .counter {
-      color: rgb(207, 59, 59);
-      font-family: "Benton Sans";
-      font-size: 0.7em;
-      padding-right: 2px;
+    // .counter {
+    //   color: rgb(207, 59, 59);
+    //   font-family: "Benton Sans";
+    //   font-size: 0.7em;
+    //   padding-right: 2px;
 
-      @media (max-width: 576px) {
-        font-size: 0.6em;
-      }
+    //   @media (max-width: 576px) {
+    //     font-size: 0.6em;
+    //   }
 
-      p {
-        font-family: "Benton Sans";
-        text-align: center;
-        display: inline;
+    //   p {
+    //     font-family: "Benton Sans";
+    //     text-align: center;
+    //     display: inline;
 
-        @media (max-width: 768px) {
-          display: block;
-          margin-bottom: 0;
-        }
+    //     @media (max-width: 768px) {
+    //       display: block;
+    //       margin-bottom: 0;
+    //     }
 
-        @media (max-width: 576px) {
-          letter-spacing: 0.05em;
-        }
-      }
+    //     @media (max-width: 576px) {
+    //       letter-spacing: 0.05em;
+    //     }
+    //   }
 
-      p.caps {
-        text-transform: uppercase;
-      }
+    //   p.caps {
+    //     text-transform: uppercase;
+    //   }
 
-      span {
-        font-weight: bold;
-      }
-    }
+    //   span {
+    //     font-weight: bold;
+    //   }
+    // }
 
     ul {
       // @media (max-width: 576px) {
