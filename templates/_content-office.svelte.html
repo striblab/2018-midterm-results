@@ -3,9 +3,9 @@
     <div class="office-details">
       <h5 class="font-benton-sans">{ supplementedTitle }</h5>
 
-      <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
 
-      {#if !condensed}
+
+      <!-- {#if !condensed}
         {#if supplementedDescription}
           <p class="office-chat">{@html supplementedDescription }</p>
         {/if}
@@ -13,7 +13,18 @@
         {#if supplementedShortDescription}
           <p class="office-chat">{@html supplementedShortDescription }</p>
         {/if}
+      {/if} -->
+
+      {#if supplementedShortDescription}
+        <p class="office-loc">{@html supplementedShortDescription }</p>
       {/if}
+
+      {#if supplementedDescription}
+        <p class="office-chat">{@html supplementedDescription }</p>
+      {/if}
+
+      <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
+
     </div>
 
     {#if contests}

@@ -12,8 +12,8 @@
     margin: 0 auto 4em;
     padding: 0.8em 2em;
 
-    @media (max-width: 576px) {
-      width: 95%;
+    @media (max-width: 767px) {
+      width: 100%;
     }
 
     h5 {
@@ -23,19 +23,38 @@
       text-align: center;
     }
 
-    .input {
+    form {
+      padding-top: 1em;
+      display: flex;
+      justify-content: space-evenly;
+
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+      }
+    }
+
+    .contest-search-form input.contest-search-input {
       max-width: 80%;
-      margin: auto;
-      padding: 0.3em 0.7em;
+      padding: 0.7em 0.7em;
       background-color: #f5f5f5;
       border: 1px solid #eee;
       border-radius: 4px;
-      color: rgb(145, 145, 145);
+      color: rgb(145, 144, 144);
       font-size: 0.9em;
+      text-align: center;
+      margin-bottom: 0;
 
-      @media (max-width: 576px) {
-        max-width: 95%;
+      @media (max-width: 767px) {
+        max-width: 100%;
       }
+    }
+
+    .contest-search-form input.contest-search-input[type="search"]:focus {
+      text-align: left;
+    }
+
+    .contest-search-form input.contest-search-input[placeholder]:focus {
+      color: rgb(100, 100, 100);
     }
 
     .examples {
