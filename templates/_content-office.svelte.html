@@ -19,11 +19,15 @@
         <p class="office-loc">{@html supplementedShortDescription }</p>
       {/if}
 
-      {#if supplementedDescription}
-        <p class="office-chat">{@html supplementedDescription }</p>
+      <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
+
+
+      {#if !condensed}
+        {#if supplementedDescription}
+          <p class="office-chat">{@html supplementedDescription }</p>
+        {/if}
       {/if}
 
-      <p class="timestamp">Last updated: { updatedDate ? makeDate(updatedDate) : '-' }</p>
 
     </div>
 

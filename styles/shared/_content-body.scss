@@ -18,11 +18,6 @@
   p.body-chat {
     font-family: "Benton Sans";
     font-size: 0.9em;
-    width: 75%;
-
-    @media (max-width: 768px) {
-      width: 100%;
-    }
   }
 
   .body-row > .body-offices:nth-child(odd) {

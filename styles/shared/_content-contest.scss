@@ -219,8 +219,11 @@
   // Questions
 
   &.is-question {
+    padding-top: 1em;
+    margin-bottom: 2em;
+
     h5 {
-      font-size: 1em;
+      font-size: 1.1em;
       font-weight: bold;
       margin-bottom: 0.2em;
       padding-top: 0;
@@ -228,7 +231,6 @@
 
     .question-title {
       @include font-styles("benton-sans");
-
       font-size: 0.9em;
       line-height: 1.15em;
       margin: 0 0 0.5em;

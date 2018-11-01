@@ -33,24 +33,44 @@
       }
     }
 
-    .contest-search-form input.contest-search-input {
-      max-width: 80%;
-      padding: 0.7em 0.7em;
-      background-color: #f5f5f5;
-      border: 1px solid #eee;
-      border-radius: 4px;
-      color: rgb(145, 144, 144);
-      font-size: 0.9em;
-      text-align: center;
-      margin-bottom: 0;
+    .contest-search-form {
+      input.contest-search-input {
+        max-width: 80%;
+        padding: 0.7em 0.7em;
+        background-color: #f5f5f5;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        color: rgb(145, 144, 144);
+        font-size: 0.9em;
+        text-align: center;
+        margin-bottom: 0;
 
-      @media (max-width: 767px) {
-        max-width: 100%;
+        @media (max-width: 768px) {
+          max-width: 100%;
+          margin-right: 0.5em;
+        }
+      }
+
+      button {
+        font-size: 0.75em;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: bold;
+        font-family: "Benton Sans";
+
+        @media (max-width: 768px) {
+          max-width: 100%;
+          margin-top: 0.5em;
+        }
       }
     }
 
     .contest-search-form input.contest-search-input[type="search"]:focus {
       text-align: left;
+    }
+
+    .contest-search-form input.contest-search-input[placeholder] {
+      font-family: "Benton Sans";
     }
 
     .contest-search-form input.contest-search-input[placeholder]:focus {
@@ -72,6 +92,11 @@
 
           a {
             text-decoration: none;
+            color: #00824a;
+
+            :hover {
+              color: #006341;
+            }
           }
         }
       }

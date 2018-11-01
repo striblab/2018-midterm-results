@@ -66,10 +66,9 @@
       color: rgb(207, 59, 59);
       font-family: "Benton Sans";
       font-size: 0.7em;
-      width: 100px;
+      padding-right: 2px;
 
       @media (max-width: 576px) {
-        max-width: 18%;
         font-size: 0.6em;
       }
 
@@ -98,9 +97,9 @@
     }
 
     ul {
-      @media (max-width: 576px) {
-        flex-grow: 2;
-      }
+      // @media (max-width: 576px) {
+      //   flex-grow: 2;
+      // }
 
       a,
       a:link,
