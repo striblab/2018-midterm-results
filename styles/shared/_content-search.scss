@@ -14,6 +14,7 @@
 
     @media (max-width: 767px) {
       width: 100%;
+      padding: 0.8em 1em;
     }
 
     h5 {
@@ -42,12 +43,16 @@
         border-radius: 4px;
         color: rgb(145, 144, 144);
         font-size: 0.9em;
-        text-align: center;
+        text-align: left;
         margin-bottom: 0;
 
         @media (max-width: 768px) {
           max-width: 100%;
           margin-right: 0.5em;
+        }
+
+        @media (max-width: 767px) {
+          margin-right: 0;
         }
       }
 
@@ -58,15 +63,12 @@
         font-weight: bold;
         font-family: "Benton Sans";
 
-        @media (max-width: 768px) {
-          max-width: 100%;
+        @media (max-width: 767px) {
+          width: 100%;
           margin-top: 0.5em;
+          padding: 0.8em;
         }
       }
-    }
-
-    .contest-search-form input.contest-search-input[type="search"]:focus {
-      text-align: left;
     }
 
     .contest-search-form input.contest-search-input[placeholder] {

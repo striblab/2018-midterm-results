@@ -1,4 +1,6 @@
 div.utility {
+  margin: auto;
+  max-width: 500px;
   margin-bottom: 1em;
   p {
     font-family: "Benton Sans";
@@ -10,5 +12,15 @@ div.utility {
       color: rgb(207, 59, 59);
       font-weight: bold;
     }
+  }
+
+  p.live-on {
+    display: none;
+  }
+
+  p.emergency {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 2em;
   }
 }
