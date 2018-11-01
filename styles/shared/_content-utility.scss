@@ -1,12 +1,16 @@
 div.utility {
+  margin-bottom: 1em;
   p {
     font-family: "Benton Sans";
     font-size: 0.8em;
     text-align: center;
+    margin-bottom: 0em;
 
     span {
       color: rgb(207, 59, 59);
       text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.05em;
     }
   }
 }

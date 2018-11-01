@@ -52,9 +52,6 @@
     },
 
     oncreate() {
-      // Start timer
-      this.startTimer();
-
       // Set place holder.
       this.refs.navigationPlaceholder.style.height =
         $(this.refs.navigation).height() + "px";
@@ -87,25 +84,6 @@
     },
 
     methods: {
-      startTimer(duration = 60) {
-        if (this.timerIntervalId) {
-          return;
-        }
-
-        // Things to keep track of
-        let time = duration;
-
-        // Update function
-        let update = () => {
-          this.refs.timer.textContent = time.toString().padStart(2, "0");
-          time = time <= 0 ? duration : time - 1;
-        };
-
-        // Set internval and start
-        this.timerIntervalId = setInterval(update, 1000);
-        update();
-      },
-
       updateStickyNav() {
         // See if we are past
         if (window.pageYOffset >= this.get().navigationTop) {
