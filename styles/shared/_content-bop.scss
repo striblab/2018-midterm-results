@@ -94,3 +94,9 @@
     letter-spacing: 0.5px;
   }
 }
+
+.bop:last-child {
+  @media (max-width: 768px) {
+    padding-top: 2em;
+  }
+}

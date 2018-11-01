@@ -38,6 +38,8 @@
     top: 40px;
     width: 100%;
     padding-top: 17px;
+    padding-left: 1em;
+    padding-right: 1em;
     padding-bottom: 17px;
     border-bottom: 1px solid #e8e8e8;
 
@@ -62,44 +64,9 @@
     justify-content: center;
     align-items: center;
 
-    // .counter {
-    //   color: rgb(207, 59, 59);
-    //   font-family: "Benton Sans";
-    //   font-size: 0.7em;
-    //   padding-right: 2px;
-
-    //   @media (max-width: 576px) {
-    //     font-size: 0.6em;
-    //   }
-
-    //   p {
-    //     font-family: "Benton Sans";
-    //     text-align: center;
-    //     display: inline;
-
-    //     @media (max-width: 768px) {
-    //       display: block;
-    //       margin-bottom: 0;
-    //     }
-
-    //     @media (max-width: 576px) {
-    //       letter-spacing: 0.05em;
-    //     }
-    //   }
-
-    //   p.caps {
-    //     text-transform: uppercase;
-    //   }
-
-    //   span {
-    //     font-weight: bold;
-    //   }
-    // }
-
     ul {
-      // @media (max-width: 576px) {
-      //   flex-grow: 2;
-      // }
+      width: 100%;
+      text-align: center;
 
       a,
       a:link,
@@ -108,7 +75,7 @@
       }
 
       li {
-        min-width: 19%;
+        min-width: 20%;
         background-color: white;
         text-transform: uppercase;
         font-size: 0.75em;
@@ -156,14 +123,6 @@
         cursor: pointer;
         color: #202020;
         border: 1px solid #202020;
-      }
-    }
-
-    .placeholder {
-      width: 100px;
-
-      @media (max-width: 576px) {
-        display: none;
       }
     }
   }

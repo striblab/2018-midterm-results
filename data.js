@@ -28,7 +28,7 @@ function buildDataOptions() {
     'contests/by-office/usa-mn-state-lower-2719a',
     'contests/by-office/usa-mn-state-lower-2737a',
     'contests/by-office/usa-mn-state-lower-2744a',
-    'contests/by-office/usa-mn-state-lower-2749b',
+    'contests/by-office/usa-mn-state-lower-2749a',
     'contests/by-office/usa-mn-state-lower-2752b',
     'contests/by-office/usa-mn-state-lower-2757a',
     'trends/by-body/usa-mn-state-upper',
