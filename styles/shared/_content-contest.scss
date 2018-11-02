@@ -148,55 +148,11 @@
       }
     }
 
-    tr.party-lib {
-      td.winner span,
-      td.bar span.pctBar {
-        background-color: #f7c272;
-      }
-
-      td.winner span.check {
-        color: #f7c272;
-        background-color: #f5f5f5;
-      }
-    }
-
+    tr.party-lib,
     tr.party-ind,
-    tr.party-idp {
-      td.winner span,
-      td.bar span.pctBar {
-        background-color: #f7c272;
-      }
-
-      td.winner span.check {
-        color: #f7c272;
-        background-color: #f5f5f5;
-      }
-    }
-
-    tr.party-grt {
-      td.winner span,
-      td.bar span.pctBar {
-        background-color: #f7c272;
-      }
-
-      td.winner span.check {
-        color: #f7c272;
-        background-color: #f5f5f5;
-      }
-    }
-
-    tr.party-gre {
-      td.winner span,
-      td.bar span.pctBar {
-        background-color: #f7c272;
-      }
-
-      td.winner span.check {
-        color: #f7c272;
-        background-color: #f5f5f5;
-      }
-    }
-
+    tr.party-idp,
+    tr.party-grt,
+    tr.party-gre,
     tr.party-lmn {
       td.winner span,
       td.bar span.pctBar {
