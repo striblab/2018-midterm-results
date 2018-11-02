@@ -22,7 +22,11 @@ function main() {
   // Allow to turn off result loading
   if (!appConfig.clientResults) {
     console.error('Client results off');
-    return;
+    // For local, we still want to show results for search,
+    // and therefore need the component to load.  Turning
+    // the clientResults off will trigger the server variable
+    // on which should ensure that no actual results show.
+    //return;
   }
 
   // Initialize data

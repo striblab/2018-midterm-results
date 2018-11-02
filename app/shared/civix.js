@@ -113,11 +113,6 @@ class Civix {
   fetch() {
     let cacher = Math.round(Date.now() / 1000 / 30) * 30;
 
-    // Don't do anything if client results off
-    if (!appConfig.clientResults) {
-      return new Promise(resolve => resolve());
-    }
-
     return window
       .fetch(
         `${this.options.endpoint}/${this.options.election}/${

@@ -15,7 +15,9 @@ import supplement from '../../assets/data/supplement.json';
 // Define store
 const store = new Store({
   supplement,
-  appConfig
+  appConfig,
+  // This helps make sure that client results dont show even if calls are made
+  server: appConfig.clientResults === false ? true : false
 });
 
 // Get some data

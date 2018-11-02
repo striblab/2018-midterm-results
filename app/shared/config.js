@@ -6,6 +6,8 @@
 module.exports = {
   // Whether to get results in browser
   clientResults: true,
-  // Environment, specifically for getting results
+  // Default environment, specifically for getting results,
+  // note that the civix class will still double check
+  // the domain
   environment: 'test'
 };
