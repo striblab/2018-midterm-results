@@ -5,7 +5,18 @@
 // CONTEST table defaults
 
 .contest {
-  //if has timestamp for nonembedded contests
+  //Unembedded contests
+  h5 {
+    margin-bottom: 0;
+  }
+
+  p.open-seats {
+    font-family: "Benton Sans";
+    font-size: 0.8em;
+    font-style: italic;
+    margin-bottom: 0.3em;
+  }
+
   p.timestamp {
     font-family: "Benton Sans";
     font-size: 0.6em;
@@ -250,6 +261,7 @@
     .question-text {
       @include font-styles("benton-sans");
       font-size: 0.8em;
+      margin-bottom: 0.2em;
     }
 
     th.cand {
