@@ -1,4 +1,4 @@
-<div class="contest contest-{ id } { uncontested ? 'uncontested' : '' } { countyMap ? 'has-county-map row' : '' } { reporting && reporting > 0 ? 'is-reporting' : '' } { partisan ? 'partisan' : 'non-partisan' } { winner ? 'has-winner' : '' } {question ? 'is-question' : ''}" id="{ id }">
+<div class="contest contest-{ id } { uncontested ? 'uncontested' : '' } { countyMap ? 'has-county-map row' : '' } { reporting && reporting > 0 ? 'is-reporting' : '' } { !partisan ? 'non-partisan' : 'partisan' } { winner ? 'has-winner' : '' } {question ? 'is-question' : ''}" id="{ id }">
   <div class="{ countyMap ? 'col col-100 col-md-50' : ''}">
     {#if type === 'primary' && (party || !embedded) }
       <h6>{ supplementedTitle }</h6>
