@@ -6,7 +6,13 @@
 
     {#if !embedded}
       <h5>{ supplementedTitle }</h5>
+    {/if}
 
+    {#if elect && elect > 1}
+        <p class="open-seats">Open seats: { elect }</p>
+    {/if}
+
+    {#if !embedded}
       <p class="timestamp" title="Updated at { updated_at ? updated_at : '-' }{ apUpdated ? ` and AP updated at ${apUpdated}` : '' }">
         Last updated: { !$server && updatedDate ? makeDate(updatedDate) : '-' }
       </p>
@@ -14,10 +20,6 @@
 
     {#if supplementedDescription}
       <p class="contest-chat">{@html supplementedDescription }</p>
-    {/if}
-
-    {#if elect && elect > 1}
-      <p class="open-seats">Open seats: { elect }</p>
     {/if}
 
     {#if question && questionText}
