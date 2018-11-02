@@ -100,6 +100,9 @@
       },
 
       dem: ({ trends, id }) => {
+        if (id === "usa-congress-house") {
+          console.log(123, trends);
+        }
         if (!trends) {
           return;
         }
@@ -107,11 +110,6 @@
         let dem = find(trends, { party_id: "dem" });
         if (!dem) {
           dem = find(trends, { party_id: "dfl" });
-        }
-
-        if (!dem) {
-          console.error("Unable to find dem in trend data.");
-          return 0;
         }
 
         // For dems, we add the others, as the senate has some
@@ -140,7 +138,7 @@
       },
 
       demTotal: ({ dem }) => {
-        if (!dem) {
+        if (!dem && dem !== 0) {
           return;
         }
 
@@ -148,7 +146,7 @@
       },
 
       repTotal: ({ rep }) => {
-        if (!rep) {
+        if (!rep && rep !== 0) {
           return;
         }
 
