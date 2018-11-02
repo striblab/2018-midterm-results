@@ -6,6 +6,10 @@
 
     {#if !embedded}
       <h5>{ supplementedTitle }</h5>
+
+      <p class="timestamp" title="Updated at { updated_at ? updated_at : '-' }{ apUpdated ? ` and AP updated at ${apUpdated}` : '' }">
+        Last updated: { !$server && updatedDate ? makeDate(updatedDate) : '-' }
+      </p>
     {/if}
 
     {#if supplementedDescription}
@@ -22,10 +26,6 @@
       {/if}
 
       <p class="question-text">{@html questionText }</p>
-    {/if}
-
-    {#if !embedded}
-      <p class="timestamp">Last updated: { !$server && updatedDate ? makeDate(updatedDate) : '-' }</p>
     {/if}
 
     <div class="contest-table">
@@ -87,10 +87,12 @@
       </table>
 
       <div class="reporting">
-        {#if !$server && percentReporting}
-          { round(percentReporting * 100, 0) }% of precincts reporting
+        {#if !$server && (percentReporting || percentReporting === 0)}
+          <span title="{ (reporting || 0).toLocaleString() } of { totalPrecincts ? totalPrecincts.toLocaleString() : 'unknown' } precincts">
+            { round(percentReporting * 100, 0) }% of precincts reporting
+          </span>
         {:else}
-          -
+          No precincts reporting yet
         {/if}
       </div>
     </div>

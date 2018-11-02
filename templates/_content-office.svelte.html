@@ -7,7 +7,9 @@
         <p class="office-loc">{@html supplementedShortDescription }</p>
       {/if}
 
-      <p class="timestamp">Last updated: { !$server && updatedDate ? makeDate(updatedDate) : '-' }</p>
+      <p class="timestamp" title="Contest updated at { contests && contests[0].updated_at ? contests[0].updated_at : '-' }{ contests && contests[0].apUpdated ? ` and AP updated at ${contests && contests[0].apUpdated}` : '' }">
+        Last updated: { !$server && updatedDate ? makeDate(updatedDate) : '-' }
+      </p>
 
 
       {#if !condensed}
