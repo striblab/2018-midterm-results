@@ -3,11 +3,14 @@
  * https://github.com/striblab/civix/
  */
 
+// Dependencies
+let appConfig = require('./config.js');
+
 // Main civix class
 class Civix {
   constructor(resource, options = {}) {
     // The default is helpful to change as a state
-    options.environment = options.environment || 'test';
+    options.environment = options.environment || appConfig.environment;
     // If on startribune.com, always use prod
     if (
       window &&

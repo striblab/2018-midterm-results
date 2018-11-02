@@ -41,11 +41,13 @@
     position: relative;
 
     span {
-      display: inline-block;
+      display: block;
       height: 100%;
       box-sizing: border-box;
       float: left;
       padding: 0;
+      width: 0;
+      transition: width 1s ease-in-out;
     }
 
     .bar-d {
