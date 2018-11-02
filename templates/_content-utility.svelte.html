@@ -1,5 +1,7 @@
 <div class="utility">
   <p class="emergency"></p>
   <p class="live-on"><span>Live:</span> Results update about every 30 seconds</p>
-  <p>Incumbents are marked with *</p>
+  {#if page != "local"}
+    <p>Incumbents are marked with *</p>
+  {/if}
 </div>
