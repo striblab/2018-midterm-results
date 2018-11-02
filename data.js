@@ -112,7 +112,7 @@ function buildStoreOptions(buildData) {
     ).features);
   }
 
-  console.log(_.keys(store));
+  //console.log(_.keys(store));
   return store;
 }
 
