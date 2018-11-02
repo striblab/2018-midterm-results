@@ -7,13 +7,15 @@
 // Dependencies
 import { Store } from 'svelte/store.js';
 import { feature as topojsonFeature } from 'topojson';
+import appConfig from './config.js';
 
 // Data
 import supplement from '../../assets/data/supplement.json';
 
 // Define store
 const store = new Store({
-  supplement
+  supplement,
+  appConfig
 });
 
 // Get some data

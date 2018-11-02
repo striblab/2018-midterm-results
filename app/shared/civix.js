@@ -3,11 +3,14 @@
  * https://github.com/striblab/civix/
  */
 
+// Dependencies
+let appConfig = require('./config.js');
+
 // Main civix class
 class Civix {
   constructor(resource, options = {}) {
     // The default is helpful to change as a state
-    options.environment = options.environment || 'test';
+    options.environment = options.environment || appConfig.environment;
     // If on startribune.com, always use prod
     if (
       window &&
@@ -109,6 +112,11 @@ class Civix {
   // Do api fetch
   fetch() {
     let cacher = Math.round(Date.now() / 1000 / 30) * 30;
+
+    // Don't do anything if client results off
+    if (!appConfig.clientResults) {
+      return new Promise(resolve => resolve());
+    }
 
     return window
       .fetch(

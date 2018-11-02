@@ -12,41 +12,53 @@ import utils from './shared/utils.js';
 import Content from '../templates/_state-mn-content.svelte.html';
 import store from './shared/store.js';
 import initializeData from './shared/initialize.js';
+import appConfig from './shared/config.js';
 
 // Mark page with note about development or staging
 utils.environmentNoting();
 
-// Initialize data
-initializeData([
-  'contests/by-office/usa-mn-governor',
-  'contests/by-office/usa-mn-attorney-general',
-  'contests/by-office/usa-mn-auditor',
-  'contests/by-office/usa-mn-secretary-state',
-  'contests/by-body/usa-mn-supreme-court',
-  'contests/by-body/usa-mn-appeals-court',
-  'contests/by-body/usa-mn-district-court'
-]).then(initData => {
-  store.set(initData);
+// Main function
+function main() {
+  // Allow to turn off result loading
+  if (!appConfig.clientResults) {
+    console.error('Client results off');
+    return;
+  }
 
-  // Hacky way to get the share parts to show up
-  let $share = $('.share-placeholder').size()
-    ? $('.share-placeholder')
-      .children()
-      .detach()
-    : undefined;
-  let attachShare = !$share
-    ? undefined
-    : () => {
-      $('.share-placeholder').append($share);
-    };
+  // Initialize data
+  initializeData([
+    'contests/by-office/usa-mn-governor',
+    'contests/by-office/usa-mn-attorney-general',
+    'contests/by-office/usa-mn-auditor',
+    'contests/by-office/usa-mn-secretary-state',
+    'contests/by-body/usa-mn-supreme-court',
+    'contests/by-body/usa-mn-appeals-court',
+    'contests/by-body/usa-mn-district-court'
+  ]).then(initData => {
+    store.set(initData);
 
-  // Svelte template hook-up
-  const app = new Content({
-    target: document.querySelector('.article-lcd-body-content'),
-    data: {
-      attachShare
-    },
-    store
+    // Hacky way to get the share parts to show up
+    let $share = $('.share-placeholder').size()
+      ? $('.share-placeholder')
+        .children()
+        .detach()
+      : undefined;
+    let attachShare = !$share
+      ? undefined
+      : () => {
+        $('.share-placeholder').append($share);
+      };
+
+    // Svelte template hook-up
+    const app = new Content({
+      target: document.querySelector('.article-lcd-body-content'),
+      data: {
+        attachShare
+      },
+      store
+    });
+    window.__app = app;
   });
-  window.__app = app;
-});
+}
+
+main();
