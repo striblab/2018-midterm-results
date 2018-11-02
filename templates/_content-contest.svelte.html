@@ -8,9 +8,9 @@
       <h5>{ supplementedTitle }</h5>
     {/if}
 
-    <!-- {#if supplementedDescription}
+    {#if supplementedDescription}
       <p class="contest-chat">{@html supplementedDescription }</p>
-    {/if} -->
+    {/if}
 
     {#if question && questionText}
       {#if questionTitle}
@@ -18,6 +18,10 @@
       {/if}
 
       <p class="question-text">{@html questionText }</p>
+    {/if}
+
+    {#if !embedded}
+      <p class="timestamp">Last updated: { !$server && updatedDate ? makeDate(updatedDate) : '-' }</p>
     {/if}
 
     <div class="contest-table">
@@ -130,6 +134,18 @@
             Math.pow(10, decimals)
           );
         }
+      },
+
+      makeDate: (date, format) => {
+        let m = moment(date);
+        let now = moment();
+        if (!m || !m.isValid()) {
+          return "";
+        }
+
+        return m.isSame(now, "date")
+          ? m.format("h:mm a")
+          : m.format("MMM D h:mm a");
       }
     },
 
@@ -173,6 +189,13 @@
         }
 
         return 0;
+      },
+
+      updatedDate: ({ results }) => {
+        if (!results || !results.length || !results[0]) {
+          return;
+        }
+        return results[0].apUpdated || results[0].updated_at;
       },
 
       // Keyed by candidate id

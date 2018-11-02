@@ -19,6 +19,19 @@ $partyColors: (
     // Use margin top since we want to get offsetHeight
     margin-top: 2em;
     position: relative;
+
+    .county-map-legend p.hover-inst {
+      font-size: 0.7em;
+      color: #808080;
+      font-style: italic;
+      font-family: "Benton Sans";
+      padding-top: 0.5em;
+      text-align: center;
+
+      @media (max-width: 767px) {
+        margin-left: 0;
+      }
+    }
   }
 
   .state-path {
@@ -163,19 +176,6 @@ $partyColors: (
 
     &.tooltip-active {
       display: block;
-    }
-  }
-
-  .county-map-legend p.hover-inst {
-    font-size: 0.7em;
-    color: #808080;
-    font-style: italic;
-    font-family: "Benton Sans";
-    margin-left: 2em;
-    padding-top: 1em;
-
-    @media (max-width: 767px) {
-      margin-left: 0;
     }
   }
 }

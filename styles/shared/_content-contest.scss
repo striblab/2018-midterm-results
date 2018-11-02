@@ -5,6 +5,16 @@
 // CONTEST table defaults
 
 .contest {
+  //if has timestamp for nonembedded contests
+  p.timestamp {
+    font-family: "Benton Sans";
+    font-size: 0.6em;
+    color: #808080;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+  }
+
+  //other defaulty things
   .contest-table {
     margin-bottom: 0.5em;
 
