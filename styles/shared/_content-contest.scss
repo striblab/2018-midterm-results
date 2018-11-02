@@ -301,7 +301,7 @@
 // NONPARTISAN race styles
 
 .contest.non-partisan,
-.contest.non-partisan.is-question {
+.contest.is-question {
   .contest-table tbody tr td.winner > span.candidate-color-label {
     display: none;
   }
