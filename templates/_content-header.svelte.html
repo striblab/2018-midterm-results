@@ -1,32 +1,32 @@
 
-<div class="strib-styles ssa ssb ssc">
-  <section class="container-lg results-header">
-    <h1>2018 Minnesota midterm election results</h1>
+<section class="container-lg results-header">
+  <h1>2018 Minnesota midterm election results</h1>
 
-    <Banner />
+  <Banner />
 
-    <!-- navigation -->
+  <!-- navigation -->
+  <div class="navigation-wrapper">
     <div class="navigation-marker" ref:navigationMarker></div>
     <div class="navigation-placeholder" ref:navigationPlaceholder></div>
     <div class="cf results-navigation" ref:navigation>
       <nav>
         <ul>
-          <a class="{page == "top" ? "active" : " "}" href="/x/497951121?preview=1"><li>Key Races</li></a>
-          <a class="{page == "state" ? "active" : " "}" href="/x/497951431?preview=1"><li>State</li></a>
-          <a class="{page == "legis" ? "active" : " "}" href="/x/497951711?preview=1"><li><span class="nav-m">MN&nbsp;</span>Leg<span class="nav-m">.</span><span class="nav-d">islature</span></li></a>
-          <a class="{page == "local" ? "active" : " "}" href="/x/497951861?preview=1"><li>Local</li></a>
+          <a class="{page == "top" ? "active" : " "}" href="/x/497951121"><li>Key Races</li></a>
+          <a class="{page == "state" ? "active" : " "}" href="/x/497951431"><li>State</li></a>
+          <a class="{page == "legis" ? "active" : " "}" href="/x/497951711"><li><span class="nav-m">MN&nbsp;</span>Leg<span class="nav-m">.</span><span class="nav-d">islature</span></li></a>
+          <a class="{page == "local" ? "active" : " "}" href="/x/497951861"><li>Local</li></a>
         </ul>
       </nav>
     </div>
+  </div>
 
-    <div class="share-placeholder">
+  <div class="share-placeholder">
     <!-- share -->
-    </div>
+  </div>
 
-    <Utility page={page}/>
+  <Utility page={page}/>
 
-  </section>
-</div>
+</section>
 
 <script>
   /* global $ */
