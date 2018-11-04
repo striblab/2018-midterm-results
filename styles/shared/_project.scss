@@ -103,11 +103,7 @@
   margin-bottom: 3em;
 
   .contest-map {
-    margin-top: -10.6em;
-
-    @media (max-width: 869px) {
-      margin-top: -12em;
-    }
+    margin-top: -12em;
 
     @media (max-width: 767px) {
       margin-top: 0.5em;
@@ -124,11 +120,7 @@
   margin-bottom: 4em;
 
   .contest-map {
-    margin-top: -9.5em;
-
-    @media (max-width: 996px) {
-      margin-top: -8em;
-    }
+    margin-top: -8em;
 
     @media (max-width: 890px) {
       margin-top: -9em;
@@ -144,7 +136,7 @@
   .contest-map {
     margin-top: -13em;
 
-    @media (max-width: 996px) {
+    @media (max-width: 1199px) {
       margin-top: -11.7em;
     }
 
