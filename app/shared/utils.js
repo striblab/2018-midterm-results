@@ -5,8 +5,8 @@
 /* global window, document */
 
 // Dependencies
-import queryString from 'query-string';
-import _ from 'lodash';
+const queryString = require('query-string');
+const _ = require('lodash');
 
 /**
  * Enable pym.
@@ -433,6 +433,19 @@ function gaPage(path) {
   }
 }
 
+// Tag manager specific
+function gtagPage(path) {
+  if (window.gtag && window.gaId) {
+    path = path
+      ? path
+      : document.location.pathname +
+        document.location.search +
+        document.location.hash;
+
+    window.gtag('config', window.gaId, { page_path: path });
+  }
+}
+
 /**
  * Google analytics event wrapper
  * @see https://developers.google.com/analytics/devguides/collection/analyticsjs/events
@@ -469,8 +482,29 @@ function gaEvent({ category, action, label, value, nonInteraction }) {
   }
 }
 
+// Gtag version
+// https://developers.google.com/analytics/devguides/collection/gtagjs/events
+//
+// <action> is the string that will appear as the event action in Google Analytics Event reports.
+// <category> is the string that will appear as the event category.
+// <label> is the string that will appear as the event label.
+// <value> is a non-negative integer that will appear as the event value.
+function gtagEvent({ action, eventCategory, eventLabel, value }) {
+  if (window.gtag && window.gaId) {
+    if (!action) {
+      throw new Error('action option is needed for a gtagEvent');
+    }
+
+    window.gtag('event', action, {
+      event_category: eventCategory,
+      event_label: eventLabel,
+      value
+    });
+  }
+}
+
 // Export a generator for the class.
-export default {
+module.exports = {
   enablePym,
   autoEnablePym,
   environment,
@@ -489,5 +523,7 @@ export default {
   isWindowsPhone,
   isMobile,
   gaPage,
-  gaEvent
+  gtagPage,
+  gaEvent,
+  gtagEvent
 };

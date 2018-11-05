@@ -1,10 +1,17 @@
+<svelte:window on:popstate="handlePopState(event)" />
+
 <div class="search local" id="">
   <div class="search-box">
     <h5>Find your races</h5>
 
     <form on:submit="handleSearch(event)" class="contest-search-form">
-      <input bind:value="searchTerms" class="contest-search-input" type="search" placeholder="Search for a Minnesota county, city or race" />
-      <button name="submit" type="submit">Search</button>
+      <input
+        bind:value="searchTerms"
+        class="contest-search-input"
+        type="search"
+        placeholder="{ !loaded ? 'Loading search index...' : 'Search for a Minnesota county, city or race' }"
+        disabled="{ !loaded }" />
+      <button name="submit" type="submit" disabled="{ !loaded }">Search</button>
     </form>
 
     <div class="examples">
@@ -48,6 +55,7 @@
   import Contest from "./_content-contest.svelte.html";
   import Civix from "../app/shared/civix.js";
   import lunr from "lunr";
+  import { gtagPage, gtagEvent } from "../app/shared/utils.js";
 
   export default {
     components: {
@@ -55,6 +63,9 @@
     },
 
     oncreate() {
+      // Get current page title
+      this.set({ defaultTitle: document.title });
+
       // Get search index
       this.civix = new Civix(`contests/search/search`);
       this.civix.on("update", index => {
@@ -71,12 +82,17 @@
         });
 
         this.set({ loaded: true });
+
+        // Load hash
+        if (window.location.hash) {
+          this.readSearch(window.location.hash);
+        }
       });
       this.civix.fetch();
     },
 
     methods: {
-      handleSearch(e) {
+      handleSearch(e, updateLink = true) {
         if (e && e.preventDefault) {
           e.preventDefault();
         }
@@ -90,8 +106,20 @@
           return;
         }
 
+        // Check index is there
+        if (!this.searchIndex) {
+          return;
+        }
+
         // Do search
         let results = this.searchIndex.search(searchTerms);
+
+        // Gtag event
+        gtagEvent({
+          action: "search",
+          eventCategory: "local_contest_search",
+          eventLabel: searchTerms
+        });
 
         // Check for results
         if (!results || !results.length) {
@@ -106,6 +134,25 @@
           this.set({ manyResults: true });
         }
         this.set({ searchResults: results });
+
+        // Update URL
+        if (updateLink) {
+          this.linkSearch(searchTerms);
+        }
+      },
+
+      linkSearch(searchTerms) {
+        // Update history
+        window.history.pushState(
+          null,
+          null,
+          `#search/${encodeURIComponent(searchTerms.toLowerCase())}`
+        );
+        // For some reason this should come after
+        document.title = `Search: ${searchTerms} | ${this.get().defaultTitle}`;
+
+        // Update gtag
+        gtagPage();
       },
 
       doSearch(event, searchTerms) {
@@ -119,6 +166,23 @@
 
         this.set({ searchTerms });
         this.handleSearch();
+      },
+
+      // Read search from url hash
+      readSearch(hash) {
+        hash = decodeURIComponent(hash);
+        let searchReg = /#?search\/(.*)/i;
+
+        if (hash && hash.match(searchReg)) {
+          this.set({ searchTerms: hash.match(searchReg)[1] });
+          this.handleSearch(null, false);
+        }
+      },
+
+      handlePopState(e) {
+        if (e && e.target && e.target.location && e.target.location.hash) {
+          this.readSearch(e.target.location.hash);
+        }
       }
     },
 

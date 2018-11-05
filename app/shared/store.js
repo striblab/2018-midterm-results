@@ -8,12 +8,14 @@
 import { Store } from 'svelte/store.js';
 import { feature as topojsonFeature } from 'topojson';
 import appConfig from './config.js';
+import initializeGa from './ga.js';
 
 // Data
 import supplement from '../../assets/data/supplement.json';
 
 // Define store
 const store = new Store({
+  gtag: initializeGa(),
   supplement,
   appConfig,
   // This helps make sure that client results dont show even if calls are made
