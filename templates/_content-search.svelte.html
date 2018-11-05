@@ -50,6 +50,7 @@
   import Contest from "./_content-contest.svelte.html";
   import Civix from "../app/shared/civix.js";
   import lunr from "lunr";
+  import { gtagPage, gtagEvent } from "../app/shared/utils.js";
 
   export default {
     components: {
@@ -103,6 +104,13 @@
         // Do search
         let results = this.searchIndex.search(searchTerms);
 
+        // Gtag event
+        gtagEvent({
+          action: "search",
+          eventCategory: "local_contest_search",
+          eventLabel: searchTerms
+        });
+
         // Check for results
         if (!results || !results.length) {
           return this.set({ noResults: true });
@@ -132,6 +140,9 @@
         );
         // For some reason this should come after
         document.title = `Search: ${searchTerms} | ${this.get().defaultTitle}`;
+
+        // Update gtag
+        gtagPage();
       },
 
       doSearch(event, searchTerms) {
