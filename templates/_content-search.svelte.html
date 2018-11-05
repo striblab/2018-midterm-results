@@ -5,8 +5,13 @@
     <h5>Find your races</h5>
 
     <form on:submit="handleSearch(event)" class="contest-search-form">
-      <input bind:value="searchTerms" class="contest-search-input" type="search" placeholder="Search for a Minnesota county, city or race" />
-      <button name="submit" type="submit">Search</button>
+      <input
+        bind:value="searchTerms"
+        class="contest-search-input"
+        type="search"
+        placeholder="{ !loaded ? 'Loading search index...' : 'Search for a Minnesota county, city or race' }"
+        disabled="{ !loaded }" />
+      <button name="submit" type="submit" disabled="{ !loaded }">Search</button>
     </form>
 
     <div class="examples">
@@ -98,6 +103,11 @@
         // Check terms
         let { searchTerms, searchLimit } = this.get();
         if (!searchTerms) {
+          return;
+        }
+
+        // Check index is there
+        if (!this.searchIndex) {
           return;
         }
 
