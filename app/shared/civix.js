@@ -112,12 +112,14 @@ class Civix {
   // Do api fetch
   fetch() {
     let cacher = Math.round(Date.now() / 1000 / 30) * 30;
+    // Turn off cacher
+    cacher = null;
 
     return window
       .fetch(
-        `${this.options.endpoint}/${this.options.election}/${
-          this.resource
-        }?_t=${cacher}`
+        `${this.options.endpoint}/${this.options.election}/${this.resource}${
+          cacher ? '?_t=' + cacher : ''
+        }`
       )
       .then(response => {
         return response.json();
