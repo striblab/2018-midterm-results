@@ -9,5 +9,5 @@ module.exports = {
   // Default environment, specifically for getting results,
   // note that the civix class will still double check
   // the domain
-  environment: 'test'
+  environment: 'prod'
 };
