@@ -24,7 +24,9 @@ const store = new Store({
 
 // Get some data
 window
-  .fetch('./assets/data/mncounties.json')
+  .fetch(
+    'http://static.startribune.com/elections/projects/2018-midterm-results/assets/data/mncounties.json'
+  )
   .then(response => {
     return response.json();
   })
