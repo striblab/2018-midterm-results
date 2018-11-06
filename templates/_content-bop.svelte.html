@@ -77,15 +77,18 @@
         title,
         defaultTitle,
         shortTitle,
+        overrideTitle,
         embedded
       }) => {
-        return $supplement && id && $supplement[id] && $supplement[id].title
-          ? $supplement[id].title
-          : defaultTitle
-            ? defaultTitle
-            : embedded && shortTitle
-              ? shortTitle
-              : title || "-";
+        return overrideTitle
+          ? overrideTitle
+          : $supplement && id && $supplement[id] && $supplement[id].title
+            ? $supplement[id].title
+            : defaultTitle
+              ? defaultTitle
+              : embedded && shortTitle
+                ? shortTitle
+                : title || "-";
       },
 
       supplementedDescription: ({ id, $supplement, description }) => {
