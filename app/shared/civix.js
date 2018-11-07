@@ -115,7 +115,7 @@ class Civix {
   fetch() {
     let cacher = this.options.cacheBuster
       ? Date.now()
-      : Math.round(Date.now() / 1000 / 10) * 10;
+      : Math.round(Date.now() / 1000 / 15) * 15;
     //let cacher = Math.round(Date.now() / 1000);
     // Turn off cacher
     //let cacher = null;

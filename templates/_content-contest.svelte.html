@@ -121,7 +121,10 @@
 
     oncreate() {
       if (!this.get().embedded) {
-        this.civix = new Civix(`contests/contests/${this.get().id}`);
+        console.log(this.get());
+        this.civix = new Civix(`contests/contests/${this.get().id}`, {
+          initialPoll: this.get().initialPoll ? true : false
+        });
         this.civix.on("update", office => {
           this.set(office);
           this.set({ loaded: true });

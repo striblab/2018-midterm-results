@@ -100,7 +100,10 @@
     oncreate() {
       this.civix = new Civix(
         `contests/sub-contests/${this.get().contestId}.county`,
-        { polling: 59 }
+        {
+          polling: 59,
+          initialPoll: true
+        }
       );
       this.civix.on("update", subContests => {
         this.set({

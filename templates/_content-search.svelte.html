@@ -35,7 +35,9 @@
         {#each searchResults as r, ri}
           {#if ri + 1 <= searchLimit}
             <div class="col col-100 col-md-50">
-              <Contest id="{ r }" />
+              <Contest
+                id="{ r }" ,
+                initialPoll="{ true }" />
             </div>
           {/if}
         {/each}
