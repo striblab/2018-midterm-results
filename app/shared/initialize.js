@@ -15,7 +15,7 @@ function initializeData(endpoints) {
 
   for (let ei in endpoints) {
     let e = endpoints[ei];
-    let c = new Civix(e, { autostart: false });
+    let c = new Civix(e, { autostart: false, cacheBuster: true });
     promises.push(
       c.fetch().then(d => {
         data[camelCase(`civix-${e}`)] = d;

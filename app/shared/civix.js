@@ -88,7 +88,9 @@ class Civix {
 
   // Poll
   poll() {
-    this.fetch();
+    if (this.options.initialPoll) {
+      this.fetch();
+    }
 
     // Don't make another interval
     if (!this.intervalId) {
@@ -111,9 +113,12 @@ class Civix {
 
   // Do api fetch
   fetch() {
-    let cacher = Math.round(Date.now() / 1000 / 30) * 30;
+    let cacher = this.options.cacheBuster
+      ? Date.now()
+      : Math.round(Date.now() / 1000 / 10) * 10;
+    //let cacher = Math.round(Date.now() / 1000);
     // Turn off cacher
-    cacher = null;
+    //let cacher = null;
 
     return window
       .fetch(
