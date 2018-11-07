@@ -59,13 +59,12 @@
     helpers: {
       makeDate: (date, format) => {
         let m = moment(date);
-        let nowMin = moment().subtract(1, "day");
-        let nowMax = moment().add(1, "day");
+        let now = moment();
         if (!m || !m.isValid()) {
           return "";
         }
 
-        return m.isBetween(nowMin, nowMax)
+        return m.isSame(now, "date")
           ? m.format("h:mm a")
           : m.format("MMM D h:mm a");
       }
